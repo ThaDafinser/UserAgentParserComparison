@@ -1,0 +1,33 @@
+{
+    "name": "thadafinser/user-agent-parser-matrix",
+    "description": "Generate a comparison matrix for different UserAgent parsers",
+    "license": "MIT",
+    
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    
+    "authors": [
+        {
+            "name": "ThaDafinser",
+            "email": "martin.keckeis1@gmail.com"
+        }
+    ],
+    
+    "autoload": {
+        "psr-4": {
+            "UserAgentParserMatrix\\":  "src"
+        }
+    },
+    
+    "require": {
+        "thadafinser/user-agent-parser": ">=0.2.2,<1.0",
+        
+        "whichbrowser/testrunner": "^1.0"
+    },
+    
+    "require-dev": {
+        "phpunit/PHPUnit": "^5.0",
+        
+        "fabpot/php-cs-fixer": "^1.10.0"
+    }
+}
