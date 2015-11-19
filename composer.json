@@ -15,14 +15,18 @@
     
     "autoload": {
         "psr-4": {
-            "UserAgentParserMatrix\\":  "src"
+            "UserAgentParserComparison\\":  "src"
         }
     },
     
     "require": {
-        "thadafinser/user-agent-parser": ">=0.2.2,<1.0",
+        "thadafinser/user-agent-parser": ">=0.7.0,<1.0",
         
-        "whichbrowser/testrunner": "^1.0"
+        "doctrine/cache": "^1.5",
+        
+        "whichbrowser/testrunner": "^1.0",
+        
+        "woothee/woothee-testset": "^1.2"
     },
     
     "require-dev": {

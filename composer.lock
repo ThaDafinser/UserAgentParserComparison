@@ -4,88 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "46e504ca3ce1d3971601c6f033ad2c2e",
-    "content-hash": "3e966e4ed0a1266d3e813e0cd17bfea0",
+    "hash": "c14dbc3ab4970491d6a52bd83144e0cb",
+    "content-hash": "f52c6b2f4371724d78e7f49a45ed0ade",
     "packages": [
-        {
-            "name": "browscap/browscap",
-            "version": "6009",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/browscap/browscap.git",
-                "reference": "450d1f66ded23fbccaf851c1a936afb3493fe29a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/browscap/browscap/zipball/450d1f66ded23fbccaf851c1a936afb3493fe29a",
-                "reference": "450d1f66ded23fbccaf851c1a936afb3493fe29a",
-                "shasum": ""
-            },
-            "require": {
-                "monolog/monolog": "~1.13",
-                "php": ">= 5.5.0",
-                "symfony/console": "~2"
-            },
-            "require-dev": {
-                "browscap/browscap-php": "*@dev",
-                "fabpot/php-cs-fixer": "*",
-                "mikey179/vfsstream": "dev-master",
-                "phpunit/phpunit": "*",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "bin": [
-                "bin/browscap"
-            ],
-            "type": "application",
-            "autoload": {
-                "psr-4": {
-                    "Browscap\\": "src/Browscap/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/browscap/browscap/graphs/contributors"
-                },
-                {
-                    "name": "James Titcumb",
-                    "email": "james@asgrim.com",
-                    "homepage": "http://www.jamestitcumb.com"
-                },
-                {
-                    "name": "Thomas Müller",
-                    "homepage": "https://github.com/mimmi20",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Joshua Estes",
-                    "email": "f1gm3nt@gmail.com",
-                    "homepage": "http://joshuaestes.me"
-                }
-            ],
-            "description": "Browser Capabilities Tools",
-            "homepage": "https://github.com/browscap/browscap",
-            "keywords": [
-                "Browscap"
-            ],
-            "time": "2015-10-27 18:14:34"
-        },
         {
             "name": "browscap/browscap-php",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/browscap/browscap-php.git",
-                "reference": "e4587ed9de47d11a00d3dc0b0ffc4c4893e33842"
+                "reference": "97ec4e4e383819fa5cc59c3ce3bc9279e1c9dc8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/browscap/browscap-php/zipball/e4587ed9de47d11a00d3dc0b0ffc4c4893e33842",
-                "reference": "e4587ed9de47d11a00d3dc0b0ffc4c4893e33842",
+                "url": "https://api.github.com/repos/browscap/browscap-php/zipball/97ec4e4e383819fa5cc59c3ce3bc9279e1c9dc8d",
+                "reference": "97ec4e4e383819fa5cc59c3ce3bc9279e1c9dc8d",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +41,7 @@
                 "ext-curl": "to use curl requests to get the ini file"
             },
             "bin": [
-                "bin/browscap"
+                "bin/browscap-php"
             ],
             "type": "library",
             "autoload": {
@@ -142,7 +75,7 @@
                 "get_browser",
                 "user agent"
             ],
-            "time": "2015-10-25 23:02:43"
+            "time": "2015-11-18 09:54:00"
         },
         {
             "name": "doctrine/cache",
@@ -382,6 +315,380 @@
             "description": "a class to load remote or local files",
             "homepage": "http://github.com/mimmi20/FileLoader",
             "time": "2015-06-05 20:07:45"
+        },
+        {
+            "name": "mimmi20/wurfl",
+            "version": "1.6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimmi20/Wurfl.git",
+                "reference": "77fa82f731925d29389c82f0a984755b427742f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimmi20/Wurfl/zipball/77fa82f731925d29389c82f0a984755b427742f7",
+                "reference": "77fa82f731925d29389c82f0a984755b427742f7",
+                "shasum": ""
+            },
+            "require": {
+                "mimmi20/wurfl-config": "*",
+                "mimmi20/wurfl-custom-device": "*",
+                "mimmi20/wurfl-generic-request": "*",
+                "mimmi20/wurfl-storage": "*",
+                "mimmi20/wurfl-virtual-capability": "*",
+                "mimmi20/wurflcache": "~1.3",
+                "php": ">=5.3.3",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.3.*",
+                "monolog/monolog": "1.*@dev",
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "monolog/monolog": "if you want to log to more than a file"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wurfl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "description": "the Wurfl PHP Library for PHP 5.3",
+            "homepage": "https://github.com/mimmi20/Wurfl",
+            "keywords": [
+                "Wurfl",
+                "browser",
+                "http",
+                "parser",
+                "user agent",
+                "user-agent"
+            ],
+            "time": "2015-08-17 19:16:28"
+        },
+        {
+            "name": "mimmi20/wurfl-config",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimmi20/wurfl-config.git",
+                "reference": "64e53babf594bfa3dacf2110eec10544209ebb79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimmi20/wurfl-config/zipball/64e53babf594bfa3dacf2110eec10544209ebb79",
+                "reference": "64e53babf594bfa3dacf2110eec10544209ebb79",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "*",
+                "mikey179/vfsstream": "dev-master",
+                "phpunit/phpunit": "*",
+                "squizlabs/php_codesniffer": "2.*",
+                "zendframework/zend-config": "2.5.0",
+                "zendframework/zend-stdlib": "2.5.0"
+            },
+            "suggest": {
+                "zendframework/zend-config": "to use an other configuration"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wurfl\\Configuration\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Müller",
+                    "homepage": "https://github.com/mimmi20",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/mimmi20/wurfl-config/graphs/contributors"
+                }
+            ],
+            "description": "the Configuration Classes from Wurfl PHP Library for PHP 5.3",
+            "homepage": "https://github.com/mimmi20/wurfl-config",
+            "keywords": [
+                "Wurfl",
+                "configuration"
+            ],
+            "time": "2015-11-17 21:34:00"
+        },
+        {
+            "name": "mimmi20/wurfl-constants",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimmi20/wurfl-constants.git",
+                "reference": "b97ce44840e5957aa9501faaa3fc2b1e77c25be7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimmi20/wurfl-constants/zipball/b97ce44840e5957aa9501faaa3fc2b1e77c25be7",
+                "reference": "b97ce44840e5957aa9501faaa3fc2b1e77c25be7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wurfl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "description": "the Constants extracted from Wurfl for PHP 5.3",
+            "homepage": "https://github.com/mimmi20/wurfl-constants",
+            "keywords": [
+                "Wurfl",
+                "browser",
+                "http",
+                "parser",
+                "user agent",
+                "user-agent"
+            ],
+            "time": "2015-07-21 18:23:08"
+        },
+        {
+            "name": "mimmi20/wurfl-custom-device",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimmi20/wurfl-custom-device.git",
+                "reference": "cf1283fe5c41095d6fd8ca34a126b97621689fdf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimmi20/wurfl-custom-device/zipball/cf1283fe5c41095d6fd8ca34a126b97621689fdf",
+                "reference": "cf1283fe5c41095d6fd8ca34a126b97621689fdf",
+                "shasum": ""
+            },
+            "require": {
+                "mimmi20/wurfl-generic-request": "*",
+                "mimmi20/wurfl-virtual-capability": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "mimmi20/wurfl": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wurfl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Müller",
+                    "homepage": "https://github.com/mimmi20",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/mimmi20/wurfl-custom-device/graphs/contributors"
+                }
+            ],
+            "description": "the Custom Device Class from Wurfl PHP Library for PHP 5.3",
+            "homepage": "https://github.com/mimmi20/wurfl-custom-device",
+            "keywords": [
+                "Custom Device",
+                "Wurfl"
+            ],
+            "time": "2015-11-17 20:24:18"
+        },
+        {
+            "name": "mimmi20/wurfl-generic-request",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimmi20/wurfl-generic-request.git",
+                "reference": "c1e06ab9de5b5616c3dae182732a9aa81f720810"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimmi20/wurfl-generic-request/zipball/c1e06ab9de5b5616c3dae182732a9aa81f720810",
+                "reference": "c1e06ab9de5b5616c3dae182732a9aa81f720810",
+                "shasum": ""
+            },
+            "require": {
+                "mimmi20/wurfl-constants": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wurfl\\Request\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Müller",
+                    "homepage": "https://github.com/mimmi20",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/mimmi20/wurfl-generic-request/graphs/contributors"
+                }
+            ],
+            "description": "the Generic Request Object extracted from Wurfl for PHP 5.3",
+            "homepage": "https://github.com/mimmi20/wurfl-generic-request",
+            "keywords": [
+                "Wurfl",
+                "generic request"
+            ],
+            "time": "2015-08-13 16:26:56"
+        },
+        {
+            "name": "mimmi20/wurfl-storage",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimmi20/wurfl-storage.git",
+                "reference": "71b9b86c56a3df279eb78388693997421f606875"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimmi20/wurfl-storage/zipball/71b9b86c56a3df279eb78388693997421f606875",
+                "reference": "71b9b86c56a3df279eb78388693997421f606875",
+                "shasum": ""
+            },
+            "require": {
+                "mimmi20/wurflcache": "~1.3",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wurfl\\Storage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Müller",
+                    "homepage": "https://github.com/mimmi20",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/mimmi20/wurfl-storage/graphs/contributors"
+                }
+            ],
+            "description": "the Storage Classes from Wurfl PHP Library for PHP 5.3",
+            "homepage": "https://github.com/mimmi20/wurfl-storage",
+            "keywords": [
+                "Wurfl",
+                "storage"
+            ],
+            "time": "2015-08-13 16:26:26"
+        },
+        {
+            "name": "mimmi20/wurfl-virtual-capability",
+            "version": "1.6.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimmi20/wurfl-virtual-capability.git",
+                "reference": "64cf39a340553c0afa148bf0d353a2550b612e34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimmi20/wurfl-virtual-capability/zipball/64cf39a340553c0afa148bf0d353a2550b612e34",
+                "reference": "64cf39a340553c0afa148bf0d353a2550b612e34",
+                "shasum": ""
+            },
+            "require": {
+                "mimmi20/wurfl-custom-device": "~1.0.4",
+                "mimmi20/wurfl-generic-request": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "*",
+                "mimmi20/wurfl": "*",
+                "phpunit/phpunit": "*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wurfl\\VirtualCapability\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Müller",
+                    "homepage": "https://github.com/mimmi20",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/mimmi20/wurfl-virtual-capability/graphs/contributors"
+                }
+            ],
+            "description": "the Virtual Capabilities from the Wurfl PHP Library for PHP 5.3",
+            "homepage": "https://github.com/mimmi20/wurfl-virtual-capability",
+            "keywords": [
+                "Virtual Capability",
+                "Wurfl"
+            ],
+            "time": "2015-11-17 20:30:39"
         },
         {
             "name": "mimmi20/wurflcache",
@@ -661,6 +968,62 @@
             "time": "2012-12-21 11:40:51"
         },
         {
+            "name": "sinergi/browser-detector",
+            "version": "5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sinergi/php-browser-detector.git",
+                "reference": "28d0b58492c435e44f1be40f6e8245056ba58f8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sinergi/php-browser-detector/zipball/28d0b58492c435e44f1be40f6e8245056ba58f8f",
+                "reference": "28d0b58492c435e44f1be40f6e8245056ba58f8f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sinergi\\BrowserDetector\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Schuld",
+                    "email": "chris@chrisschuld.com",
+                    "homepage": "http://chrisschuld.com"
+                },
+                {
+                    "name": "Gabriel Bull",
+                    "email": "me@gabrielbull.com"
+                }
+            ],
+            "description": "Detecting the user's browser, operating system and language.",
+            "keywords": [
+                "browser",
+                "detection",
+                "language",
+                "operating system",
+                "os"
+            ],
+            "time": "2015-11-16 15:27:17"
+        },
+        {
             "name": "symfony/console",
             "version": "v2.7.6",
             "source": {
@@ -856,33 +1219,33 @@
         },
         {
             "name": "thadafinser/user-agent-parser",
-            "version": "v0.2.2",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThaDafinser/UserAgentParser.git",
-                "reference": "d53281ba4e6de7154fa43c0f8651637b4e8acedd"
+                "reference": "d4c5e16be3c84e27887c0815058cb3129368b59a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThaDafinser/UserAgentParser/zipball/d53281ba4e6de7154fa43c0f8651637b4e8acedd",
-                "reference": "d53281ba4e6de7154fa43c0f8651637b4e8acedd",
+                "url": "https://api.github.com/repos/ThaDafinser/UserAgentParser/zipball/d4c5e16be3c84e27887c0815058cb3129368b59a",
+                "reference": "d4c5e16be3c84e27887c0815058cb3129368b59a",
                 "shasum": ""
             },
             "require": {
-                "browscap/browscap": ">=6000,<7000",
                 "browscap/browscap-php": "dev-master",
-                "doctrine/cache": "^1.5",
                 "donatj/phpuseragentparser": "^0.5.0",
-                "php": ">=5.6",
+                "mimmi20/wurfl": "^1.6",
+                "php": ">=5.5",
                 "piwik/device-detector": "^3.4",
+                "sinergi/browser-detector": "^5.1",
                 "ua-parser/uap-php": "^3.4",
-                "whichbrowser/whichbrowser": ">=1.0.1039,<1.1",
+                "whichbrowser/parser": ">=1.0.1044,<1.1",
                 "woothee/woothee": "^1.2",
                 "yzalis/ua-parser": "^0.2"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "^1.10.0",
-                "phpunit/phpunit": "^5.0"
+                "phpunit/phpunit": "^4.0|^5.0"
             },
             "type": "library",
             "autoload": {
@@ -921,7 +1284,7 @@
                 "whichbrowser",
                 "woothee"
             ],
-            "time": "2015-11-12 12:00:54"
+            "time": "2015-11-17 18:14:35"
         },
         {
             "name": "ua-parser/uap-php",
@@ -973,55 +1336,17 @@
             "time": "2015-10-21 12:39:43"
         },
         {
-            "name": "whichbrowser/testrunner",
-            "version": "v1.0.1039",
+            "name": "whichbrowser/parser",
+            "version": "v1.0.1045",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WhichBrowser/Testrunner.git",
-                "reference": "803cfd6494fd23c83b471b1259ab13581ba191f8"
+                "url": "https://github.com/WhichBrowser/Parser.git",
+                "reference": "936846b0e46c08c1ce43e88048c6cf3035a06056"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WhichBrowser/Testrunner/zipball/803cfd6494fd23c83b471b1259ab13581ba191f8",
-                "reference": "803cfd6494fd23c83b471b1259ab13581ba191f8",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/yaml": "^2.7",
-                "whichbrowser/whichbrowser": "1.*"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Niels Leenheer",
-                    "email": "niels@leenheer.nl",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Data for testing the WhichBrowser library",
-            "homepage": "http://whichbrowser.net",
-            "keywords": [
-                "browser",
-                "useragent"
-            ],
-            "time": "2015-11-12 10:28:12"
-        },
-        {
-            "name": "whichbrowser/whichbrowser",
-            "version": "v1.0.1039",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WhichBrowser/WhichBrowser.git",
-                "reference": "9de313f7942713bf7eda6b63b5d2634f5f837afc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WhichBrowser/WhichBrowser/zipball/9de313f7942713bf7eda6b63b5d2634f5f837afc",
-                "reference": "9de313f7942713bf7eda6b63b5d2634f5f837afc",
+                "url": "https://api.github.com/repos/WhichBrowser/Parser/zipball/936846b0e46c08c1ce43e88048c6cf3035a06056",
+                "reference": "936846b0e46c08c1ce43e88048c6cf3035a06056",
                 "shasum": ""
             },
             "require": {
@@ -1044,13 +1369,51 @@
                     "role": "Developer"
                 }
             ],
-            "description": "User agent sniffing gone too far",
+            "description": "Useragent sniffing library for PHP",
             "homepage": "http://whichbrowser.net",
             "keywords": [
                 "browser",
                 "useragent"
             ],
-            "time": "2015-11-12 10:09:20"
+            "time": "2015-11-17 23:21:20"
+        },
+        {
+            "name": "whichbrowser/testrunner",
+            "version": "v1.0.1045",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WhichBrowser/Testrunner.git",
+                "reference": "6eacc5ea87087eec9d954a5c324b028849233efe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WhichBrowser/Testrunner/zipball/6eacc5ea87087eec9d954a5c324b028849233efe",
+                "reference": "6eacc5ea87087eec9d954a5c324b028849233efe",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/yaml": "^2.7",
+                "whichbrowser/parser": "1.*"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Niels Leenheer",
+                    "email": "niels@leenheer.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data for running tests on WhichBrowser",
+            "homepage": "http://whichbrowser.net",
+            "keywords": [
+                "browser",
+                "useragent"
+            ],
+            "time": "2015-11-17 23:21:30"
         },
         {
             "name": "woothee/woothee",
@@ -1097,6 +1460,34 @@
                 "useragent"
             ],
             "time": "2015-08-13 15:01:06"
+        },
+        {
+            "name": "woothee/woothee-testset",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/woothee/woothee.git",
+                "reference": "48bd4f9f70fcaed9985f946ce3505df9e71820fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/woothee/woothee/zipball/48bd4f9f70fcaed9985f946ce3505df9e71820fe",
+                "reference": "48bd4f9f70fcaed9985f946ce3505df9e71820fe",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "TAGOMORI Satoshi",
+                    "email": "tagomoris@gmail.com"
+                }
+            ],
+            "description": "Set of test case for woothee project. Project Woothee is multi-language user-agent strings parsers.",
+            "time": "2015-08-11 06:14:50"
         },
         {
             "name": "yzalis/ua-parser",
@@ -1415,16 +1806,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "c84f05be256cd7c9d2340b26f7995b4afbf8787b"
+                "reference": "f7bb5cddf4ffe113eeb737b05241adb947b43f9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c84f05be256cd7c9d2340b26f7995b4afbf8787b",
-                "reference": "c84f05be256cd7c9d2340b26f7995b4afbf8787b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f7bb5cddf4ffe113eeb737b05241adb947b43f9d",
+                "reference": "f7bb5cddf4ffe113eeb737b05241adb947b43f9d",
                 "shasum": ""
             },
             "require": {
@@ -1473,7 +1864,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-06 15:51:05"
+            "time": "2015-11-12 21:08:20"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1729,16 +2120,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "382c729a52b7ef682e94c73fd6868f5ee8116ba7"
+                "reference": "b28b029356e65091dfbf8c2bc4ef106ffece509e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/382c729a52b7ef682e94c73fd6868f5ee8116ba7",
-                "reference": "382c729a52b7ef682e94c73fd6868f5ee8116ba7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b28b029356e65091dfbf8c2bc4ef106ffece509e",
+                "reference": "b28b029356e65091dfbf8c2bc4ef106ffece509e",
                 "shasum": ""
             },
             "require": {
@@ -1781,7 +2172,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-10-18 07:55:54"
+            "time": "2015-11-09 15:37:17"
         },
         {
             "name": "sebastian/comparator",
