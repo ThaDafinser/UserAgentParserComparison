@@ -8,7 +8,7 @@ use WurflCache\Adapter\File;
  * Browscap
  */
 $cache = new File([
-    File::DIR => 'vendor/browscap/browscap-php/resources'
+    File::DIR => '.tmp/browscap'
 ]);
 
 $browscapParser = new \BrowscapPHP\Browscap();
@@ -39,6 +39,7 @@ $cacheDir       = $resourcesDir . '/storage/cache';
 $wurflConfig = new \Wurfl\Configuration\InMemoryConfig();
 $wurflConfig->wurflFile('.tmp/wurfl.xml');
 $wurflConfig->matchMode(\Wurfl\Configuration\Config::MATCH_MODE_ACCURACY);
+
 $wurflConfig->persistence('file', [
     \Wurfl\Configuration\Config::DIR => $persistenceDir,
 ]);

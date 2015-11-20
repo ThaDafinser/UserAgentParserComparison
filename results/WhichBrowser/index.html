@@ -1,65 +1,249 @@
 <html>
 <head>
-    <title>ThaDafinser/UserAgentParserComparison</title>
+<title>ThaDafinser/UserAgentParserComparison</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
 
 </head>
 
 <body>
-<div class="container">
+	<div class="container">
 
-	<div class="section">
-		<h1 class="header center orange-text">WhichBrowser - overview</h1>
-		<div class="row center">
-			<h5 class="header col s12 light">
-			    Here you will find all details of this provider (work in progress)<br />
-			    Currently you only find the result lists
-			</h5>
-			
-			<p>
-			 <a href="../index.html" class="btn-large waves-effect waves-light">
-                Back to the overview
-            </a>
-			</p>
+		<div class="section">
+			<h1 class="header center orange-text">WhichBrowser - overview</h1>
+			<div class="row center">
+				<h5 class="header col s12 light">Here you find the details of this
+					provider<br />
+					<br />
+					We analyzed <strong>6136</strong> user agents</h5>
+			</div>
+		</div>
+
+		<div class="section">
+
+			<table class="striped">
+				<!-- header -->
+				<tr>
+					<th>Group</th>
+					<th>Percent</th>
+					<th>Total</th>
+					<th>Actions</th>
+				</tr>
+				
+				<!-- results -->
+				<tr>
+				    <td>Results found</td>
+				    <td>
+                        94.12 %
+					    <div class="progress">
+							<div class="determinate" style="width: 94.12"></div>
+						</div>
+					</td>
+				    <td>
+                        5775					</td>
+					<td>
+					   <a href="noResultFound.html"
+						class="btn waves-effect waves-light">Not found</a>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td>Browser found</td>
+				    <td>
+                        82.35 %
+					    <div class="progress">
+							<div class="determinate" style="width: 82.35"></div>
+						</div>
+					</td>
+				    <td>
+                        5053					</td>
+					<td>
+					   <a href="noBrowserResultFound.html"
+						class="btn waves-effect waves-light">Not found</a>
+					</td>
+				</tr>
+				<tr>
+				    <td>Engine found</td>
+				    <td>
+                        82.22 %
+					    <div class="progress">
+							<div class="determinate" style="width: 82.22"></div>
+						</div>
+					</td>
+				    <td>
+                        5045					</td>
+					<td>
+					   <a href="noRenderingEngineResultFound.html"
+						class="btn waves-effect waves-light">Not found</a>
+					</td>
+				</tr>
+				<tr>
+				    <td>Operating system found</td>
+				    <td>
+                        79.03 %
+					    <div class="progress">
+							<div class="determinate" style="width: 79.03"></div>
+						</div>
+					</td>
+				    <td>
+                        4849					</td>
+					<td>
+					   <a href="noOperatingSystemResultFound.html"
+						class="btn waves-effect waves-light">Not found</a>
+					</td>
+				</tr>
+				
+				<tr>
+				    <td>Device detected</td>
+				    <td>
+                        92.89 %
+					    <div class="progress">
+							<div class="determinate" style="width: 92.89"></div>
+						</div>
+					</td>
+				    <td>
+                        5700					</td>
+					<td>
+					   
+					</td>
+				</tr>
+				<tr>
+				    <td>Device model found</td>
+				    <td>
+                        79.92 %
+					    <div class="progress">
+							<div class="determinate" style="width: 79.92"></div>
+						</div>
+					</td>
+				    <td>
+                        4904					</td>
+					<td>
+					   
+					</td>
+				</tr>
+				<tr>
+				    <td>Device brand found</td>
+				    <td>
+                        77.4 %
+					    <div class="progress">
+							<div class="determinate" style="width: 77.4"></div>
+						</div>
+					</td>
+				    <td>
+                        4749					</td>
+					<td>
+					   
+					</td>
+				</tr>
+				<tr>
+				    <td>Device type found</td>
+				    <td>
+                        92.89 %
+					    <div class="progress">
+							<div class="determinate" style="width: 92.89"></div>
+						</div>
+					</td>
+				    <td>
+                        5700					</td>
+					<td>
+					   
+					</td>
+				</tr>
+				<tr>
+				    <td>As mobile detected</td>
+				    <td>
+                        71.82 %
+					    <div class="progress">
+							<div class="determinate" style="width: 71.82"></div>
+						</div>
+					</td>
+				    <td>
+                        4407					</td>
+					<td>
+					   
+					</td>
+				</tr>
+				
+				<tr>
+				    <td>As bot detected</td>
+				    <td>
+                        23.36 %
+					    <div class="progress">
+							<div class="determinate" style="width: 23.36"></div>
+						</div>
+					</td>
+				    <td>
+                        75					</td>
+					<td>
+					   <a href="notDetectedAsBot.html"
+						class="btn waves-effect waves-light">Not detected as bot</a>
+					</td>
+				</tr>
+				<tr>
+				    <td>Bot name found</td>
+				    <td>
+                        23.36 %
+					    <div class="progress">
+							<div class="determinate" style="width: 23.36"></div>
+						</div>
+					</td>
+				    <td>
+                        75					</td>
+					<td>
+					   
+					</td>
+				</tr>
+				<tr>
+				    <td>Bot type found</td>
+				    <td>
+                        0 %
+					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+				    <td>
+                        0					</td>
+					<td>
+					   
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+
+		<div class="section">
+			<h2 class="header center orange-text">I'm done here</h2>
+			<div class="row center">
+				<a href="../index.html" class="btn-large waves-effect waves-light">
+					Back to the overview </a>
+			</div>
+		</div>
+
+		<div class="section" id="informations">
+			<h2 class="header center orange-text">More informations</h2>
+			<div class="row center">
+				<h5 class="header light">
+					The primary goal of this project is simple. I wanted to know which
+					user agent parser is the most accurate in each part - device
+					detection, bot detection and so on...<br /> <br /> The secondary
+					goal is to provide a source for all user agent parsers to improve
+					their detection based on this results.<br /> <br /> You can also
+					improve this further, by suggesting ideads at <a
+						href="https://github.com/ThaDafinser/UserAgentParserComparison/">ThaDafinser/UserAgentParserComparison</a><br />
+					<br /> The comparison is based on the abstraction by <a
+						href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+				</h5>
+			</div>
+
+			<div class="card">
+				<div class="card-content">
+					Comparison created <i>2015-11-20 10:19:56</i> | by <a
+						href="https://github.com/ThaDafinser">ThaDafinser 
+				
+				</div>
+			</div>
 		</div>
 	</div>
-	
-	<div class="section center">
-	   <h2>
-	       Details
-	   </h2>
-        <p>
-        <a href="noResultFound.html" class="btn-large waves-effect waves-light">
-            No result found
-        </a>
-        </p>
-        
-        <p>
-        <a href="notDetectedAsBot.html" class="btn-large waves-effect waves-light">
-            Not detected as bot
-        </a>
-        </p>
-        
-        <p>
-        <a href="noBrowserResultFound.html" class="btn-large waves-effect waves-light">
-            Browser not detected
-        </a>
-        </p>
-        
-        <p>
-        <a href="noRenderingEngineResultFound.html" class="btn-large waves-effect waves-light">
-            Engine not detected
-        </a>
-        </p>
-        
-        <p>
-        <a href="noOperatingSystemResultFound.html" class="btn-large waves-effect waves-light">
-            Operating system not detected
-        </a>
-        </p>
-	</div>
-	
-</div>
 </body>
     

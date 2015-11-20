@@ -17,11 +17,11 @@
 		<div class="section">
 			<h1 class="header center orange-text">UserAgent parser comparison</h1>
 			<div class="row center">
-				<h5 class="header col s12 light">
+				<h5 class="header light">
 					We took <strong>6136</strong> user agents <br />
 					from <strong>5</strong> test suites<br /> and
-					analyzed them with <strong>9 parsers</strong>.<br />
-					Here you can see the results!
+					analyzed them with <strong>9 providers</strong>.<br />
+					Here you can see the results!<br />
 				</h5>
 			</div>
 		</div>
@@ -50,213 +50,597 @@
 						data-tooltip="321 user agents are known bots! Number of detected bots can still be higher">
 							Is bot <i class="material-icons right">info_outline</i>
 					</a></th>
+
+					<th><a class="tooltipped" data-position="bottom" data-delay="50"
+						data-tooltip="Stock provider or only file cache is used and it was generated on Windows! So this can be in the real world a lot faster...">
+							Parse time <i class="material-icons right">info_outline</i>
+					</a></th>
+
 					<th>Actions</th>
 				</tr>
 
 				<!-- result(s) -->
-                        <tr>
-					<th>
-				   BrowscapPhp<br /> <small>6009</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/browscap/browscap-php">BrowscapPhp</a><br />
+						<small></small></th>
 
-					<td>5536</td>
-					<td>5536</td>
-					<td>0</td>
-					<td>5027</td>
-
-					<td>5207</td>
-					<td>0</td>
-					<td>0</td>
-					<td>5207</td>
-
-					<td>4284</td>
 					<td>
-				    0 
-			    </td>
+                        5536					    <div class="progress">
+							<div class="determinate" style="width: 90"></div>
+						</div>
+					</td>
+					<td>
+                        5171					    <div class="progress">
+							<div class="determinate" style="width: 84"></div>
+						</div>
+					</td>
+					<td>
+                        4978					    <div class="progress">
+							<div class="determinate" style="width: 81"></div>
+						</div>
+					</td>
+					<td>
+                        4975					    <div class="progress">
+							<div class="determinate" style="width: 81"></div>
+						</div>
+					</td>
+
+					<td>
+                        5169					    <div class="progress">
+							<div class="determinate" style="width: 84"></div>
+						</div>
+					</td>
+					<td>
+                        5169					    <div class="progress">
+							<div class="determinate" style="width: 84"></div>
+						</div>
+					</td>
+					<td>
+                        1388					    <div class="progress">
+							<div class="determinate" style="width: 23"></div>
+						</div>
+					</td>
+					<td>
+                        5169					    <div class="progress">
+							<div class="determinate" style="width: 84"></div>
+						</div>
+					</td>
+					<td>
+                        4269					    <div class="progress">
+							<div class="determinate" style="width: 70"></div>
+						</div>
+					</td>
+
+					<td>
+                        365					    <div class="progress">
+							<div class="determinate" style="width: 114"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.0475 
+		              </td>
 
 					<td><a href="BrowscapPhp/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   DonatjUAParser<br /> <small>v0.5.0</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/donatj/phpuseragentparser">DonatjUAParser</a><br />
+						<small>v0.5.0</small></th>
 
-					<td>5857</td>
-					<td>5857</td>
-					<td>0</td>
-					<td>0</td>
-
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-
-					<td>0</td>
 					<td>
-				    0 
-			    </td>
+                        5857					    <div class="progress">
+							<div class="determinate" style="width: 95"></div>
+						</div>
+					</td>
+					<td>
+                        5857					    <div class="progress">
+							<div class="determinate" style="width: 95"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.00067 
+		              </td>
 
 					<td><a href="DonatjUAParser/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   PiwikDeviceDetector<br /> <small>3.4.2</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/piwik/device-detector">PiwikDeviceDetector</a><br />
+						<small>3.4.2</small></th>
 
-					<td>6076</td>
-					<td>5578</td>
-					<td>5074</td>
-					<td>5402</td>
-
-					<td>5690</td>
-					<td>4709</td>
-					<td>4781</td>
-					<td>5404</td>
-
-					<td>4577</td>
 					<td>
-				    316 
-			    </td>
+                        6076					    <div class="progress">
+							<div class="determinate" style="width: 99"></div>
+						</div>
+					</td>
+					<td>
+                        5578					    <div class="progress">
+							<div class="determinate" style="width: 91"></div>
+						</div>
+					</td>
+					<td>
+                        5074					    <div class="progress">
+							<div class="determinate" style="width: 83"></div>
+						</div>
+					</td>
+					<td>
+                        5402					    <div class="progress">
+							<div class="determinate" style="width: 88"></div>
+						</div>
+					</td>
+
+					<td>
+                        5690					    <div class="progress">
+							<div class="determinate" style="width: 93"></div>
+						</div>
+					</td>
+					<td>
+                        4709					    <div class="progress">
+							<div class="determinate" style="width: 77"></div>
+						</div>
+					</td>
+					<td>
+                        4781					    <div class="progress">
+							<div class="determinate" style="width: 78"></div>
+						</div>
+					</td>
+					<td>
+                        5404					    <div class="progress">
+							<div class="determinate" style="width: 88"></div>
+						</div>
+					</td>
+					<td>
+                        4577					    <div class="progress">
+							<div class="determinate" style="width: 75"></div>
+						</div>
+					</td>
+
+					<td>
+                        316					    <div class="progress">
+							<div class="determinate" style="width: 98"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.01312 
+		              </td>
 
 					<td><a href="PiwikDeviceDetector/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   SinergiBrowserDetector<br /> <small>5.1.0</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/sinergi/browser-detector">SinergiBrowserDetector</a><br />
+						<small>5.1.0</small></th>
 
-					<td>5685</td>
-					<td>5378</td>
-					<td>0</td>
-					<td>4938</td>
-
-					<td>3807</td>
-					<td>482</td>
-					<td>0</td>
-					<td>0</td>
-
-					<td>3470</td>
 					<td>
-				    207 
-			    </td>
+                        5685					    <div class="progress">
+							<div class="determinate" style="width: 93"></div>
+						</div>
+					</td>
+					<td>
+                        5378					    <div class="progress">
+							<div class="determinate" style="width: 88"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        4938					    <div class="progress">
+							<div class="determinate" style="width: 80"></div>
+						</div>
+					</td>
+
+					<td>
+                        3807					    <div class="progress">
+							<div class="determinate" style="width: 62"></div>
+						</div>
+					</td>
+					<td>
+                        482					    <div class="progress">
+							<div class="determinate" style="width: 8"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        3470					    <div class="progress">
+							<div class="determinate" style="width: 57"></div>
+						</div>
+					</td>
+
+					<td>
+                        207					    <div class="progress">
+							<div class="determinate" style="width: 64"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.00117 
+		              </td>
 
 					<td><a href="SinergiBrowserDetector/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   UAParser<br /> <small>v3.4.4</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/ua-parser/uap-php">UAParser</a><br />
+						<small>v3.4.4</small></th>
 
-					<td>5980</td>
-					<td>5543</td>
-					<td>0</td>
-					<td>5212</td>
-
-					<td>4956</td>
-					<td>4899</td>
-					<td>4945</td>
-					<td>0</td>
-
-					<td>0</td>
 					<td>
-				    254 
-			    </td>
+                        5980					    <div class="progress">
+							<div class="determinate" style="width: 97"></div>
+						</div>
+					</td>
+					<td>
+                        5543					    <div class="progress">
+							<div class="determinate" style="width: 90"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        5212					    <div class="progress">
+							<div class="determinate" style="width: 85"></div>
+						</div>
+					</td>
+
+					<td>
+                        4956					    <div class="progress">
+							<div class="determinate" style="width: 81"></div>
+						</div>
+					</td>
+					<td>
+                        4899					    <div class="progress">
+							<div class="determinate" style="width: 80"></div>
+						</div>
+					</td>
+					<td>
+                        4945					    <div class="progress">
+							<div class="determinate" style="width: 81"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+
+					<td>
+                        254					    <div class="progress">
+							<div class="determinate" style="width: 79"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.00831 
+		              </td>
 
 					<td><a href="UAParser/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   WhichBrowser<br /> <small>v1.0.1045</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/whichbrowser/parser">WhichBrowser</a><br />
+						<small>v1.0.1045</small></th>
 
-					<td>5775</td>
-					<td>5053</td>
-					<td>5045</td>
-					<td>4849</td>
-
-					<td>5700</td>
-					<td>4904</td>
-					<td>4749</td>
-					<td>5700</td>
-
-					<td>4407</td>
 					<td>
-				    75 
-			    </td>
+                        5775					    <div class="progress">
+							<div class="determinate" style="width: 94"></div>
+						</div>
+					</td>
+					<td>
+                        5053					    <div class="progress">
+							<div class="determinate" style="width: 82"></div>
+						</div>
+					</td>
+					<td>
+                        5045					    <div class="progress">
+							<div class="determinate" style="width: 82"></div>
+						</div>
+					</td>
+					<td>
+                        4849					    <div class="progress">
+							<div class="determinate" style="width: 79"></div>
+						</div>
+					</td>
+
+					<td>
+                        5700					    <div class="progress">
+							<div class="determinate" style="width: 93"></div>
+						</div>
+					</td>
+					<td>
+                        4904					    <div class="progress">
+							<div class="determinate" style="width: 80"></div>
+						</div>
+					</td>
+					<td>
+                        4749					    <div class="progress">
+							<div class="determinate" style="width: 77"></div>
+						</div>
+					</td>
+					<td>
+                        5700					    <div class="progress">
+							<div class="determinate" style="width: 93"></div>
+						</div>
+					</td>
+					<td>
+                        4407					    <div class="progress">
+							<div class="determinate" style="width: 72"></div>
+						</div>
+					</td>
+
+					<td>
+                        75					    <div class="progress">
+							<div class="determinate" style="width: 23"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.07551 
+		              </td>
 
 					<td><a href="WhichBrowser/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   Woothee<br /> <small>v1.2.0</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/woothee/woothee">Woothee</a><br />
+						<small>v1.2.0</small></th>
 
-					<td>5568</td>
-					<td>4956</td>
-					<td>0</td>
-					<td>0</td>
-
-					<td>5162</td>
-					<td>0</td>
-					<td>0</td>
-					<td>5162</td>
-
-					<td>3856</td>
 					<td>
-				    234 
-			    </td>
+                        5568					    <div class="progress">
+							<div class="determinate" style="width: 91"></div>
+						</div>
+					</td>
+					<td>
+                        4956					    <div class="progress">
+							<div class="determinate" style="width: 81"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+
+					<td>
+                        5162					    <div class="progress">
+							<div class="determinate" style="width: 84"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        5162					    <div class="progress">
+							<div class="determinate" style="width: 84"></div>
+						</div>
+					</td>
+					<td>
+                        3856					    <div class="progress">
+							<div class="determinate" style="width: 63"></div>
+						</div>
+					</td>
+
+					<td>
+                        234					    <div class="progress">
+							<div class="determinate" style="width: 73"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.0006 
+		              </td>
 
 					<td><a href="Woothee/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   Wurfl<br /> <small>for API 1.6.3, db.scientiamobile.com - 2015-10-16 11:07:21</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/mimmi20/wurfl">Wurfl</a><br />
+						<small>for API 1.6.3, db.scientiamobile.com - 2015-10-16 11:07:21</small></th>
 
-					<td>5762</td>
-					<td>4628</td>
-					<td>0</td>
-					<td>4852</td>
-
-					<td>5636</td>
-					<td>5092</td>
-					<td>5092</td>
-					<td>5636</td>
-
-					<td>4448</td>
 					<td>
-				    126 
-			    </td>
+                        5762					    <div class="progress">
+							<div class="determinate" style="width: 94"></div>
+						</div>
+					</td>
+					<td>
+                        4623					    <div class="progress">
+							<div class="determinate" style="width: 75"></div>
+						</div>
+					</td>
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+					<td>
+                        4847					    <div class="progress">
+							<div class="determinate" style="width: 79"></div>
+						</div>
+					</td>
+
+					<td>
+                        5629					    <div class="progress">
+							<div class="determinate" style="width: 92"></div>
+						</div>
+					</td>
+					<td>
+                        5092					    <div class="progress">
+							<div class="determinate" style="width: 83"></div>
+						</div>
+					</td>
+					<td>
+                        5092					    <div class="progress">
+							<div class="determinate" style="width: 83"></div>
+						</div>
+					</td>
+					<td>
+                        5629					    <div class="progress">
+							<div class="determinate" style="width: 92"></div>
+						</div>
+					</td>
+					<td>
+                        4448					    <div class="progress">
+							<div class="determinate" style="width: 72"></div>
+						</div>
+					</td>
+
+					<td>
+                        133					    <div class="progress">
+							<div class="determinate" style="width: 41"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.20953 
+		              </td>
 
 					<td><a href="Wurfl/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
 				</tr>
-                        <tr>
-					<th>
-				   YzalisUAParser<br /> <small>0.2.0</small>
-					</th>
+                            <tr>
+					<th><a
+						href="https://github.com/yzalis/ua-parser">YzalisUAParser</a><br />
+						<small>0.2.0</small></th>
 
-					<td>4977</td>
-					<td>4758</td>
-					<td>4568</td>
-					<td>4036</td>
-
-					<td>474</td>
-					<td>367</td>
-					<td>474</td>
-					<td>373</td>
-
-					<td>373</td>
 					<td>
-				    0 
-			    </td>
+                        4977					    <div class="progress">
+							<div class="determinate" style="width: 81"></div>
+						</div>
+					</td>
+					<td>
+                        4758					    <div class="progress">
+							<div class="determinate" style="width: 78"></div>
+						</div>
+					</td>
+					<td>
+                        4568					    <div class="progress">
+							<div class="determinate" style="width: 74"></div>
+						</div>
+					</td>
+					<td>
+                        4036					    <div class="progress">
+							<div class="determinate" style="width: 66"></div>
+						</div>
+					</td>
+
+					<td>
+                        474					    <div class="progress">
+							<div class="determinate" style="width: 8"></div>
+						</div>
+					</td>
+					<td>
+                        367					    <div class="progress">
+							<div class="determinate" style="width: 6"></div>
+						</div>
+					</td>
+					<td>
+                        474					    <div class="progress">
+							<div class="determinate" style="width: 8"></div>
+						</div>
+					</td>
+					<td>
+                        373					    <div class="progress">
+							<div class="determinate" style="width: 6"></div>
+						</div>
+					</td>
+					<td>
+                        373					    <div class="progress">
+							<div class="determinate" style="width: 6"></div>
+						</div>
+					</td>
+
+					<td>
+                        0					    <div class="progress">
+							<div class="determinate" style="width: 0"></div>
+						</div>
+					</td>
+
+					<td>
+				        0.00249 
+		              </td>
 
 					<td><a href="YzalisUAParser/index.html"
 						class="btn waves-effect waves-light">Details</a></td>
@@ -280,57 +664,62 @@
 		<div class="section">
 			<h2 class="header center orange-text">Source of user agents</h2>
 			<div class="row center">
-				<h5 class="header col s12 light">
-					<p>The user agents were taken mainly out of the testsuites of the
-						providers above. Thanks to all who provided them!</p>
-				</h5>
+				<h5 class="header col s12 light">The user agents were taken mainly
+					out of the testsuites of the providers above. Thanks to all who
+					provided them!</h5>
 			</div>
 
 			<table class="striped">
 				<tr>
 					<th>Name</th>
 					<th>Number of user agents</th>
-					<th>Actions</th>
 				</tr>
-	       	           <tr>
-					<td>donatj/phpuseragentparser</td>
+				
+	           	           <tr>
+					<td><a href="https://github.com/donatj/phpuseragentparser">donatj/phpuseragentparser</a></td>
 					<td>147</td>
-					<td><a href="https://github.com/donatj/phpuseragentparser"
-						class="btn">Go to repo</a></td>
 				</tr>
-	       	           <tr>
-					<td>piwik/device-detector</td>
+	           	           <tr>
+					<td><a href="https://github.com/piwik/device-detector">piwik/device-detector</a></td>
 					<td>3909</td>
-					<td><a href="https://github.com/piwik/device-detector"
-						class="btn">Go to repo</a></td>
 				</tr>
-	       	           <tr>
-					<td>whichbrowser/testrunner</td>
+	           	           <tr>
+					<td><a href="https://github.com/whichbrowser/testrunner">whichbrowser/testrunner</a></td>
 					<td>1770</td>
-					<td><a href="https://github.com/whichbrowser/testrunner"
-						class="btn">Go to repo</a></td>
 				</tr>
-	       	           <tr>
-					<td>woothee/woothee-testset</td>
+	           	           <tr>
+					<td><a href="https://github.com/woothee/woothee-testset">woothee/woothee-testset</a></td>
 					<td>229</td>
-					<td><a href="https://github.com/woothee/woothee-testset"
-						class="btn">Go to repo</a></td>
 				</tr>
-	       	           <tr>
-					<td>yzalis/ua-parser</td>
+	           	           <tr>
+					<td><a href="https://github.com/yzalis/ua-parser">yzalis/ua-parser</a></td>
 					<td>81</td>
-					<td><a href="https://github.com/yzalis/ua-parser"
-						class="btn">Go to repo</a></td>
 				</tr>
-	       	   </table>
+	           	           
+	       </table>
 		</div>
 
-		<div class="section">
+		<div class="section" id="informations">
+			<h2 class="header center orange-text">More informations</h2>
+			<div class="row center">
+				<h5 class="header light">
+					The primary goal of this project is simple. I wanted to know which
+					user agent parser is the most accurate in each part - device
+					detection, bot detection and so on...<br /> <br /> The secondary
+					goal is to provide a source for all user agent parsers to improve
+					their detection based on this results.<br /> <br /> You can also
+					improve this further, by suggesting ideads at <a
+						href="https://github.com/ThaDafinser/UserAgentParserComparison/">ThaDafinser/UserAgentParserComparison</a><br />
+					<br /> The comparison is based on the abstraction by <a
+						href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+				</h5>
+			</div>
+
 			<div class="card">
 				<div class="card-content">
-					Comparison created by <a href="https://github.com/ThaDafinser">ThaDafinser
-						(Martin Keckeis)</a><br /> Results generated with <a
-						href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+					Comparison created <i>2015-11-20 10:09:25</i> | by <a
+						href="https://github.com/ThaDafinser">ThaDafinser 
+				
 				</div>
 			</div>
 		</div>

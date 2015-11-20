@@ -6,5 +6,5 @@ array_pop($userAgents);
 return [
     'userAgents' => $userAgents,
     'source' => 'whichbrowser/testrunner',
-    'group' => 'phone'
+    'group' => 'mobile'
 ];

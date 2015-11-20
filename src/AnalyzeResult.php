@@ -23,7 +23,7 @@ class AnalyzeResult
      * @param AbstractProvider $provider            
      * @param UserAgent $result            
      */
-    public function addResult(AbstractProvider $provider, UserAgent $result = null)
+    public function addResult(AbstractProvider $provider, UserAgent $result = null, array $misc = [])
     {
         $array = [];
         if ($result !== null) {
@@ -33,7 +33,9 @@ class AnalyzeResult
         $this->providerResults[] = [
             'provider' => $provider,
             'result' => $result,
-            'resultArray' => $array
+            'resultArray' => $array,
+            
+            'misc' => $misc
         ];
     }
 
@@ -55,6 +57,8 @@ class AnalyzeResult
             $return[] = [
                 'provider' => $provider,
                 'result' => $result,
+                
+                'misc' => $providerResult['misc']
 //                 'matchCount' => $this->getPossibleWrongPositive($provider, $result)
             ];
         }

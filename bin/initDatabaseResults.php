@@ -52,6 +52,8 @@ $sql = "
         `result` LONGTEXT,
         `rawResult` LONGTEXT,
     
+        `parseTime` DECIMAL(20,10),
+    
         FOREIGN KEY(`userAgent_uaId`) REFERENCES `userAgent`(`uaId`)
     );
 ";
@@ -101,7 +103,9 @@ $insert = "
         `botType`,
     
         `result`,
-        `rawResult`
+        `rawResult`,
+    
+        `parseTime`
     )
     VALUES (
         :resId,
@@ -140,7 +144,9 @@ $insert = "
         :botType,
     
         :result,
-        :rawResult
+        :rawResult,
+    
+        :parseTime
     )
 ";
 $stmtInsert = $pdo->prepare($insert);
@@ -166,13 +172,15 @@ foreach ($results as $row) {
     foreach ($chain->getProviders() as $provider) {
         /* @var $provider \UserAgentParser\Provider\AbstractProvider */
         
+        $start = microtime(true);
         try {
             $result = $provider->parse($row['userAgent']);
         } catch (NoResultFoundException $ex) {
             $result = null;
         }
+        $end = microtime(true);
         
-        $analyze->addResult($provider, $result);
+        $analyze->addResult($provider, $result, ['parseTime' => $end-$start]);
     }
     
     foreach ($analyze->getAnalyzedResult() as $providerResult) {
@@ -182,6 +190,8 @@ foreach ($results as $row) {
         /* @var $result \UserAgentParser\Model\UserAgent */
         $result = $providerResult['result'];
         
+        $misc = $providerResult['misc'];
+        
         $ourId ++;
         
         $stmtInsert->bindValue(':resId', $ourId);
@@ -190,6 +200,8 @@ foreach ($results as $row) {
         $stmtInsert->bindValue(':providerName', $provider->getName());
         $stmtInsert->bindValue(':providerPackageName', $provider->getComposerPackageName());
         $stmtInsert->bindValue(':providerVersion', $provider->getVersion());
+        
+        $stmtInsert->bindValue(':parseTime', $misc['parseTime']);
         
         if ($result === null) {
             // no result found

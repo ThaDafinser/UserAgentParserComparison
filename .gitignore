@@ -47,5 +47,7 @@ Temporary Items
 .project
 vendor
 .tmp
-data/wurfl.xml
+
 data/results.sqlite3
+data/full_php_browscap.ini
+data/wurfl.xml

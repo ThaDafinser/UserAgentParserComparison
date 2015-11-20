@@ -6,5 +6,5 @@ $userAgents = array_column($fixtureData, 'user_agent');
 return [
     'userAgents' => $userAgents,
     'source' => 'piwik/device-detector',
-    'group' => 'phone'
+    'group' => 'mobile'
 ];
