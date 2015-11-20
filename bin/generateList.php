@@ -41,6 +41,12 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $providers = array_column($result, 'providerName');
 
 foreach ($providers as $providerName) {
+    $path = 'results/' . $providerName;
+    
+    if (! file_exists($path)) {
+        mkdir($path, null, true);
+    }
+    
     /*
      * No result found
      */
@@ -56,12 +62,6 @@ foreach ($providers as $providerName) {
     $generate = new GenerateHtmlListV2();
     $generate->setSubquery($sql);
     $generate->setTitle($providerName . ' - no result found');
-    
-    $path = 'results/' . $providerName;
-    
-    if (! file_exists($path)) {
-        mkdir($path, null, true);
-    }
     
     file_put_contents($path . '/noResultFound.html', $generate->getHtml());
     
@@ -83,13 +83,29 @@ foreach ($providers as $providerName) {
     $generate->setSubquery($sql);
     $generate->setTitle($providerName . ' - not detected as bot');
     
+    file_put_contents($path . '/notDetectedAsBot.html', $generate->getHtml());
+    
+    /*
+     * Is probably no bot
+     */
+    $sql = "
+        SELECT
+        	userAgent_uaId
+        FROM userAgent
+        JOIN vendorResult
+            ON userAgent_uaId = uaId
+        WHERE
+            providerName = '" . $providerName . "'
+            AND `group` != 'bot'
+            AND botIsBot = 1
+    ";
+    $generate = new GenerateHtmlListV2();
+    $generate->setSubquery($sql);
+    $generate->setTitle($providerName . ' - is probably no bot?');
+    
     $path = 'results/' . $providerName;
     
-    if (! file_exists($path)) {
-        mkdir($path, null, true);
-    }
-    
-    file_put_contents($path . '/notDetectedAsBot.html', $generate->getHtml());
+    file_put_contents($path . '/isProbablyNoBot.html', $generate->getHtml());
     
     /*
      * No browser result found
@@ -107,12 +123,6 @@ foreach ($providers as $providerName) {
     $generate = new GenerateHtmlListV2();
     $generate->setSubquery($sql);
     $generate->setTitle($providerName . ' - no browser result found');
-    
-    $path = 'results/' . $providerName;
-    
-    if (! file_exists($path)) {
-        mkdir($path, null, true);
-    }
     
     file_put_contents($path . '/noBrowserResultFound.html', $generate->getHtml());
     
@@ -133,12 +143,6 @@ foreach ($providers as $providerName) {
     $generate->setSubquery($sql);
     $generate->setTitle($providerName . ' - no rendering engine result found');
     
-    $path = 'results/' . $providerName;
-    
-    if (! file_exists($path)) {
-        mkdir($path, null, true);
-    }
-    
     file_put_contents($path . '/noRenderingEngineResultFound.html', $generate->getHtml());
     
     /*
@@ -158,11 +162,6 @@ foreach ($providers as $providerName) {
     $generate->setSubquery($sql);
     $generate->setTitle($providerName . ' - no operating system result found');
     
-    $path = 'results/' . $providerName;
-    
-    if (! file_exists($path)) {
-        mkdir($path, null, true);
-    }
     
     file_put_contents($path . '/noOperatingSystemResultFound.html', $generate->getHtml());
 }

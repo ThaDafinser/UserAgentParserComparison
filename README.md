@@ -16,13 +16,26 @@ Download this repo to a folder
 
 ```
 composer update -o
-
-vendor/bin/browscap browscap:update
-php bin/initPiwikCache.php
-php bin/initWurflCache.php
 ```
 
-### Step 3) Fill the SQLite database
+### Step 3) Download files
+
+### Browscap
+Download the full browscap.ini from [here](http://browscap.org/stream?q=Full_PHP_BrowscapINI)
+
+And put it to `data/full_php_browscap.ini`
+
+### Wurfl
+You need to put the wurfl file to `data/wurfl.xml`
+
+### Step 4) init caches
+```
+php bin/initCacheBrowscap.php
+php bin/initCachePiwik.php
+php bin/initCacheWurfl.php
+```
+
+### Step 5) Fill the SQLite database
 
 ```
 php bin/initDatabase.php
@@ -30,7 +43,7 @@ php bin/initDatabaseResults.php
 ```
 
 
-## Step 4) Generate reports
+## Step 6) Generate reports
 
 ```
 php bin/generateGeneralOverview.php
@@ -40,6 +53,6 @@ php bin/generateList.php
 
 ## Run your own queries
 
-After executing step 3) you have all data inside a `sqlite` database!
+After executing Step 5) you have all data inside a `sqlite` database!
 
 Just open it in `data/results.sqlite3` 
