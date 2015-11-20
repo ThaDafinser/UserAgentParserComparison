@@ -1,0 +1,55 @@
+
+<html>
+<head>
+    <title>WhichBrowser - device types detected</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+</head>
+    
+<body>
+    <div class="container">
+    
+	<div class="section no-pad-bot" id="index-banner">
+		<h1 class="header center orange-text">WhichBrowser - device types detected</h1>
+		<div class="row center">
+            13 results<br />
+    
+            <p>
+			 <a href="../index.html" class="btn-large waves-effect waves-light">
+                Back to the overview
+            </a>
+			</p>
+		</div>
+	</div>
+    
+    
+    <div class="section" id="userAgent-list">
+        <nav class="teal lighten-2">
+        <div class="nav-wrapper">
+          <form>
+            <div class="input-field">
+              <input class="search" type="search" placeholder="Search for a user agent">
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+        </nav>
+    
+        <ul class="list collection">
+            <li class="collection-item"><h4 class="searchable"></h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.24) Gecko cXense</span></li><li class="collection-item"><h4 class="searchable">camera</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (Linux; U; Tizen 1.0; xx; Samsung NX300) AppleWebKit/534.16 (KHTML, like Gecko) Version/1.0 Mobile Android compatible</span></li><li class="collection-item"><h4 class="searchable">car</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (X11; u; Linux; C) AppleWebKit /533.3 (Khtml, like Gheko) QtCarBrowser Safari/533.3</span></li><li class="collection-item"><h4 class="searchable">desktop</h4><strong>Example user agent</strong><br /><span class="userAgent">Opera/12.80 (Windows NT 5.1; U; en) Presto/2.10.289 Version/12.02</span></li><li class="collection-item"><h4 class="searchable">emulator</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (Linux; U; Android 2.3.3; ja-jp; sdk Build/GRI34; Y!J-BRZ/YATSHA crawler; http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1</span></li><li class="collection-item"><h4 class="searchable">ereader</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (Linux; U; en-us; EBRD1301; EXT) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1</span></li><li class="collection-item"><h4 class="searchable">gaming</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; Xbox; Xbox One)</span></li><li class="collection-item"><h4 class="searchable">headset</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (Linux; U; Android 4.0.4; en-us; Glass 1 Build/IMM76L; XE7) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30</span></li><li class="collection-item"><h4 class="searchable">media</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5</span></li><li class="collection-item"><h4 class="searchable">mobile</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (SymbianOS/9.4; U; Series60/5.0 Nokia5800d-1b/20.2.014; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413</span></li><li class="collection-item"><h4 class="searchable">monitor</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (Linux; Android 4.2.1; DA241HL Build/JOP40D) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Safari/537.36</span></li><li class="collection-item"><h4 class="searchable">tablet</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (iPad; U; CPU OS 4_3_5 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) CriOS/23.0.1271.100 Mobile/8L1 Safari/6533.18.5</span></li><li class="collection-item"><h4 class="searchable">television</h4><strong>Example user agent</strong><br /><span class="userAgent">Mozilla/5.0 (Standard; NF34SW/1.1; like Gecko) NetFront/3.4 InettvBrowser/2.2C (000087;IP03-01;0100;0000)</span></li>
+        </ul>
+    </div>
+    </div>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <script>
+    var options = {
+        page: 10000,
+        valueNames: ['searchable', 'userAgent']
+    };
+    
+    var hackerList = new List('userAgent-list', options);
+    
+    </script>
+</body>
+</html>

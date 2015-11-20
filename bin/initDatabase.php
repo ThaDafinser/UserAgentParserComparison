@@ -3,9 +3,6 @@ include_once 'bootstrap.php';
 /*
  * generate a sqlite database with all parse results
  */
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 $pdo = new PDO('sqlite:data/results.sqlite3');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

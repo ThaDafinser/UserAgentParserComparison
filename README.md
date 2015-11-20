@@ -27,6 +27,7 @@ And put it to `data/full_php_browscap.ini`
 
 #### Wurfl
 Download the `wurfl.xml` from [here (need register)](http://www.scientiamobile.com/downloads) or [here (not allowed)](https://github.com/fauvel/wurfl-dbapi/blob/master/data/wurfl.xml)
+
 You need to put the wurfl file to `data/wurfl.xml`
 
 ### Step 4) init caches
@@ -57,4 +58,4 @@ php bin/generateList.php
 
 After executing Step 5) you have all data inside a `sqlite` database!
 
-Just open it in `data/results.sqlite3` 
+Just open `data/results.sqlite3` with a viewer and query it...have fun :-)

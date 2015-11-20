@@ -58,8 +58,9 @@ class AnalyzeResult
                 'provider' => $provider,
                 'result' => $result,
                 
-                'misc' => $providerResult['misc']
-//                 'matchCount' => $this->getPossibleWrongPositive($provider, $result)
+                'misc' => $providerResult['misc'],
+                
+                'matchCount' => $this->getPossibleWrongPositive($provider, $result)
             ];
         }
         
@@ -70,7 +71,7 @@ class AnalyzeResult
     {
         return count($this->providerResults);
     }
-    
+
     /**
      *
      * @return array
@@ -80,31 +81,42 @@ class AnalyzeResult
         if ($this->groupedResult !== null) {
             return $this->groupedResult;
         }
-    
+        
         $resultArray = array_column($this->providerResults, 'resultArray');
-    
+        
         $browser = array_column($resultArray, 'browser');
         $browserName = array_column($browser, 'name');
         $browserVersion = array_column($browser, 'version');
-    
+        
+        $engine = array_column($resultArray, 'renderingEngine');
+        $engineName = array_column($engine, 'name');
+        $engineVersion = array_column($engine, 'version');
+        
         $os = array_column($resultArray, 'operatingSystem');
         $osName = array_column($os, 'name');
-        $browserVersion = array_column($browser, 'version');
-    
+        $osVersion = array_column($os, 'version');
+        
         $this->groupedResult = [
+            
             'browser' => [
                 'name' => $browserName,
                 'version' => $browserVersion
             ],
-    
+            
+            'engine' => [
+                'name' => $engineName,
+                'version' => $engineVersion
+            ],
+            
             'os' => [
-                'name' => $osName
+                'name' => $osName,
+                'version' => $osVersion
             ]
         ];
-    
+        
         return $this->groupedResult;
     }
-    
+
     private function getPossibleWrongPositive(AbstractProvider $provider, UserAgent $resultToCheck = null)
     {
         if ($resultToCheck === null) {
@@ -112,27 +124,52 @@ class AnalyzeResult
         }
         
         return [
-            'browser' => [
-                'name' => $this->getMatchCountBrowserName($resultToCheck),
-                'version' => $this->getMatchCountVersion($resultToCheck->getBrowser()
-                    ->getVersion(), 'browser')
+            'renderingEngine' => [
+                'name' => $this->getMatchCountEngineName($resultToCheck),
+                'engine' => $this->getMatchCountVersion($resultToCheck->getRenderingEngine()
+                    ->getVersion(), 'engine')
             ]
         ];
     }
 
-    private function getMatchCountBrowserName(UserAgent $resultToCheck)
+
+    private function getMatchCountEngineName(UserAgent $resultToCheck)
     {
         $groupedResult = $this->getGroupedResult();
         
+        $toCompare = $this->getNormalizedEngineName($resultToCheck->getRenderingEngine()
+            ->getName());
+        
+        // no result itself...so no comparison needed
+        if ($toCompare === null) {
+            return [
+                'countOtherResults' => null,
+                'matchCount' => null
+            ];
+        }
+        
         // -1 because the own result is also here!
+        $resultsAvailable = - 1;
         $matchCount = - 1;
-        foreach ($groupedResult['browser']['name'] as $browserName) {
-            if ($browserName == $resultToCheck->getBrowser()->getName()) {
+        foreach ($groupedResult['engine']['name'] as $value) {
+            
+            $normalizedValue = $this->getNormalizedEngineName($value);
+            
+            if ($normalizedValue === null) {
+                continue;
+            }
+            
+            $resultsAvailable ++;
+            
+            if ($toCompare == $normalizedValue) {
                 $matchCount ++;
             }
         }
         
-        return $matchCount;
+        return [
+            'countOtherResults' => $resultsAvailable,
+            'matchCount' => $matchCount
+        ];
     }
 
     private function getMatchCountVersion(Version $version, $type)
@@ -162,5 +199,39 @@ class AnalyzeResult
         }
         
         return $matchCount;
+    }
+    
+    private function getNormalizedEngineName($name)
+    {
+        if ($name === null) {
+            return null;
+        }
+        /*
+         * "NULL"
+         * "Blink"
+         * "Dillo"
+         * "Edge" <-- str_ireplace
+         * "EdgeHTML"<-- str_ireplace
+         * "Gecko"
+         * "KHTML"
+         * "Microsoft Word"
+         * "NetFront"
+         * "Presto"
+         * "T5"
+         * "Tasman"
+         * "Text-based"
+         * "Trident"
+         * "U2"
+         * "U3"
+         * "WebKit" <- covered with strtolower
+         * "Webkit" <- covered with strtolower
+         * "webkit" <- covered with strtolower
+         *
+         */
+        $name = str_ireplace('Edge', 'EdgeHTML', $name);
+    
+        $name = strtolower($name);
+    
+        return $name;
     }
 }

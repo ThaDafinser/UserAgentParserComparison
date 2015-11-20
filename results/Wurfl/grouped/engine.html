@@ -1,0 +1,55 @@
+
+<html>
+<head>
+    <title>Wurfl - rendering engines detected</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+</head>
+    
+<body>
+    <div class="container">
+    
+	<div class="section no-pad-bot" id="index-banner">
+		<h1 class="header center orange-text">Wurfl - rendering engines detected</h1>
+		<div class="row center">
+            0 results<br />
+    
+            <p>
+			 <a href="../index.html" class="btn-large waves-effect waves-light">
+                Back to the overview
+            </a>
+			</p>
+		</div>
+	</div>
+    
+    
+    <div class="section" id="userAgent-list">
+        <nav class="teal lighten-2">
+        <div class="nav-wrapper">
+          <form>
+            <div class="input-field">
+              <input class="search" type="search" placeholder="Search for a user agent">
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+        </nav>
+    
+        <ul class="list collection">
+            
+        </ul>
+    </div>
+    </div>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <script>
+    var options = {
+        page: 10000,
+        valueNames: ['searchable', 'userAgent']
+    };
+    
+    var hackerList = new List('userAgent-list', options);
+    
+    </script>
+</body>
+</html>

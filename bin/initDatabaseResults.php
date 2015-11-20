@@ -28,6 +28,8 @@ $sql = "
         `browserVersion` VARCHAR(255),
     
         `engineResultFound` INT,
+        `engineNameMatchCount` INT,
+        `engineNameOtherResults` INT,
         `engineName` VARCHAR(255),
         `engineVersion` VARCHAR(255),
     
@@ -81,6 +83,8 @@ $insert = "
         `browserVersion`,
     
         `engineResultFound`,
+        `engineNameMatchCount`,
+        `engineNameOtherResults`,
         `engineName`,
         `engineVersion`,
     
@@ -122,6 +126,8 @@ $insert = "
         :browserVersion,
     
         :engineResultFound,
+        :engineNameMatchCount,
+        :engineNameOtherResults,
         :engineName,
         :engineVersion,
     
@@ -192,6 +198,8 @@ foreach ($results as $row) {
         
         $misc = $providerResult['misc'];
         
+        $matchCount = $providerResult['matchCount'];
+        
         $ourId ++;
         
         $stmtInsert->bindValue(':resId', $ourId);
@@ -212,6 +220,8 @@ foreach ($results as $row) {
             $stmtInsert->bindValue(':browserVersion', null);
             
             $stmtInsert->bindValue(':engineResultFound', 0);
+            $stmtInsert->bindValue(':engineNameMatchCount', null);
+            $stmtInsert->bindValue(':engineNameOtherResults', null);
             $stmtInsert->bindValue(':engineName', null);
             $stmtInsert->bindValue(':engineVersion', null);
             
@@ -266,6 +276,9 @@ foreach ($results as $row) {
         } else {
             $stmtInsert->bindValue(':engineResultFound', 0);
         }
+        
+        $stmtInsert->bindValue(':engineNameMatchCount', $matchCount['renderingEngine']['name']['matchCount']);
+        $stmtInsert->bindValue(':engineNameOtherResults', $matchCount['renderingEngine']['name']['countOtherResults']);
         
         $stmtInsert->bindValue(':engineName', $result->getRenderingEngine()
             ->getName());

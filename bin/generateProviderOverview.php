@@ -143,8 +143,7 @@ foreach ($providers as $providerName) {
                         <?= $row['resultFound']; ?>
 					</td>
 					<td>
-					   <a href="noResultFound.html"
-						class="btn waves-effect waves-light">Not found</a>
+					   <a href="noResult/atAll.html" class="btn waves-effect waves-light">Not found</a>
 					</td>
 				</tr>
 				
@@ -160,7 +159,8 @@ foreach ($providers as $providerName) {
                         <?= $row['browserResultFound']; ?>
 					</td>
 					<td>
-					   <a href="noBrowserResultFound.html"
+						<a href="grouped/browser.html" class="btn waves-effect waves-light">Detected names</a>
+						<a href="noResult/browser.html"
 						class="btn waves-effect waves-light">Not found</a>
 					</td>
 				</tr>
@@ -176,7 +176,8 @@ foreach ($providers as $providerName) {
                         <?= $row['engineResultFound']; ?>
 					</td>
 					<td>
-					   <a href="noRenderingEngineResultFound.html"
+					   <a href="grouped/engine.html" class="btn waves-effect waves-light">Detected names</a>
+					   <a href="noResult/engine.html"
 						class="btn waves-effect waves-light">Not found</a>
 					</td>
 				</tr>
@@ -192,7 +193,8 @@ foreach ($providers as $providerName) {
                         <?= $row['osResultFound']; ?>
 					</td>
 					<td>
-					   <a href="noOperatingSystemResultFound.html"
+					   <a href="grouped/os.html" class="btn waves-effect waves-light">Detected names</a>
+					   <a href="noResult/os.html"
 						class="btn waves-effect waves-light">Not found</a>
 					</td>
 				</tr>
@@ -209,7 +211,7 @@ foreach ($providers as $providerName) {
                         <?= $row['deviceResultFound']; ?>
 					</td>
 					<td>
-					   
+				       
 					</td>
 				</tr>
 				<tr>
@@ -224,7 +226,7 @@ foreach ($providers as $providerName) {
                         <?= $row['deviceModelFound']; ?>
 					</td>
 					<td>
-					   
+					   <a href="grouped/deviceModel.html" class="btn waves-effect waves-light">Detected models</a>
 					</td>
 				</tr>
 				<tr>
@@ -239,7 +241,7 @@ foreach ($providers as $providerName) {
                         <?= $row['deviceBrandFound']; ?>
 					</td>
 					<td>
-					   
+					   <a href="grouped/deviceBrand.html" class="btn waves-effect waves-light">Detected brands</a>
 					</td>
 				</tr>
 				<tr>
@@ -254,7 +256,7 @@ foreach ($providers as $providerName) {
                         <?= $row['deviceTypeFound']; ?>
 					</td>
 					<td>
-					   
+					   <a href="grouped/deviceType.html" class="btn waves-effect waves-light">Detected types</a>
 					</td>
 				</tr>
 				<tr>
@@ -285,7 +287,7 @@ foreach ($providers as $providerName) {
                         <?= $row['asBotDetected']; ?>
 					</td>
 					<td>
-					   <a href="notDetectedAsBot.html"
+					   <a href="bot/shouldBeABot.html"
 						class="btn waves-effect waves-light">Not detected as bot</a>
 					</td>
 				</tr>
