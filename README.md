@@ -20,12 +20,13 @@ composer update -o
 
 ### Step 3) Download files
 
-### Browscap
-Download the full browscap.ini from [here](http://browscap.org/stream?q=Full_PHP_BrowscapINI)
+#### Browscap
+Download the `full_php_browscap.ini` from [here](http://browscap.org/stream?q=Full_PHP_BrowscapINI)
 
 And put it to `data/full_php_browscap.ini`
 
-### Wurfl
+#### Wurfl
+Download the `wurfl.xml` from [here (need register)](http://www.scientiamobile.com/downloads) or [here (not allowed)](https://github.com/fauvel/wurfl-dbapi/blob/master/data/wurfl.xml)
 You need to put the wurfl file to `data/wurfl.xml`
 
 ### Step 4) init caches
@@ -34,6 +35,7 @@ php bin/initCacheBrowscap.php
 php bin/initCachePiwik.php
 php bin/initCacheWurfl.php
 ```
+
 
 ### Step 5) Fill the SQLite database
 
