@@ -24,7 +24,7 @@
         
         "doctrine/cache": "^1.5",
         
-        "whichbrowser/testrunner": "^1.0",
+        "whichbrowser/testrunner": "^2.0",
         
         "woothee/woothee-testset": "^1.2"
     },
