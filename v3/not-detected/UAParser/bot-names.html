@@ -1,0 +1,77 @@
+
+<html>
+<head>
+    <title>No bot name found - UAParser <small>v3.4.5</small></title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">No bot name found - UAParser <small>v3.4.5</small></h1>
+        
+    <div class="row center">
+        3 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable"> <small>3x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/e6/ea/e6ea876f-9ae8-4df9-ac55-2cfc69236243.html">Yahoo Pipes 2.0</a></span></li><li class="collection-item"><h4 class="searchable"> <small>2x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/f0/6a/f06afecf-188c-450b-b7a7-0016f2c9c9dc.html">SearQuBot/SearQuBot v1.0</a></span></li><li class="collection-item"><h4 class="searchable"> <small>3x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/ab/a2/aba2b72d-2c17-486a-8fba-5e7492d4d66c.html">Mozilla/5.0 (compatible; Yahoo Ad monitoring; https://help.yahoo.com/kb/yahoo-ad-monitoring-SLN24857.html)</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2016-01-26 16:35:50</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 10000,
+    valueNames: ['searchable']
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>

@@ -1,0 +1,77 @@
+
+<html>
+<head>
+    <title>Detected bot types</title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">Detected bot types</h1>
+        
+    <div class="row center">
+        12 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable">Crawler <small>448x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/ef/2f/ef2f211a-b7f3-4fd5-bd48-9e68cdf4349a.html">Mozilla/5.0 (compatible; AhrefsBot/4.0; +http://ahrefs.com/robot/)</a></span></li><li class="collection-item"><h4 class="searchable">Feed Fetcher <small>26x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/a3/0b/a30bdc06-642f-4bd3-b64d-929b86a908b8.html">NewsBlur Feed Fetcher - 7 subscribers - http://www.newsblur.com/site/1948420/analytics-piwik (Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_1) AppleWebKit/534.48.3 (KHTML, like Gecko) Version/5.1 Safari/534.48.3)</a></span></li><li class="collection-item"><h4 class="searchable">Feed Parser <small>6x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/0d/95/0d95b8de-15d1-44b2-8b7f-a74001051bbf.html">SimplePie/1.3-dev (Feed Parser; http://simplepie.org; Allow like Gecko) Build/20111118194710</a></span></li><li class="collection-item"><h4 class="searchable">Offline Browser <small>6x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/4f/80/4f801352-0f71-40b7-b7e4-ffedefc546a8.html">Wget/1.15 (linux-gnu)</a></span></li><li class="collection-item"><h4 class="searchable">RSS <small>46x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/84/b9/84b9caae-fe47-493b-aa59-64c459d44afd.html">Feedly/1.0 (+http://www.feedly.com/fetcher.html; like FeedFetcher-Google)</a></span></li><li class="collection-item"><h4 class="searchable">Search bot <small>149x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/a2/30/a230d169-3d52-4a43-ab64-9696ee6a307f.html">Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)</a></span></li><li class="collection-item"><h4 class="searchable">Search tools <small>1x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/cf/77/cf778da8-d4dc-48f5-ab45-f1b85c6c8c68.html">ShopWiki/1.0 ( +http://www.shopwiki.com/wiki/Help:Bot)</a></span></li><li class="collection-item"><h4 class="searchable">Service Agent <small>1x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/b3/90/b390429c-197b-4a10-b4a8-8787dd687aec.html">Browsershots</a></span></li><li class="collection-item"><h4 class="searchable">Site Monitor <small>9x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/d5/f0/d5f0d5a3-d777-4c26-a094-8c7b32aa2fac.html">websitepulse checker/1.1 (compatible; MSIE 5.5; Netscape 4.75; Linux)</a></span></li><li class="collection-item"><h4 class="searchable">Site Monitors <small>2x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/80/b7/80b75a50-620c-47b3-838d-ff457903b438.html">Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)</a></span></li><li class="collection-item"><h4 class="searchable">Social Media Agent <small>9x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/64/0e/640ebe89-6c59-4ee6-b1ce-a6afa1d12f77.html">Twitterbot/1.0</a></span></li><li class="collection-item"><h4 class="searchable">Validator <small>8x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/d1/9a/d19ae450-73ac-495b-bd75-c6344f7fa8b2.html">Jigsaw/2.3.0 W3C_CSS_Validator_JFouffa/2.0 (See <http://validator.w3.org/services>)</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2016-01-26 16:32:29</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 10000,
+    valueNames: ['searchable']
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>

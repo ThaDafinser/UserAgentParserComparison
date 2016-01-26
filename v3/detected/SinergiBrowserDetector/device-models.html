@@ -1,0 +1,77 @@
+
+<html>
+<head>
+    <title>Detected device models - SinergiBrowserDetector <small>6.0.0</small></title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">Detected device models - SinergiBrowserDetector <small>6.0.0</small></h1>
+        
+    <div class="row center">
+        3 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable">iPad <small>48x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/df/3a/df3aa1e0-cffd-4d33-b4b3-dcf6aba4a503.html">Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; pl_pl) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B367 Ninesky-android-mobile/2.1.0</a></span></li><li class="collection-item"><h4 class="searchable">iPhone <small>162x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/84/ad/84ad26c7-d784-4f29-813f-cd0aba9770ed.html">Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A403 SogouAndroidBrowser/2.6.1</a></span></li><li class="collection-item"><h4 class="searchable">Windows Phone <small>357x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/df/fe/dffef2bc-29af-442a-b668-6ceb9ef9c57e.html">Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Nokia 520T)</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2016-01-26 16:33:12</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 10000,
+    valueNames: ['searchable']
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>

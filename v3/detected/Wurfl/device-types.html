@@ -1,0 +1,77 @@
+
+<html>
+<head>
+    <title>Detected device types - Wurfl <small>1.6.4</small></title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">Detected device types - Wurfl <small>1.6.4</small></h1>
+        
+    <div class="row center">
+        7 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable">Desktop <small>1009x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/30/76/3076ec8c-c221-4934-b496-b88bc9249d5e.html">Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.1.8) Gecko/20100317 Postbox/1.1.3</a></span></li><li class="collection-item"><h4 class="searchable">Feature Phone <small>1484x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/26/9a/269ad08c-2b35-4a39-87a1-d11267db40ca.html">Mozilla/5.0 (Windows NT 6.1; Windows CE 6.0; WOW64; Trident/7.0; rv:11.0) like Gecko</a></span></li><li class="collection-item"><h4 class="searchable">Other Mobile <small>52x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/ea/ae/eaae77a9-4101-49a1-b4b8-a9b92d0656cb.html">Mozilla/4.0 (compatible; Linux 2.6.22) NetFront/3.4 Kindle/2.5 (screen 600x800; rotate)</a></span></li><li class="collection-item"><h4 class="searchable">Other Non-Mobile <small>5x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/d4/36/d43655ae-f29c-4998-bdfd-8b7c36964188.html">Lynx/2.8.6rel.4 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.7l Lynxlet/0.7.0</a></span></li><li class="collection-item"><h4 class="searchable">Smart-TV <small>552x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/af/c1/afc1c2e0-f0b8-447d-b085-0b373c38046d.html">Mozilla/5.0 (Linux; U) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.33 Safari/537.31 LGSmartTV/5.0</a></span></li><li class="collection-item"><h4 class="searchable">Smartphone <small>3663x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/04/ed/04ed2ca6-cb2f-4bb7-9bbe-711cb3109ebf.html">Mozilla/5.0 (Linux; Android 4.2.2; xx; Galaxy Nexus Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Version/1.0 Chrome/18.0.1025.308 Mobile Safari/535.19</a></span></li><li class="collection-item"><h4 class="searchable">Tablet <small>1198x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/v3/user-agent-detail/a9/fa/a9fac800-6ad9-4f8d-bd19-a9a1636ed813.html">Mozilla/5.0 (Linux; U; de-de; KFOT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.10 Safari/535.19 Silk-Accelerated=true</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2016-01-26 16:32:54</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 10000,
+    valueNames: ['searchable']
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>
