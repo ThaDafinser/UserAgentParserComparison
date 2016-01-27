@@ -1,0 +1,106 @@
+<?php
+use UserAgentParser\Provider;
+use UserAgentParser\Provider\Http;
+use BrowscapPHP\Cache\BrowscapCache;
+use Doctrine\Common\Cache;
+use WurflCache\Adapter\File;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Handler\CurlHandler;
+
+/*
+ * Browscap
+ */
+$cache = new File([
+    File::DIR => '.tmp/browscap'
+]);
+
+// $cache = new \WurflCache\Adapter\Apc([
+//     'namespace' => 'browscap-php'
+// ]);
+
+$browscapParser = new \BrowscapPHP\Browscap();
+$browscapParser->setCache($cache);
+
+$browscapProvider = new Provider\BrowscapPhp($browscapParser);
+
+/*
+ * Piwik
+*/
+$cache = new Cache\PhpFileCache('.tmp/piwik');
+
+// $cache = new Cache\ApcCache();
+// $cache->setNamespace('piwik_device');
+
+$piwikParser = new \DeviceDetector\DeviceDetector();
+$piwikParser->setCache($cache);
+
+$piwikProvider = new Provider\PiwikDeviceDetector($piwikParser);
+
+/*
+ * Wurfl
+*/
+$resourcesDir = '.tmp/wurfl';
+
+$persistenceDir = $resourcesDir . '/storage/persistence';
+$cacheDir       = $resourcesDir . '/storage/cache';
+
+// Create WURFL Configuration
+$wurflConfig = new \Wurfl\Configuration\InMemoryConfig();
+$wurflConfig->wurflFile('.tmp/wurfl.xml');
+$wurflConfig->matchMode(\Wurfl\Configuration\Config::MATCH_MODE_ACCURACY);
+
+$wurflConfig->persistence('file', [
+    \Wurfl\Configuration\Config::DIR => $persistenceDir,
+]);
+
+// Setup Caching
+// $wurflConfig->cache('apc');
+$wurflConfig->cache('file', [
+    \Wurfl\Configuration\Config::DIR => $cacheDir
+]);
+
+// Create the cache instance from the configuration
+$cacheStorage = \Wurfl\Storage\Factory::create($wurflConfig->cache);
+
+// Create the persistent cache instance from the configuration
+$persistenceStorage = \Wurfl\Storage\Factory::create($wurflConfig->persistence);
+
+// Create a WURFL Manager from the WURFL Configuration
+$wurflManager = new \Wurfl\Manager($wurflConfig, $persistenceStorage, $cacheStorage);
+
+$wurflProvider = new Provider\Wurfl($wurflManager);
+
+/*
+ * HTTP
+ */
+$handler = new CurlHandler();
+$stack = HandlerStack::create($handler);
+
+$client = new Client([
+    'handler' => $stack,
+    'timeout' => 3,
+
+    'curl' => [
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false
+    ]
+]);
+
+$userAgentString = new Http\UserAgentStringCom($client);
+
+
+$chain = new Provider\Chain([
+    $browscapProvider,
+    new Provider\DonatjUAParser(),
+    $piwikProvider,
+    new Provider\SinergiBrowserDetector(),
+    new Provider\UAParser(),
+    new Provider\WhichBrowser(),
+    new Provider\Woothee(),
+    $wurflProvider,
+    
+//     $userAgentString,
+]);
+
+return $chain;

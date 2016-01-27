@@ -1,0 +1,18 @@
+<?php
+/*
+ * Version number for output folder!
+ */
+define('COMPARISON_VERSION', 3);
+
+$basePath = '../gh-pages/v' . COMPARISON_VERSION;
+
+// database configuration parameters
+$conn = [
+    'dbname' => '...',
+    
+    'user' => '...',
+    'password' => '...',
+    
+    'host' => 'localhost',
+    'driver' => 'pdo_mysql'
+];
