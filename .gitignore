@@ -47,3 +47,6 @@ Temporary Items
 .project
 vendor
 .tmp
+
+config.php
+bin/getChainProvider.php
