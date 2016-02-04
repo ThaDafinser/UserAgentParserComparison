@@ -65,7 +65,6 @@ class OverviewProvider extends AbstractHtml
             	COUNT(resEngineName) as engineFound,
             	COUNT(resOsName) as osFound,
     
-            	COUNT(resDeviceResultFound) as deviceFound,
             	COUNT(resDeviceModel) as deviceModelFound,
             	COUNT(resDeviceBrand) as deviceBrandFound,
             	COUNT(resDeviceType) as deviceTypeFound,

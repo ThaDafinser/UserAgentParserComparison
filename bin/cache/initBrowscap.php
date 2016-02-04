@@ -12,7 +12,7 @@ include 'bootstrap.php';
  * File
  */
 $cache = new File([
-    File::DIR => '.tmp/browscap'
+    File::DIR => '../myCache/.tmp/browscap'
 ]);
 
 $bc = new Browscap();

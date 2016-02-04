@@ -3,21 +3,16 @@ namespace UserAgentParserComparison\Html;
 
 use UserAgentParserComparison\Entity\UserAgentEvaluation;
 use UserAgentParserComparison\Entity\Result;
+use UserAgentParserComparison\Entity\UserAgent;
 
 class UserAgentDetail extends AbstractHtml
 {
 
     /**
      *
-     * @var string
+     * @var UserAgent
      */
     private $userAgent;
-
-    /**
-     *
-     * @var UserAgentEvaluation
-     */
-    private $userAgentEvaluation;
 
     /**
      *
@@ -25,32 +20,18 @@ class UserAgentDetail extends AbstractHtml
      */
     private $results = [];
 
-    public function setUserAgent($userAgent)
+    public function setUserAgent(UserAgent $userAgent)
     {
         $this->userAgent = $userAgent;
     }
 
+    /**
+     *
+     * @return \UserAgentParserComparison\Entity\UserAgent
+     */
     public function getUserAgent()
     {
         return $this->userAgent;
-    }
-
-    /**
-     *
-     * @param UserAgentEvaluation $userAgentEvaluation            
-     */
-    public function setUserAgentEvaluation(UserAgentEvaluation $userAgentEvaluation = null)
-    {
-        $this->userAgentEvaluation = $userAgentEvaluation;
-    }
-
-    /**
-     *
-     * @return UserAgentEvaluation
-     */
-    public function getUserAgentEvaluation()
-    {
-        return $this->userAgentEvaluation;
     }
 
     /**
@@ -141,6 +122,73 @@ class UserAgentDetail extends AbstractHtml
         
         $html .= '</tr>';
         
+        /*
+         * Test suite
+         */
+        $userAgent = $this->getUserAgent();
+        
+        $html .= '<tr><th colspan="13" class="green lighten-3">';
+        $html .= 'Source result (test suite)';
+        $html .= '</th></tr>';
+        
+        $html .= '<tr>';
+        
+        $html .= '<td>';
+        $html .= '' . $userAgent->source . '<br /><small>' . $userAgent->fileName . '</small></td>';
+        
+        $html .= '<td>' . $userAgent->browserName . ' ' . $userAgent->browserVersion . '</td>';
+        $html .= '<td>' . $userAgent->osName . ' ' . $userAgent->osVersion . '</td>';
+        $html .= '<td>' . $userAgent->engineName . ' ' . $userAgent->engineVersion . '</td>';
+        
+        $html .= '<td>' . $userAgent->deviceBrand . '</td>';
+        $html .= '<td>' . $userAgent->deviceModel . '</td>';
+        $html .= '<td>' . $userAgent->deviceType . '</td>';
+        if ($userAgent->deviceIsMobile === true) {
+            $html .= '<td>yes</td>';
+        } else {
+            $html .= '<td></td>';
+        }
+        if ($userAgent->deviceIsTouch === true) {
+            $html .= '<td>yes</td>';
+        } else {
+            $html .= '<td></td>';
+        }
+        
+        if ($userAgent->botIsBot === true) {
+            $html .= '<td>yes</td>';
+        } else {
+            $html .= '<td></td>';
+        }
+        $html .= '<td>' . $userAgent->botName . '</td>';
+        $html .= '<td>' . $userAgent->botType . '</td>';
+        
+        $html .= '<td>
+                
+<!-- Modal Trigger -->
+<a class="modal-trigger btn waves-effect waves-light" href="#modal-test">Detail</a>
+
+<!-- Modal Structure -->
+<div id="modal-test" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Testsuite result detail</h4>
+        <p><pre><code class="php">' . print_r($userAgent->rawResult, true) . '</code></pre></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">close</a>
+    </div>
+</div>
+                
+        </td>';
+        
+        $html .= '</tr>';
+        
+        $html .= '<tr><th colspan="13" class="green lighten-3">';
+        $html .= 'Providers';
+        $html .= '</th></tr>';
+        
+        /*
+         * Providers
+         */
         foreach ($this->getResults() as $result) {
             
             $provider = $result->getProvider();
@@ -165,8 +213,6 @@ class UserAgentDetail extends AbstractHtml
             /*
              * General
              */
-            if ($provider->canDetectBotIsBot) {}
-            
             if ($provider->canDetectBrowserName === true) {
                 $html .= '<td>' . $result->getBrowserName() . ' ' . $result->getBrowserVersion() . '</td>';
             } else {
@@ -277,80 +323,15 @@ class UserAgentDetail extends AbstractHtml
         return $html;
     }
 
-    private function getEvaluationRow($type)
-    {
-        $uaEvaluation = $this->getUserAgentEvaluation();
-        
-        $html = '<tr>';
-        $html .= '<td>' . $type . '</td>';
-        $html .= '<td>' . $uaEvaluation->{$type . 'Found'} . ' of ' . $this->getProviderCapabilityCount($type) . '</td>';
-        
-        $html .= '<td>' . $uaEvaluation->{$type . 'FoundUnique'} . '</td>';
-        $html .= '<td>' . $uaEvaluation->{$type . 'MaxSameResultCount'} . '</td>';
-        
-        $html .= '<td>' . $uaEvaluation->{$type . 'HarmonizedFoundUnique'} . '</td>';
-        $html .= '<td>' . $uaEvaluation->{$type . 'HarmonizedMaxSameResultCount'} . '</td>';
-        $html .= '</tr>';
-        
-        return $html;
-    }
-
-    private function getEvaluationTable()
-    {
-        $html = '<table class="striped">';
-        
-        $html .= '<tr>';
-        
-        $html .= '<th>Part</th>';
-        $html .= '<th>Found</th>';
-        
-        $html .= '<th>Unique found</th>';
-        $html .= '<th>Max same result count</th>';
-        
-        $html .= '<th>Harmonized unique</th>';
-        $html .= '<th>Harmonized max same result count</th>';
-        
-        $html .= '</tr>';
-        
-        $html .= $this->getEvaluationRow('browserName');
-        $html .= $this->getEvaluationRow('browserVersion');
-        
-        $html .= $this->getEvaluationRow('engineName');
-        $html .= $this->getEvaluationRow('engineVersion');
-        
-        $html .= $this->getEvaluationRow('osName');
-        $html .= $this->getEvaluationRow('osVersion');
-        
-        $html .= $this->getEvaluationRow('deviceBrand');
-        $html .= $this->getEvaluationRow('deviceModel');
-        $html .= $this->getEvaluationRow('deviceType');
-        
-        $html .= $this->getEvaluationRow('botName');
-        $html .= $this->getEvaluationRow('botType');
-        
-        $html .= '</table>';
-        
-        return $html;
-    }
-
     public function getHtml()
     {
-        $script = '
-$(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $(\'.modal-trigger\').leanModal();
-});
-        ';
-        
         $body = '
 <div class="section">
 	<h1 class="header center orange-text">User agent detail</h1>
 	<div class="row center">
-        ' . $this->getUserAgent() . '
-        <p>
-            Detected by ' . $this->getUserAgentEvaluation()->resultFound . ' of ' . $this->getUserAgentEvaluation()->resultCount . ' providers<br />
-            As bot detected by ' . $this->getUserAgentEvaluation()->asBotDetectedCount . ' of ' . $this->getProviderCapabilityCount('botIsBot') . '
-		</p>
+        <h5 class="header light">
+            ' . $this->getUserAgent()->string . '
+        </h5>
 	</div>
 </div>   
 
@@ -359,11 +340,12 @@ $(document).ready(function(){
 </div>
 ';
         
-        // $body .= '
-        // <div class="section">
-        // ' . $this->getEvaluationTable() . '
-        // </div>
-        // ';
+        $script = '
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $(\'.modal-trigger\').leanModal();
+});
+        ';
         
         return parent::getHtmlCombined($body, $script);
     }

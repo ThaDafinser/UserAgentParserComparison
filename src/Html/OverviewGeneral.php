@@ -46,9 +46,7 @@ class OverviewGeneral extends AbstractHtml
     {
         $sql = "
             SELECT
-            	proName,
-            	proPackageName,
-            	proVersion,
+            	provider.*,
             
             	SUM(resResultFound) as resultFound,
             
@@ -56,7 +54,6 @@ class OverviewGeneral extends AbstractHtml
             	COUNT(resEngineName) as engineFound,
             	COUNT(resOsName) as osFound,
             
-            	COUNT(resDeviceResultFound) as deviceFound,
             	COUNT(resDeviceModel) as deviceModelFound,
             	COUNT(resDeviceBrand) as deviceBrandFound,
             	COUNT(resDeviceType) as deviceTypeFound,
@@ -74,6 +71,7 @@ class OverviewGeneral extends AbstractHtml
         ";
         
         $conn = $this->getEntityManager()->getConnection();
+        
         return $conn->fetchAll($sql);
     }
 
@@ -133,6 +131,9 @@ class OverviewGeneral extends AbstractHtml
         $html .= '<tbdoy>';
         foreach ($this->getProviders() as $row) {
             
+//             var_dump($row);
+//             exit();
+            
             $html .= '<tr>';
             
             $html .= '<th><a href="https://packagist.org/packages/' . $row['proPackageName'] . '">' . $row['proName'] . '</a>';
@@ -143,7 +144,7 @@ class OverviewGeneral extends AbstractHtml
              */
             $html .= '
                 <td>
-                    ' . $row['resultFound'] . '					    
+                    ' . round($row['resultFound'] / $totalUserAgentsOnePercent, 2) . '%	    
                     <div class="progress">
 						<div class="determinate" style="width: ' . round($row['resultFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
 					</div>
@@ -152,78 +153,135 @@ class OverviewGeneral extends AbstractHtml
             
             $html .= '
                 <td>
-                    ' . $row['browserFound'] . '
+                    ' . round($row['browserFound'] / $totalUserAgentsOnePercent, 2) . '%
                     <div class="progress">
 						<div class="determinate" style="width: ' . round($row['browserFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
 					</div>
 				</td>
             ';
             
-            $html .= '
-                <td>
-                    ' . $row['engineFound'] . '
-                    <div class="progress">
-						<div class="determinate" style="width: ' . round($row['engineFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
-					</div>
-				</td>
-            ';
+            if($row['proCanDetectEngineName'] == 1){
+                $html .= '
+                    <td>
+                        ' . round($row['engineFound'] / $totalUserAgentsOnePercent, 2) . '%
+                        <div class="progress">
+    						<div class="determinate" style="width: ' . round($row['engineFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
+    					</div>
+    				</td>
+                ';
+            } else {
+                $html .= '
+                    <td>
+                        <i class="material-icons">close</i>
+                    </td>
+                ';
+            }
             
             /*
              * OS
              */
-            $html .= '
-                <td>
-                    ' . $row['osFound'] . '
-                    <div class="progress">
-						<div class="determinate" style="width: ' . round($row['osFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
-					</div>
-				</td>
-            ';
+            if($row['proCanDetectOsName'] == 1){
+                $html .= '
+                    <td>
+                        ' . round($row['osFound'] / $totalUserAgentsOnePercent, 2) . '%
+                        <div class="progress">
+    						<div class="determinate" style="width: ' . round($row['osFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
+    					</div>
+    				</td>
+                ';
+            } else {
+                $html .= '
+                    <td>
+                        <i class="material-icons">close</i>
+                    </td>
+                ';
+            }
+            
             
             /*
              * device
              */
-            $html .= '
-                <td>
-                    ' . $row['deviceBrandFound'] . '
-                    <div class="progress">
-						<div class="determinate" style="width: ' . round($row['deviceBrandFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
-					</div>
-				</td>
-            ';
+            if($row['proCanDetectDeviceBrand'] == 1){
+                $html .= '
+                    <td>
+                        ' . round($row['deviceBrandFound'] / $totalUserAgentsOnePercent, 2) . '%
+                        <div class="progress">
+    						<div class="determinate" style="width: ' . round($row['deviceBrandFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
+    					</div>
+    				</td>
+                ';
+            } else {
+                $html .= '
+                    <td>
+                        <i class="material-icons">close</i>
+                    </td>
+                ';
+            }
             
-            $html .= '
-                <td>
-                    ' . $row['deviceModelFound'] . '
-                    <div class="progress">
-						<div class="determinate" style="width: ' . round($row['deviceModelFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
-					</div>
-				</td>
-            ';
+            if($row['proCanDetectDeviceModel'] == 1){
+                $html .= '
+                    <td>
+                        ' . round($row['deviceModelFound'] / $totalUserAgentsOnePercent, 2) . '%
+                        <div class="progress">
+    						<div class="determinate" style="width: ' . round($row['deviceModelFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
+    					</div>
+    				</td>
+                ';
+            } else {
+                $html .= '
+                    <td>
+                        <i class="material-icons">close</i>
+                    </td>
+                ';
+            }
             
-            $html .= '
-                <td>
-                    ' . $row['deviceTypeFound'] . '
-                    <div class="progress">
-						<div class="determinate" style="width: ' . round($row['deviceTypeFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
-					</div>
-				</td>
-            ';
+            if($row['proCanDetectDeviceType'] == 1){
+                $html .= '
+                    <td>
+                        ' . round($row['deviceTypeFound'] / $totalUserAgentsOnePercent, 2) . '%
+                        <div class="progress">
+    						<div class="determinate" style="width: ' . round($row['deviceTypeFound'] / $totalUserAgentsOnePercent, 0) . '"></div>
+    					</div>
+    				</td>
+                ';
+            } else {
+                $html .= '
+                    <td>
+                        <i class="material-icons">close</i>
+                    </td>
+                ';
+            }
             
-            $html .= '
-                <td>
-                    ' . $row['asMobileDetected'] . '
-                    <div class="progress">
-						<div class="determinate" style="width: ' . round($row['asMobileDetected'] / $totalUserAgentsOnePercent, 0) . '"></div>
-					</div>
-				</td>
-            ';
+            if($row['proCanDetectDeviceIsMobile'] == 1){
+                $html .= '
+                    <td>
+                        ' . round($row['asMobileDetected'] / $totalUserAgentsOnePercent, 2) . '%
+                        <div class="progress">
+    						<div class="determinate" style="width: ' . round($row['asMobileDetected'] / $totalUserAgentsOnePercent, 0) . '"></div>
+    					</div>
+    				</td>
+                ';
+            } else {
+                $html .= '
+                    <td>
+                        <i class="material-icons">close</i>
+                    </td>
+                ';
+            }
             
-            $html .= '
-                <td>
-                    ' . $row['asBotDetected'] . '
-				</td>
-            ';
+            if($row['proCanDetectBotIsBot'] == 1){
+                $html .= '
+                    <td>
+                        ' . $row['asBotDetected'] . '
+    				</td>
+                ';
+            } else {
+                $html .= '
+                    <td>
+                        <i class="material-icons">close</i>
+                    </td>
+                ';
+            }
             
             $html .= '
                 <td>

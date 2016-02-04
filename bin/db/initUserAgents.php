@@ -10,94 +10,88 @@ $conn = $entityManager->getConnection();
 $userAgentRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\UserAgent');
 
 /*
- * Get all current UA
- */
-$sql = "
-SELECT
-    uaString
-FROM userAgent
-";
-$result = $conn->fetchAll($sql);
-$alreadyInsertedUserAgents = array_column($result, 'uaString');
-
-/*
  * Grab the userAgents!
  */
-$handleAll = opendir('data/datasets');
-if ($handleAll === false) {
-    throw new \Exception('folder could not get opened');
-}
-
 echo '~~~ Load all UAs ~~~' . PHP_EOL;
 
-$allUserAgents = [];
-while ($filename = readdir($handleAll)) {
-    if ($filename == '.' || $filename == '..' || strpos($filename, '.php') === false) {
+$files = [
+    'woothee_all.php',
+    'whichbrowser_all.php',
+    'piwik_all.php',
+    'browscap_all.php'
+];
+
+$userAgents = [];
+
+foreach ($files as $file) {
+    
+    if (strpos($file, '.php') === false) {
         continue;
     }
     
-    echo $filename;
+    echo $file . PHP_EOL;
     
-    // skip currently whichbrowser, because shell_exec does not work
-    // if ($filename != 'whichbrowser_all.php') {
-    // echo ' - skip' . PHP_EOL;
+    $result = include 'data/datasets/' . $file;
     
-    // continue;
-    // }
-    
-    echo ' - use it!' . PHP_EOL;
-    
-    $result = include 'data/datasets/' . $filename;
-    
-    $allUserAgents = array_merge($allUserAgents, $result['userAgents']);
+    $userAgents = array_merge($userAgents, $result);
 }
 
-$allUserAgents = array_unique($allUserAgents);
-
-foreach ($allUserAgents as $key => $value) {
-    if ($value == '') {
-        unset($allUserAgents[$key]);
-    }
-}
-
-echo 'UserAgents Unique: ' . count($allUserAgents) . PHP_EOL;
-echo 'Already inserted: ' . count($alreadyInsertedUserAgents) . PHP_EOL;
-
-$allUserAgents = array_diff($allUserAgents, $alreadyInsertedUserAgents);
-
-echo 'LEft: ' . count($allUserAgents) . PHP_EOL;
+echo 'UserAgent count: ' . count($userAgents) . PHP_EOL;
 
 /*
  * Insert them!
  */
 echo '~~~ Insert all UAs ~~~' . PHP_EOL;
 
-$sql = "
-    INSERT INTO userAgent
-        (uaId, uaHash, uaString)
-    VALUES
-";
+$conn->beginTransaction();
+$currenUserAgent = 1;
 
-$values = [];
-foreach ($allUserAgents as $userAgent) {
+foreach ($userAgents as $row) {
     
-    $uuid = Uuid::uuid4();
+    $row['uaFileName'] = str_replace('\\', '/', $row['uaFileName']);
     
-    $values[] = '(' . $conn->quote($uuid->toString(), \PDO::PARAM_STR) . ', 0x' . bin2hex(sha1($userAgent, true)) . ', ' . $conn->quote($userAgent, \PDO::PARAM_STR) . ')';
-    
-    if (count($values) > 2000) {
-        $realSql = $sql . implode(',', $values);
-        
-        $conn->query($realSql);
-        
-        $values = [];
+    $parts = explode($row['uaSource'], $row['uaFileName']);
+    if(count($parts) === 2){
+        $row['uaFileName'] = $parts[1];
     }
     
-    echo '.';
+    $row['uaHash'] = bin2hex(sha1($row['uaString'], true));
+    
+    $sql = "
+        SELECT
+            *
+        FROM userAgent
+        WHERE
+            uaHash = '" . $row['uaHash'] . "'
+    ";
+    $result = $conn->fetchAll($sql);
+    
+    if (count($result) === 1) {
+        // update!
+        $conn->update('userAgent', $row, [
+            'uaId' => $result[0]['uaId']
+        ]);
+        
+        echo 'U';
+        
+        continue;
+    }
+    
+    $row['uaId'] = Uuid::uuid4()->toString();
+    
+    $conn->insert('userAgent', $row);
+    
+    echo 'I';
+    
+    if ($currenUserAgent % 100 === 0) {
+        $conn->commit();
+        
+        $conn->beginTransaction();
+    }
+    
+    $currenUserAgent ++;
 }
 
-if (count($values) > 0) {
-    $realSql = $sql . implode(',', $values);
-    
-    $conn->query($realSql);
+if ($conn->getTransactionNestingLevel() !== 0) {
+    $conn->commit();
 }

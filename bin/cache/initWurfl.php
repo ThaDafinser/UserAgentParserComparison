@@ -9,7 +9,7 @@ use WurflCache\Adapter\File;
 /*
  * File
  */
-$resourcesDir = '.tmp/wurfl';
+$resourcesDir = '../myCache/.tmp/wurfl';
 
 $persistenceDir = $resourcesDir . '/storage/persistence';
 $cacheDir = $resourcesDir . '/storage/cache';
@@ -43,7 +43,7 @@ $wurflManager->reload();
 // /*
 //  * APC
 //  */
-// $resourcesDir = '.tmp/wurfl';
+// $resourcesDir = '../myCache/.tmp/wurfl';
 
 // $persistenceDir = $resourcesDir . '/storage/persistence';
 // $cacheDir = $resourcesDir . '/storage/cache';

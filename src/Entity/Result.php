@@ -45,7 +45,7 @@ class Result
      * @OneToOne(targetEntity="ResultEvaluation", mappedBy="result")
      */
     protected $resultEvaluation;
-    
+
     /**
      * @Column(type="string", name="resProviderVersion", nullable=true)
      */
@@ -95,11 +95,6 @@ class Result
      * @Column(type="string", name="resOsVersion", nullable=true)
      */
     protected $osVersion;
-
-    /**
-     * @Column(type="boolean", name="resDeviceResultFound", nullable=true)
-     */
-    protected $deviceResultFound;
 
     /**
      * @Column(type="string", name="resDeviceModel", nullable=true)
@@ -172,6 +167,7 @@ class Result
     }
 
     /**
+     *
      * @return Provider
      */
     public function getProvider()
@@ -210,8 +206,8 @@ class Result
     }
 
     /**
-     * 
-     * @param boolean $resultFound
+     *
+     * @param boolean $resultFound            
      */
     public function setResultFound($resultFound)
     {
@@ -242,120 +238,134 @@ class Result
     {
         return $this->browserVersion;
     }
-    
-    public function setEngineName($engineName) {
+
+    public function setEngineName($engineName)
+    {
         $this->engineName = $engineName;
     }
-    
-    public function getEngineName() {
+
+    public function getEngineName()
+    {
         return $this->engineName;
     }
-    
-    public function setEngineVersion($engineVersion) {
+
+    public function setEngineVersion($engineVersion)
+    {
         $this->engineVersion = $engineVersion;
     }
-    
-    public function getEngineVersion() {
+
+    public function getEngineVersion()
+    {
         return $this->engineVersion;
     }
-    
-    public function setOsName($osName) {
+
+    public function setOsName($osName)
+    {
         $this->osName = $osName;
     }
-    
-    public function getOsName() {
+
+    public function getOsName()
+    {
         return $this->osName;
     }
-    
-    public function setOsVersion($osVersion) {
+
+    public function setOsVersion($osVersion)
+    {
         $this->osVersion = $osVersion;
     }
-    
-    public function getOsVersion() {
+
+    public function getOsVersion()
+    {
         return $this->osVersion;
     }
-    
-    /**
-     * 
-     * @param boolean $deviceResultFound
-     */
-    public function setDeviceResultFound($deviceResultFound) {
-        $this->deviceResultFound = $deviceResultFound;
-    }
-    
-    public function getDeviceResultFound() {
-        return $this->deviceResultFound;
-    }
-    
-    public function setDeviceModel($deviceModel) {
+
+    public function setDeviceModel($deviceModel)
+    {
         $this->deviceModel = $deviceModel;
     }
-    
-    public function getDeviceModel() {
+
+    public function getDeviceModel()
+    {
         return $this->deviceModel;
     }
-    
-    public function setDeviceBrand($deviceBrand) {
+
+    public function setDeviceBrand($deviceBrand)
+    {
         $this->deviceBrand = $deviceBrand;
     }
-    
-    public function getDeviceBrand() {
+
+    public function getDeviceBrand()
+    {
         return $this->deviceBrand;
     }
-    
-    public function setDeviceType($deviceType) {
+
+    public function setDeviceType($deviceType)
+    {
         $this->deviceType = $deviceType;
     }
-    
-    public function getDeviceType() {
+
+    public function getDeviceType()
+    {
         return $this->deviceType;
     }
-    
-    public function setDeviceIsMobile($deviceIsMobile) {
+
+    public function setDeviceIsMobile($deviceIsMobile)
+    {
         $this->deviceIsMobile = $deviceIsMobile;
     }
-    
-    public function getDeviceIsMobile() {
+
+    public function getDeviceIsMobile()
+    {
         return $this->deviceIsMobile;
     }
-    
-    public function setDeviceIsTouch($deviceIsTouch) {
+
+    public function setDeviceIsTouch($deviceIsTouch)
+    {
         $this->deviceIsTouch = $deviceIsTouch;
     }
-    
-    public function getDeviceIsTouch() {
+
+    public function getDeviceIsTouch()
+    {
         return $this->deviceIsTouch;
     }
-    
-    public function setBotIsBot($botIsBot) {
+
+    public function setBotIsBot($botIsBot)
+    {
         $this->botIsBot = $botIsBot;
     }
-    
-    public function getBotIsBot() {
+
+    public function getBotIsBot()
+    {
         return $this->botIsBot;
     }
-    
-    public function setBotName($botName) {
+
+    public function setBotName($botName)
+    {
         $this->botName = $botName;
     }
-    
-    public function getBotName() {
+
+    public function getBotName()
+    {
         return $this->botName;
     }
-    
-    public function setBotType($botType) {
+
+    public function setBotType($botType)
+    {
         $this->botType = $botType;
     }
-    
-    public function getBotType() {
+
+    public function getBotType()
+    {
         return $this->botType;
     }
-    
-    public function setRawResult($rawResult) {
+
+    public function setRawResult($rawResult)
+    {
         $this->rawResult = $rawResult;
     }
-    
-    public function getRawResult() {
+
+    public function getRawResult()
+    {
         return $this->rawResult;
     }
 }

@@ -20,9 +20,11 @@ $resultRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\Re
  */
 $providers = [];
 foreach ($chain->getProviders() as $provider) {
+    
     $providerEntity = $providerRepo->findOneBy([
         'name' => $provider->getName()
     ]);
+    
     if ($providerEntity === null) {
         throw new \Exception('no provider found with name: ' . $provider->getName());
     }
@@ -50,8 +52,8 @@ $statement->execute();
 echo 'done loading..' . PHP_EOL;
 
 $conn->beginTransaction();
-
 $currenUserAgent = 1;
+
 while ($row = $statement->fetch()) {
     
     foreach ($chain->getProviders() as $provider) {
@@ -138,11 +140,6 @@ if($conn->getTransactionNestingLevel() !== 0){
 
 function hydrateResult(array $row2, \UserAgentParser\Model\UserAgent $result)
 {
-    $deviceResultFound = null;
-    if ($result->getDevice()->getModel() !== null || $result->getDevice()->getBrand() !== null || $result->getDevice()->getType() !== null || $result->getDevice()->getIsMobile() !== null) {
-        $deviceResultFound = true;
-    }
-    
     $toHydrate = [
         'resBrowserName' => $result->getBrowser()->getName(),
         'resBrowserVersion' => $result->getBrowser()
@@ -158,8 +155,6 @@ function hydrateResult(array $row2, \UserAgentParser\Model\UserAgent $result)
         'resOsVersion' => $result->getOperatingSystem()
             ->getVersion()
             ->getComplete(),
-        
-        'resDeviceResultFound' => $deviceResultFound,
         
         'resDeviceModel' => $result->getDevice()->getModel(),
         'resDeviceBrand' => $result->getDevice()->getBrand(),

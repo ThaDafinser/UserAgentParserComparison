@@ -24,8 +24,6 @@
         
         "thadafinser/user-agent-parser": "dev-master",
         
-        "doctrine/cache": "^1.6",
-        
         "browscap/browscap-php": "dev-master",
         "donatj/phpuseragentparser": "^0.5.0",
         "piwik/device-detector": "^3.5",
@@ -34,10 +32,12 @@
         "whichbrowser/parser": ">=2.0.3,<3.0",
         "woothee/woothee": "^1.2",
         "mimmi20/wurfl": "^1.6",
-        "zsxsoft/php-useragent": "^1.0",
         
+        "browscap/browscap": ">=6011,<7000",
+        "thadafinser/uap-core": "^0.5",
         "woothee/woothee-testset": "^1.3",
         
+        "doctrine/cache": "^1.6",
         "doctrine/orm": "^2.5",
         "ramsey/uuid-doctrine": "^1.0"
     },
