@@ -1,0 +1,77 @@
+
+<html>
+<head>
+    <title>Detected bot types - PiwikDeviceDetector <small>3.5.2</small></title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">Detected bot types - PiwikDeviceDetector <small>3.5.2</small></h1>
+        
+    <div class="row center">
+        9 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable">Crawler <small>136x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/51/2f/512fa7b1-c48c-426a-8055-5d6e80f3c454.html">Mozilla/5.0 (compatible; Exabot/3.0 (BiggerBetter); +http://www.exabot.com/go/robot)</a></span></li><li class="collection-item"><h4 class="searchable">Feed Fetcher <small>28x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/d8/8a/d88a1b3c-bedf-4617-8b57-7905cb0f8147.html">Netvibes (http://www.netvibes.com/; 8 subscribers; feedID: 2244192)</a></span></li><li class="collection-item"><h4 class="searchable">Feed Parser <small>7x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/99/7e/997e1e9c-95db-486f-a6bc-7e639eb0388d.html">MagpieRSS/0.72 (+http://magpierss.sf.net)</a></span></li><li class="collection-item"><h4 class="searchable">Search bot <small>240x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/40/12/4012227f-1a7e-48d6-9a57-c6175f76c3bc.html">Mozilla/5.0 (compatible; OpenindexSpider; +http://www.openindex.io/en/webmasters/spider.html)</a></span></li><li class="collection-item"><h4 class="searchable">Search tools <small>1x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/84/ed/84ed6cf9-c224-44bf-9e8e-c05466ec2743.html">ShopWiki/1.0 ( +http://www.shopwiki.com/wiki/Help:Bot)</a></span></li><li class="collection-item"><h4 class="searchable">Service Agent <small>1x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/fb/bc/fbbcdac8-58d6-487c-a0ad-54616eab4f11.html">Browsershots</a></span></li><li class="collection-item"><h4 class="searchable">Site Monitor <small>11x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/a1/d2/a1d26cd6-89de-4677-8400-c2f6aa518347.html">Mozilla/5.0 YottaaMonitor;</a></span></li><li class="collection-item"><h4 class="searchable">Social Media Agent <small>11x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/9e/df/9edf1f46-6260-4d7d-b804-1118ddffad22.html">facebookplatform/1.0 (+http://developers.facebook.com)</a></span></li><li class="collection-item"><h4 class="searchable">Validator <small>8x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/14/87/1487ab5d-8960-4966-96e5-216871adf951.html">W3C-checklink/4.81 libwww-perl/5.836</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2016-02-13 13:09:55</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 10000,
+    valueNames: ['searchable']
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>

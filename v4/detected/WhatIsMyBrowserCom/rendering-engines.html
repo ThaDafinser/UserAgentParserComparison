@@ -1,0 +1,77 @@
+
+<html>
+<head>
+    <title>Detected rendering engines - WhatIsMyBrowserCom <small></small></title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">Detected rendering engines - WhatIsMyBrowserCom <small></small></h1>
+        
+    <div class="row center">
+        5 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable">Gecko <small>696x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/00/2a/002a528a-c254-4686-bd17-badabf1b6fa4.html">Mozilla/5.0 (Series40; Nokia206.1/03.58; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.36</a></span></li><li class="collection-item"><h4 class="searchable">NetFront <small>59x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/07/b6/07b6c53f-3dfb-4a84-bca1-6afa6575b267.html">Mozilla/5.0 (PLAYSTATION 3; 3.55)</a></span></li><li class="collection-item"><h4 class="searchable">Presto <small>661x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/00/44/0044ec71-1f60-4d05-9223-cde400990256.html">Opera/9.80 (Linux 7335b0-smp; U; HbbTV/1.1.1 (; Humax; iCord MINI; 1.00.28; 1.0;  hdplusSmartTV/1.0 (NETRANGEMMH; )); ce-html/1.0; en) Presto/2.10.250 Version/11.60</a></span></li><li class="collection-item"><h4 class="searchable">Trident <small>1063x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/00/34/0034ddf7-43df-4fca-8e6d-696709ca9df0.html">Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; SAMSUNG; GT-i8700)</a></span></li><li class="collection-item"><h4 class="searchable">WebKit <small>17541x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v4/user-agent-detail/00/00/0000d299-27ec-4046-a670-ee5a11517fca.html">Mozilla/5.0 (Linux; Android 4.4.2; xx; SAMSUNG SM-N9005 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/1.5 Chrome/28.0.1500.94 Mobile Safari/537.36</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2016-02-13 13:15:48</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 10000,
+    valueNames: ['searchable']
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>
