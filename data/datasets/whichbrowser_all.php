@@ -40,7 +40,7 @@ function hydrateWhichbrowser($data, array $row, $userAgent)
 }
 
 /*
- * Fixtures 1) all expect bots.yml
+ * Fixtures 1)
  */
 $path = 'vendor/whichbrowser/parser/tests/data';
 

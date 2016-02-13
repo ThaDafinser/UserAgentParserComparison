@@ -74,7 +74,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resBrowserName IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resBrowserName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resBrowserName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resBrowserName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resBrowserName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
@@ -112,7 +130,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resEngineName IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resEngineName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resEngineName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resEngineName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resEngineName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
@@ -150,7 +186,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resOsName IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resOsName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resOsName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resOsName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resOsName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
@@ -188,7 +242,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resDeviceModel IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resDeviceModel)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resDeviceModel IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resDeviceModel)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resDeviceModel IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
@@ -226,7 +298,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resDeviceBrand IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resDeviceBrand)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resDeviceBrand IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resDeviceBrand)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resDeviceBrand IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
@@ -264,7 +354,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resDeviceType IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resDeviceType)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resDeviceType IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resDeviceType)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resDeviceType IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
@@ -281,6 +389,82 @@ foreach ($providers as $provider) {
         $generate->setElements($result);
     
         file_put_contents($folder . '/device-types.html', $generate->getHtml());
+    }
+    
+    /*
+     * not detected as mobile
+     */
+    if ($provider->canDetectDeviceIsMobile === true) {
+        echo '.';
+    
+        $sql = "
+            SELECT
+            	resBotName as name,
+            	uaId,
+            	uaString,
+            	(
+            		SELECT
+            			COUNT(1)
+            		FROM result as res2
+                    WHERE
+            			res2.userAgent_id = uaId
+                        AND res2.resDeviceIsMobile IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCount`
+            FROM result
+            JOIN userAgent
+            	ON uaId = userAgent_id
+			    AND uaDeviceIsMobile IS NOT NULL
+            WHERE
+            	provider_id = '" . $provider->id . "'
+                AND resResultFound = 1
+                AND resDeviceIsMobile IS NULL
+        ";
+        $result = $conn->fetchAll($sql);
+    
+        $generate = new SimpleList();
+        $generate->setTitle('Not detected as mobile - ' . $provider->name . ' <small>' . $provider->version . '</small>');
+        $generate->setElements($result);
+    
+        file_put_contents($folder . '/device-is-mobile.html', $generate->getHtml());
+    }
+    
+    /*
+     * not detected as bot
+     */
+    if ($provider->canDetectBotIsBot === true) {
+        echo '.';
+    
+        $sql = "
+            SELECT
+            	resBotName as name,
+            	uaId,
+            	uaString,
+            	(
+            		SELECT
+            			COUNT(1)
+            		FROM result as res2
+                    WHERE
+            			res2.userAgent_id = uaId
+                        AND res2.resBotIsBot IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCount`
+            FROM result
+            JOIN userAgent
+            	ON uaId = userAgent_id
+			    AND uaBotIsBot IS NOT NULL
+            WHERE
+            	provider_id = '" . $provider->id . "'
+                AND resResultFound = 1
+                AND resBotIsBot IS NULL
+        ";
+        $result = $conn->fetchAll($sql);
+    
+        $generate = new SimpleList();
+        $generate->setTitle('Not detected as bot - ' . $provider->name . ' <small>' . $provider->version . '</small>');
+        $generate->setElements($result);
+    
+        file_put_contents($folder . '/bot-is-bot.html', $generate->getHtml());
     }
     
     /*
@@ -302,7 +486,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resBotName IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resBotName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resBotName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resBotName)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resBotName IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
@@ -340,7 +542,25 @@ foreach ($providers as $provider) {
             			res2.userAgent_id = uaId
                         AND res2.resBotType IS NOT NULL
             			AND res2.provider_id != '" . $provider->id . "'
-                ) as `detectionCount`
+                ) as `detectionCount`,
+			    (
+            		SELECT
+            			COUNT(DISTINCT res2.resBotType)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resBotType IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionCountUnique`,
+                (
+            		SELECT
+            			GROUP_CONCAT(DISTINCT res2.resBotType)
+            		FROM result as res2
+                    WHERE 
+            			res2.userAgent_id = uaId
+                        AND res2.resBotType IS NOT NULL
+            			AND res2.provider_id != '" . $provider->id . "'
+                ) as `detectionValuesDistinct`
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id

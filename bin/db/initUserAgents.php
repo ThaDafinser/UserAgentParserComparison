@@ -15,6 +15,7 @@ $userAgentRepo = $entityManager->getRepository('UserAgentParserComparison\Entity
 echo '~~~ Load all UAs ~~~' . PHP_EOL;
 
 $files = [
+    'uap-core_all.php',
     'woothee_all.php',
     'whichbrowser_all.php',
     'piwik_all.php',

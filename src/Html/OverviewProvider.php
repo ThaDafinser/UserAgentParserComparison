@@ -414,6 +414,9 @@ class OverviewProvider extends AbstractHtml
                     ' . $row['asMobileDetected'] . '
                 </td>
                 <td>
+                    <a href="not-detected/' . $provider->name . '/device-is-mobile.html" class="btn waves-effect waves-light">
+                        Not detected
+                    </a>
                 </td>
                 </tr>
             ';
@@ -446,6 +449,12 @@ class OverviewProvider extends AbstractHtml
                     ' . $row['asBotDetected'] . '
                 </td>
                 <td>
+                    <a href="detected/' . $provider->name . '/bot-is-bot.html" class="btn waves-effect waves-light">
+                        Detected
+                    </a>
+                    <a href="not-detected/' . $provider->name . '/bot-is-bot.html" class="btn waves-effect waves-light">
+                        Not detected
+                    </a>
                 </td>
                 </tr>
             ';

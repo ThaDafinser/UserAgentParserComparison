@@ -83,7 +83,26 @@ foreach ($files as $file) {
         
         $data = [
             'uaSource' => 'browscap/browscap',
-            'uaFileName' => $file
+            'uaFileName' => $file,
+            
+            'uaBrowserName' => null,
+            'uaBrowserVersion' => null,
+            
+            'uaEngineName' => null,
+            'uaEngineVersion' => null,
+            
+            'uaOsName' => null,
+            'uaOsVersion' => null,
+            
+            'uaDeviceModel' => null,
+            'uaDeviceBrand' => null,
+            'uaDeviceType' => null,
+            'uaDeviceIsMobile' => null,
+            'uaDeviceIsTouch' => null,
+            
+            'uaBotIsBot' => null,
+            'uaBotName' => null,
+            'uaBotType' => null,
         ];
         
         $allData[] = hydrateBrowscap($data, $row);

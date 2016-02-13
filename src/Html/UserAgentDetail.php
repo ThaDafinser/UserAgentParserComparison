@@ -99,7 +99,7 @@ class UserAgentDetail extends AbstractHtml
         $html .= '<th colspan="3">General</th>';
         $html .= '<th colspan="5">Device</th>';
         $html .= '<th colspan="3">Bot</th>';
-        $html .= '<th></th>';
+        $html .= '<th colspan="2"></th>';
         $html .= '</tr>';
         
         $html .= '<tr>';
@@ -118,6 +118,7 @@ class UserAgentDetail extends AbstractHtml
         $html .= '<th>Name</th>';
         $html .= '<th>Type</th>';
         
+        $html .= '<th>Parse time</th>';
         $html .= '<th>Actions</th>';
         
         $html .= '</tr>';
@@ -127,7 +128,7 @@ class UserAgentDetail extends AbstractHtml
          */
         $userAgent = $this->getUserAgent();
         
-        $html .= '<tr><th colspan="13" class="green lighten-3">';
+        $html .= '<tr><th colspan="14" class="green lighten-3">';
         $html .= 'Source result (test suite)';
         $html .= '</th></tr>';
         
@@ -140,7 +141,7 @@ class UserAgentDetail extends AbstractHtml
         $html .= '<td>' . $userAgent->osName . ' ' . $userAgent->osVersion . '</td>';
         $html .= '<td>' . $userAgent->engineName . ' ' . $userAgent->engineVersion . '</td>';
         
-        $html .= '<td>' . $userAgent->deviceBrand . '</td>';
+        $html .= '<td style="border-left: 1px solid #555">' . $userAgent->deviceBrand . '</td>';
         $html .= '<td>' . $userAgent->deviceModel . '</td>';
         $html .= '<td>' . $userAgent->deviceType . '</td>';
         if ($userAgent->deviceIsMobile === true) {
@@ -155,13 +156,14 @@ class UserAgentDetail extends AbstractHtml
         }
         
         if ($userAgent->botIsBot === true) {
-            $html .= '<td>yes</td>';
+            $html .= '<td style="border-left: 1px solid #555">yes</td>';
         } else {
-            $html .= '<td></td>';
+            $html .= '<td style="border-left: 1px solid #555"></td>';
         }
         $html .= '<td>' . $userAgent->botName . '</td>';
         $html .= '<td>' . $userAgent->botType . '</td>';
         
+        $html .= '<td></td>';
         $html .= '<td>
                 
 <!-- Modal Trigger -->
@@ -182,7 +184,7 @@ class UserAgentDetail extends AbstractHtml
         
         $html .= '</tr>';
         
-        $html .= '<tr><th colspan="13" class="green lighten-3">';
+        $html .= '<tr><th colspan="14" class="green lighten-3">';
         $html .= 'Providers';
         $html .= '</th></tr>';
         
@@ -235,9 +237,9 @@ class UserAgentDetail extends AbstractHtml
              * Device
              */
             if ($provider->canDetectDeviceBrand === true) {
-                $html .= '<td>' . $result->getDeviceBrand() . '</td>';
+                $html .= '<td style="border-left: 1px solid #555">' . $result->getDeviceBrand() . '</td>';
             } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
+                $html .= '<td style="border-left: 1px solid #555"><i class="material-icons">close</i></td>';
             }
             
             if ($provider->canDetectDeviceModel === true) {
@@ -277,12 +279,12 @@ class UserAgentDetail extends AbstractHtml
              */
             if ($provider->canDetectBotIsBot === true) {
                 if ($result->getBotIsBot() === true) {
-                    $html .= '<td>yes</td>';
+                    $html .= '<td style="border-left: 1px solid #555">yes</td>';
                 } else {
-                    $html .= '<td></td>';
+                    $html .= '<td style="border-left: 1px solid #555"></td>';
                 }
             } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
+                $html .= '<td style="border-left: 1px solid #555"><i class="material-icons">close</i></td>';
             }
             
             if ($provider->canDetectBotName === true) {
@@ -296,7 +298,8 @@ class UserAgentDetail extends AbstractHtml
                 $html .= '<td><i class="material-icons">close</i></td>';
             }
             
-            // @todo somehow show this as a detail?
+            $html .= '<td>' . round($result->getParseTime(), 5) . '</td>';
+            
             $html .= '<td>
                 
 <!-- Modal Trigger -->

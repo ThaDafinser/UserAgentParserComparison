@@ -186,6 +186,31 @@ foreach ($providers as $provider) {
     }
     
     /*
+     * detected - bots
+     */
+    if ($provider->canDetectBotIsBot === true) {
+        $sql = "
+            SELECT
+                resBotName as name,
+                uaId,
+            	uaString
+            FROM result
+            JOIN userAgent
+                ON uaId = userAgent_id
+            WHERE
+                resBotIsBot IS NOT NULL
+                AND provider_id = '" . $provider->id . "'
+        ";
+        $result = $conn->fetchAll($sql);
+    
+        $generate = new SimpleList();
+        $generate->setTitle('Detected as bot - ' . $provider->name . ' <small>' . $provider->version . '</small>');
+        $generate->setElements($result);
+    
+        file_put_contents($folder . '/bot-is-bot.html', $generate->getHtml());
+    }
+    
+    /*
      * detected - botNames
      */
     if ($provider->canDetectBotName === true) {

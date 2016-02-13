@@ -41,8 +41,10 @@ $sql = "
     SELECT
         *
     FROM userAgent
-    LEFT JOIN result ON userAgent_id = uaId
-    WHERE
+    LEFT JOIN result 
+        ON userAgent_id = uaId
+        AND provider_id = '9cdd8b45-a2eb-406b-bd27-7e48af38ffd4'
+    WHERE 
         resId IS NULL
     ORDER BY uaId
 ";
@@ -76,7 +78,7 @@ while ($row = $statement->fetch()) {
             $row2 = $result[0];
             
             // skip
-            if ($row2['resProviderVersion'] == $provider->getVersion() && $provider->getVersion() !== null) {
+            if ($row2['resProviderVersion'] == $provider->getVersion() || $provider->getVersion() === null) {
                 echo 'S';
                 continue;
             }
@@ -87,12 +89,20 @@ while ($row = $statement->fetch()) {
             ];
         }
         
+        /*
+         * Get the result with timing
+         */
         $start = microtime(true);
+        
         try {
             $result = $provider->parse($row['uaString']);
         } catch (NoResultFoundException $ex) {
             $result = null;
-        } 
+        } catch (\UserAgentParser\Exception\RequestException $ex) {
+            echo $ex->getMessage() . PHP_EOL;
+            
+            continue;
+        }
         
         $end = microtime(true);
         
@@ -101,6 +111,9 @@ while ($row = $statement->fetch()) {
         $date = new \DateTime(null, new \DateTimeZone('UTC'));
         $row2['resLastChangeDate'] = $date->format('Y-m-d H:i:s');
         
+        /*
+         * Hydrate the result
+         */
         if ($result === null) {
             $row2['resResultFound'] = 0;
         } else {
@@ -109,6 +122,9 @@ while ($row = $statement->fetch()) {
             $row2 = hydrateResult($row2, $result);
         }
         
+        /*
+         * Persist
+         */
         if (! isset($row2['resId'])) {
             $row2['resId'] = Uuid::uuid4()->toString();
             
@@ -122,7 +138,7 @@ while ($row = $statement->fetch()) {
         echo '.';
     }
     
-    if($currenUserAgent % 100 === 0){
+    if ($currenUserAgent % 100 === 0) {
         $conn->commit();
         
         $conn->beginTransaction();
@@ -134,7 +150,7 @@ while ($row = $statement->fetch()) {
     $currenUserAgent ++;
 }
 
-if($conn->getTransactionNestingLevel() !== 0){
+if ($conn->getTransactionNestingLevel() !== 0) {
     $conn->commit();
 }
 

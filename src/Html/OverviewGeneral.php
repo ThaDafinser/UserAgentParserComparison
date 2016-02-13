@@ -75,7 +75,23 @@ class OverviewGeneral extends AbstractHtml
         return $conn->fetchAll($sql);
     }
 
-    private function getTable()
+    private function getUserAgentPerProviderCount()
+    {
+        $sql = "
+            SELECT 
+            	uaSource,
+            	COUNT(1) countNumber
+            FROM useragent
+            group by uaSource
+            order by uaSource
+        ";
+        
+        $conn = $this->getEntityManager()->getConnection();
+        
+        return $conn->fetchAll($sql);
+    }
+
+    private function getTableSummary()
     {
         $html = '<table class="striped">';
         
@@ -131,13 +147,19 @@ class OverviewGeneral extends AbstractHtml
         $html .= '<tbdoy>';
         foreach ($this->getProviders() as $row) {
             
-//             var_dump($row);
-//             exit();
-            
             $html .= '<tr>';
             
-            $html .= '<th><a href="https://packagist.org/packages/' . $row['proPackageName'] . '">' . $row['proName'] . '</a>';
-            $html .= '<br /><small>' . $row['proVersion'] . '</small></th>';
+            $html .= '<th>';
+            
+            if ($row['proPackageName'] != '') {
+                $html .= '<a href="https://packagist.org/packages/' . $row['proPackageName'] . '">' . $row['proName'] . '</a>';
+                $html .= '<br /><small>' . $row['proVersion'] . '</small>';
+            } else {
+                $html .= '<a href="' . $row['proHomepage'] . '">' . $row['proName'] . '</a>';
+                $html .= '<br /><small>Cloud API</small>';
+            }
+            
+            $html .= '</th>';
             
             /*
              * Result found?
@@ -160,7 +182,7 @@ class OverviewGeneral extends AbstractHtml
 				</td>
             ';
             
-            if($row['proCanDetectEngineName'] == 1){
+            if ($row['proCanDetectEngineName'] == 1) {
                 $html .= '
                     <td>
                         ' . round($row['engineFound'] / $totalUserAgentsOnePercent, 2) . '%
@@ -171,16 +193,14 @@ class OverviewGeneral extends AbstractHtml
                 ';
             } else {
                 $html .= '
-                    <td>
-                        <i class="material-icons">close</i>
-                    </td>
+                    <td></td>
                 ';
             }
             
             /*
              * OS
              */
-            if($row['proCanDetectOsName'] == 1){
+            if ($row['proCanDetectOsName'] == 1) {
                 $html .= '
                     <td>
                         ' . round($row['osFound'] / $totalUserAgentsOnePercent, 2) . '%
@@ -191,17 +211,14 @@ class OverviewGeneral extends AbstractHtml
                 ';
             } else {
                 $html .= '
-                    <td>
-                        <i class="material-icons">close</i>
-                    </td>
+                    <td></td>
                 ';
             }
-            
             
             /*
              * device
              */
-            if($row['proCanDetectDeviceBrand'] == 1){
+            if ($row['proCanDetectDeviceBrand'] == 1) {
                 $html .= '
                     <td>
                         ' . round($row['deviceBrandFound'] / $totalUserAgentsOnePercent, 2) . '%
@@ -212,13 +229,11 @@ class OverviewGeneral extends AbstractHtml
                 ';
             } else {
                 $html .= '
-                    <td>
-                        <i class="material-icons">close</i>
-                    </td>
+                    <td></td>
                 ';
             }
             
-            if($row['proCanDetectDeviceModel'] == 1){
+            if ($row['proCanDetectDeviceModel'] == 1) {
                 $html .= '
                     <td>
                         ' . round($row['deviceModelFound'] / $totalUserAgentsOnePercent, 2) . '%
@@ -229,13 +244,11 @@ class OverviewGeneral extends AbstractHtml
                 ';
             } else {
                 $html .= '
-                    <td>
-                        <i class="material-icons">close</i>
-                    </td>
+                    <td></td>
                 ';
             }
             
-            if($row['proCanDetectDeviceType'] == 1){
+            if ($row['proCanDetectDeviceType'] == 1) {
                 $html .= '
                     <td>
                         ' . round($row['deviceTypeFound'] / $totalUserAgentsOnePercent, 2) . '%
@@ -246,13 +259,11 @@ class OverviewGeneral extends AbstractHtml
                 ';
             } else {
                 $html .= '
-                    <td>
-                        <i class="material-icons">close</i>
-                    </td>
+                    <td></td>
                 ';
             }
             
-            if($row['proCanDetectDeviceIsMobile'] == 1){
+            if ($row['proCanDetectDeviceIsMobile'] == 1) {
                 $html .= '
                     <td>
                         ' . round($row['asMobileDetected'] / $totalUserAgentsOnePercent, 2) . '%
@@ -263,13 +274,11 @@ class OverviewGeneral extends AbstractHtml
                 ';
             } else {
                 $html .= '
-                    <td>
-                        <i class="material-icons">close</i>
-                    </td>
+                    <td></td>
                 ';
             }
             
-            if($row['proCanDetectBotIsBot'] == 1){
+            if ($row['proCanDetectBotIsBot'] == 1) {
                 $html .= '
                     <td>
                         ' . $row['asBotDetected'] . '
@@ -277,9 +286,7 @@ class OverviewGeneral extends AbstractHtml
                 ';
             } else {
                 $html .= '
-                    <td>
-                        <i class="material-icons">close</i>
-                    </td>
+                    <td></td>
                 ';
             }
             
@@ -300,6 +307,47 @@ class OverviewGeneral extends AbstractHtml
         return $html;
     }
 
+    private function getTableTests()
+    {
+        $html = '';
+        
+        $html = '<table class="striped">';
+        
+        /*
+         * Header
+         */
+        $html .= '
+            <tr>
+                <th>
+                    Provider
+                </th>
+                <th>
+                    Number of user agents
+                </th>
+            </tr>
+        ';
+        
+        /*
+         * Body
+         */
+        $html.='<tbody>';
+        
+        foreach ($this->getUserAgentPerProviderCount() as $row) {
+            
+            $html .= '<tr>';
+            
+            $html .= '<td>' . $row['uaSource'] . '</td>';
+            $html .= '<td>' . $row['countNumber'] . '</td>';
+            
+            $html .= '</tr>';
+        }
+        $html .= '</tbdoy>';
+        
+        $html .= '</table>';
+        
+        return $html;
+    }
+
     public function getHtml()
     {
         $body = '
@@ -309,20 +357,25 @@ class OverviewGeneral extends AbstractHtml
     <div class="row center">
         <h5 class="header light">
             We took <strong>' . $this->getUserAgentCount() . '</strong> different user agents and analyzed them with all providers below.<br />
-            That way, it\'s possible to get a real overview.
+            That way, it\'s possible to get a good overview of each provider
         </h5>
     </div>
 </div>
 
 <div class="section">
-    ' . $this->getTable() . '
+    <h3 class="header center orange-text">
+        Detected by all providers
+    </h3>
+                
+    ' . $this->getTableSummary() . '
+        
 </div>
         
 <div class="section center">
         
-    <h2 class="header center orange-text">
+    <h3 class="header center orange-text">
         Detected by all providers
-    </h2>
+    </h3>
         
     <a href="detected/general/browser-names.html" class="btn waves-effect waves-light">
         Browser names    
@@ -355,6 +408,22 @@ class OverviewGeneral extends AbstractHtml
     <a href="detected/general/bot-types.html" class="btn waves-effect waves-light">
         Bot types
     </a><br /><br />
+        
+</div>
+        
+<div class="section">
+    <h3 class="header center orange-text">
+        Sources of the user agents
+    </h3>
+    <div class="row center">
+        <h5 class="header light">
+            The user agents were extracted from the test suites of the following providers<br />
+            <strong>Note</strong> The actual number of tested user agents can be higher in the test suite itself.<br />
+            If a user agent is used in multiple test suites, the last one "wins" and overwrites the previous!
+        </h5>
+    </div>
+                
+    ' . $this->getTableTests() . '
         
 </div>
 ';

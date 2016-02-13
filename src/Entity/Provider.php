@@ -30,6 +30,11 @@ class Provider
     public $packageName;
 
     /**
+     * @Column(type="string", name="proHomepage", nullable=true)
+     */
+    public $homepage;
+    
+    /**
      * @Column(type="string", name="proVersion", nullable=true)
      */
     public $version;

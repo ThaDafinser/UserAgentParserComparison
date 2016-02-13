@@ -22,6 +22,7 @@ foreach ($chain->getProviders() as $provider) {
     
     $providerEntity->name = $provider->getName();
     $providerEntity->packageName = $provider->getPackageName();
+    $providerEntity->homepage = $provider->getHomepage();
     $providerEntity->version = $provider->getVersion();
     
     /*

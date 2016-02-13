@@ -21,12 +21,24 @@ class SimpleList extends AbstractHtml
         $html = '<ul class="list collection">';
         
         foreach ($this->getElements() as $element) {
+            
             $html .= '<li class="collection-item">';
             
             $html .= '<h4 class="searchable">' . $element['name'];
+            
+            /*
+             * Optional
+             */
             if (isset($element['detectionCount'])) {
                 $html .= ' <small>' . $element['detectionCount'] . 'x detected</small>';
             }
+            if (isset($element['detectionCountUnique'])) {
+                $html .= ' <small>(' . $element['detectionCountUnique'] . 'x unique)</small>';
+            }
+            if (isset($element['detectionValuesDistinct'])) {
+                $html .= '<br /><small>' . $element['detectionValuesDistinct'] . '</small>';
+            }
+            
             $html .= '</h4>';
             
             $html .= '<strong>Example user agent</strong><br />';
@@ -36,6 +48,7 @@ class SimpleList extends AbstractHtml
             $html .= '</span>';
             
             $html .= '</li>';
+            
         }
         
         $html .= '</ul>';
