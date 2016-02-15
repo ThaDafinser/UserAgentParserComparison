@@ -138,8 +138,8 @@ class UserAgentDetail extends AbstractHtml
         $html .= '' . $userAgent->source . '<br /><small>' . $userAgent->fileName . '</small></td>';
         
         $html .= '<td>' . $userAgent->browserName . ' ' . $userAgent->browserVersion . '</td>';
-        $html .= '<td>' . $userAgent->osName . ' ' . $userAgent->osVersion . '</td>';
         $html .= '<td>' . $userAgent->engineName . ' ' . $userAgent->engineVersion . '</td>';
+        $html .= '<td>' . $userAgent->osName . ' ' . $userAgent->osVersion . '</td>';
         
         $html .= '<td style="border-left: 1px solid #555">' . $userAgent->deviceBrand . '</td>';
         $html .= '<td>' . $userAgent->deviceModel . '</td>';

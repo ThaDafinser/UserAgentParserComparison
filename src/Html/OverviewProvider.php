@@ -320,7 +320,7 @@ class OverviewProvider extends AbstractHtml
             $html .= '
                 <tr>
                 <td>
-                    Device brands
+                    Device models
                 </td>
                 <td>
                     ' . round($row['deviceModelFound'] / $totalUserAgentsOnePercent, 2) . '%
