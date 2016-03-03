@@ -7,6 +7,10 @@ function hydrateBrowscap($data, array $row)
     
     $row = $row[1];
     
+    if (isset($row['Browser']) && stripos($row['Browser'], 'Fake') !== false) {
+        throw new \Exception('skip...');
+    }
+    
     if (isset($row['Crawler']) && $row['Crawler'] === true) {
         $data['resBotIsBot'] = 1;
         
@@ -100,14 +104,19 @@ foreach ($files as $file) {
             'resBotType' => null
         ];
         
-        $result = hydrateBrowscap($data, $row);
-        
-        $userAgents[bin2hex(sha1($row[0], true))] = [
-            'uaString' => $row[0],
-            'results' => [
-                $result
-            ]
-        ];
+        try {
+            $result = hydrateBrowscap($data, $row);
+            
+            $userAgents[bin2hex(sha1($row[0], true))] = [
+                'uaString' => $row[0],
+                'results' => [
+                    $result
+                ]
+            ];
+        } catch (\Exception $ex) {
+            // skip this UA
+            echo 'S';
+        }
     }
 }
 
