@@ -20,7 +20,6 @@ $resultRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\Re
  */
 $providers = [];
 foreach ($chain->getProviders() as $provider) {
-    
     $providerEntity = $providerRepo->findOneBy([
         'name' => $provider->getName()
     ]);
@@ -43,7 +42,7 @@ $sql = "
     FROM userAgent
     LEFT JOIN result 
         ON userAgent_id = uaId
-        AND provider_id = '9cdd8b45-a2eb-406b-bd27-7e48af38ffd4'
+        AND provider_id = '9b0fa449-ec1b-40c8-8b1c-9486eb3b9cbc'
     WHERE 
         resId IS NULL
     ORDER BY uaId
@@ -57,7 +56,6 @@ $conn->beginTransaction();
 $currenUserAgent = 1;
 
 while ($row = $statement->fetch()) {
-    
     foreach ($chain->getProviders() as $provider) {
         /* @var $provider \UserAgentParser\Provider\AbstractProvider */
         

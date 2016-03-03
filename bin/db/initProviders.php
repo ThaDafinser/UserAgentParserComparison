@@ -20,6 +20,7 @@ foreach ($chain->getProviders() as $provider) {
         $providerEntity = new Provider();
     }
     
+    $providerEntity->type = 'real';
     $providerEntity->name = $provider->getName();
     $providerEntity->packageName = $provider->getPackageName();
     $providerEntity->homepage = $provider->getHomepage();

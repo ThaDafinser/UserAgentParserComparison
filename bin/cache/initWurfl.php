@@ -70,4 +70,3 @@ $wurflManager->reload();
 // // Create a WURFL Manager from the WURFL Configuration
 // $wurflManager = new \Wurfl\Manager($wurflConfig, $persistenceStorage, $cacheStorage);
 // $wurflManager->reload();
- 

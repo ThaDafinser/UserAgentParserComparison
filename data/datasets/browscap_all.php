@@ -3,63 +3,59 @@ $path = 'vendor/browscap/browscap/tests/fixtures/issues';
 
 function hydrateBrowscap($data, array $row)
 {
-    $data['uaString'] = $row[0];
-    $data['uaRawResult'] = serialize($row[1]);
+    $data['resRawResult'] = serialize($row[1]);
     
     $row = $row[1];
     
     if (isset($row['Crawler']) && $row['Crawler'] === true) {
-        $data['uaBotIsBot'] = 1;
+        $data['resBotIsBot'] = 1;
         
         if (isset($row['Browser']) && $row['Browser'] != '') {
-            $data['uaBotName'] = $row['Browser'];
+            $data['resBotName'] = $row['Browser'];
         }
         
         if (isset($row['Browser_Type']) && $row['Browser_Type'] != '') {
-            $data['uaBotType'] = $row['Browser_Type'];
+            $data['resBotType'] = $row['Browser_Type'];
         }
         
         return $data;
     }
     
     if (isset($row['Browser']) && $row['Browser'] != '') {
-        $data['uaBrowserName'] = $row['Browser'];
+        $data['resBrowserName'] = $row['Browser'];
     }
-    
     if (isset($row['Version']) && $row['Version'] != '') {
-        $data['uaBrowserVersion'] = $row['Version'];
+        $data['resBrowserVersion'] = $row['Version'];
     }
     
     if (isset($row['RenderingEngine_Name']) && $row['RenderingEngine_Name'] != '') {
-        $data['uaEngineName'] = $row['RenderingEngine_Name'];
+        $data['resEngineName'] = $row['RenderingEngine_Name'];
     }
-    
     if (isset($row['RenderingEngine_Version']) && $row['RenderingEngine_Version'] != '') {
-        $data['uaEngineName'] = $row['RenderingEngine_Version'];
+        $data['resEngineVersion'] = $row['RenderingEngine_Version'];
     }
     
     if (isset($row['Platform']) && $row['Platform'] != '') {
-        $data['uaOsName'] = $row['Platform'];
+        $data['resOsName'] = $row['Platform'];
     }
-    
     if (isset($row['Platform_Version']) && $row['Platform_Version'] != '') {
-        $data['uaOsVersion'] = $row['Platform_Version'];
+        $data['resOsVersion'] = $row['Platform_Version'];
     }
     
     if (isset($row['Device_Name']) && $row['Device_Name'] != '') {
-        $data['uaDeviceModel'] = $row['Device_Name'];
+        $data['resDeviceModel'] = $row['Device_Name'];
     }
     if (isset($row['Device_Brand_Name']) && $row['Device_Brand_Name'] != '') {
-        $data['uaDeviceBrand'] = $row['Device_Brand_Name'];
+        $data['resDeviceBrand'] = $row['Device_Brand_Name'];
     }
     if (isset($row['Device_Type']) && $row['Device_Type'] != '') {
-        $data['uaDeviceType'] = $row['Device_Type'];
+        $data['resDeviceType'] = $row['Device_Type'];
     }
     if (isset($row['isMobileDevice']) && $row['isMobileDevice'] != '') {
-        $data['uaDeviceIsMobile'] = $row['isMobileDevice'];
+        $data['resDeviceIsMobile'] = $row['isMobileDevice'];
     }
     if (isset($row['Device_Pointing_Method']) && $row['Device_Pointing_Method'] == 'touchscreen') {
-        $data['uaDeviceIsTouch'] = 1;
+        $data['resDeviceIsTouch'] = 1;
     }
     
     return $data;
@@ -68,7 +64,7 @@ function hydrateBrowscap($data, array $row)
 $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
 $files = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
 
-$allData = [];
+$userAgents = [];
 
 foreach ($files as $file) {
     $file = $file[0];
@@ -82,32 +78,65 @@ foreach ($files as $file) {
     foreach ($result as $row) {
         
         $data = [
-            'uaSource' => 'browscap/browscap',
-            'uaFileName' => $file,
+            'resFileName' => $file,
             
-            'uaBrowserName' => null,
-            'uaBrowserVersion' => null,
+            'resBrowserName' => null,
+            'resBrowserVersion' => null,
             
-            'uaEngineName' => null,
-            'uaEngineVersion' => null,
+            'resEngineName' => null,
+            'resEngineVersion' => null,
             
-            'uaOsName' => null,
-            'uaOsVersion' => null,
+            'resOsName' => null,
+            'resOsVersion' => null,
             
-            'uaDeviceModel' => null,
-            'uaDeviceBrand' => null,
-            'uaDeviceType' => null,
-            'uaDeviceIsMobile' => null,
-            'uaDeviceIsTouch' => null,
+            'resDeviceModel' => null,
+            'resDeviceBrand' => null,
+            'resDeviceType' => null,
+            'resDeviceIsMobile' => null,
+            'resDeviceIsTouch' => null,
             
-            'uaBotIsBot' => null,
-            'uaBotName' => null,
-            'uaBotType' => null,
+            'resBotIsBot' => null,
+            'resBotName' => null,
+            'resBotType' => null
         ];
         
-        $allData[] = hydrateBrowscap($data, $row);
+        $result = hydrateBrowscap($data, $row);
+        
+        $userAgents[bin2hex(sha1($row[0], true))] = [
+            'uaString' => $row[0],
+            'results' => [
+                $result
+            ]
+        ];
     }
-    
 }
 
-return $allData;
+return [
+    'provider' => [
+        'proType' => 'testSuite',
+        'proName' => 'Browscap',
+        'proPackageName' => 'browscap/browscap',
+        'proHomepage' => 'https://github.com/browscap/browscap',
+        
+        'proCanDetectBrowserName' => 1,
+        'proCanDetectBrowserVersion' => 1,
+        
+        'proCanDetectEngineName' => 1,
+        'proCanDetectEngineVersion' => 1,
+        
+        'proCanDetectOsName' => 1,
+        'proCanDetectOsVersion' => 1,
+        
+        'proCanDetectDeviceModel' => 1,
+        'proCanDetectDeviceBrand' => 1,
+        'proCanDetectDeviceType' => 1,
+        'proCanDetectDeviceIsMobile' => 1,
+        'proCanDetectDeviceIsTouch' => 1,
+        
+        'proCanDetectBotIsBot' => 1,
+        'proCanDetectBotName' => 1,
+        'proCanDetectBotType' => 1
+    ],
+    
+    'userAgents' => $userAgents
+];

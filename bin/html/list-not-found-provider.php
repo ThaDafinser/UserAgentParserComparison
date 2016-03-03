@@ -581,4 +581,3 @@ foreach ($providers as $provider) {
     
     echo PHP_EOL;
 }
-

@@ -79,7 +79,6 @@ class UserAgentDetail extends AbstractHtml
         
         $canDetect = 0;
         foreach ($this->getProviders() as $provider) {
-            
             if ($provider->{$property} === true) {
                 $canDetect ++;
             }
@@ -192,7 +191,6 @@ class UserAgentDetail extends AbstractHtml
          * Providers
          */
         foreach ($this->getResults() as $result) {
-            
             $provider = $result->getProvider();
             
             $html .= '<tr>';
@@ -200,7 +198,6 @@ class UserAgentDetail extends AbstractHtml
             $html .= '<td>' . $provider->name . '<br /><small>' . $result->getProviderVersion() . '</small></td>';
             
             if ($result->getResultFound() !== true) {
-                
                 $html .= '
                     <td colspan="12" class="center-align red lighten-1">
                         <strong>No result found</strong>

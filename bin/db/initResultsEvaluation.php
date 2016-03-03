@@ -27,7 +27,6 @@ $conn->beginTransaction();
 
 $i = 1;
 while ($row = $statement->fetch()) {
-    
     $sql = "
         SELECT
             GROUP_CONCAT(resBrowserName SEPARATOR '~~~') browserName,
@@ -92,7 +91,8 @@ while ($row = $statement->fetch()) {
     }
     
     $date = new \DateTime(null, new \DateTimeZone('UTC'));
-    $row2['lastChangeDate'] = $date->format('Y-m-d H:i:s');;
+    $row2['lastChangeDate'] = $date->format('Y-m-d H:i:s');
+    ;
     
     $row2 = hydrateResult($row2, $row, $resultGrouped);
     
@@ -104,7 +104,7 @@ while ($row = $statement->fetch()) {
         $conn->update('resultEvaluation', $row2, [
             'revId' => $row2['revId']
         ]);
-    }    
+    }
     
     echo '.';
     

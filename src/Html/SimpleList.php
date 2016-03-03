@@ -21,7 +21,6 @@ class SimpleList extends AbstractHtml
         $html = '<ul class="list collection">';
         
         foreach ($this->getElements() as $element) {
-            
             $html .= '<li class="collection-item">';
             
             $html .= '<h4 class="searchable">' . $element['name'];
@@ -48,7 +47,6 @@ class SimpleList extends AbstractHtml
             $html .= '</span>';
             
             $html .= '</li>';
-            
         }
         
         $html .= '</ul>';

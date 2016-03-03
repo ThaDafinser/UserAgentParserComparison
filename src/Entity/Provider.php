@@ -20,6 +20,11 @@ class Provider
     public $id;
 
     /**
+     * @Column(type="string", name="proType")
+     */
+    public $type;
+    
+    /**
      * @Column(type="string", name="proName")
      */
     public $name;

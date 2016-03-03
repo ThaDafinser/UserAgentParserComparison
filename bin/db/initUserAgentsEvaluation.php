@@ -81,7 +81,8 @@ while ($row = $statement->fetch()) {
     }
     
     $date = new \DateTime(null, new \DateTimeZone('UTC'));
-    $row2['lastChangeDate'] = $date->format('Y-m-d H:i:s');;
+    $row2['lastChangeDate'] = $date->format('Y-m-d H:i:s');
+    ;
     $row2['resultCount'] = $row['resultCount'];
     $row2['resultFound'] =$row['resultFound'];
     
@@ -99,7 +100,7 @@ while ($row = $statement->fetch()) {
     
     echo '.';
     
-    if($i % 100 === 0){
+    if ($i % 100 === 0) {
         $conn->commit();
     
         $conn->beginTransaction();
@@ -108,7 +109,7 @@ while ($row = $statement->fetch()) {
     $i++;
 }
 
-if($conn->getTransactionNestingLevel() !== 0){
+if ($conn->getTransactionNestingLevel() !== 0) {
     $conn->commit();
 }
 
@@ -307,4 +308,3 @@ function hydrateResult(array $row2, array $row)
     
     return $row2;
 }
-        

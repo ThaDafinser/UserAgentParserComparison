@@ -1,10 +1,30 @@
 <?php
 namespace UserAgentParserComparison\Html;
 
+use Doctrine\ORM\EntityManager;
+
 abstract class AbstractHtml
 {
 
     private $title;
+
+    protected $em;
+
+    private $userAgentCount;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    /**
+     *
+     * @return EntityManager
+     */
+    protected function getEntityManager()
+    {
+        return $this->em;
+    }
 
     public function setTitle($title)
     {
@@ -14,6 +34,49 @@ abstract class AbstractHtml
     public function getTitle()
     {
         return $this->title;
+    }
+
+    protected function getUserAgentCount()
+    {
+        if ($this->userAgentCount === null) {
+            $sql = "
+                SELECT
+                    COUNT(1) getThis
+                FROM userAgent
+            ";
+            
+            $conn = $this->getEntityManager()->getConnection();
+            $result = $conn->fetchAll($sql);
+            
+            $this->userAgentCount = $result[0]['getThis'];
+        }
+        
+        return $this->userAgentCount;
+    }
+
+    protected function getPercentCircle($resultFound, $uniqueFound = null)
+    {
+        $onePercent = $this->getUserAgentCount() / 100;
+        
+        $html = '
+            <div class="c100 p' . round($resultFound / $onePercent, 0) . ' small green-circle">
+                <span>' . round($resultFound / $onePercent, 2) . '%</span>
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+        ';
+        
+        $html .= 'Tot.' . $resultFound . '<br />';
+        
+        if ($uniqueFound !== null) {
+            $html .= 'Unq.' . $uniqueFound . '<br />';
+        } else {
+            $html .= '&nbsp;<br />';
+        }
+        
+        return $html;
     }
 
     protected function getUserAgentUrl($uaId)
@@ -33,6 +96,7 @@ abstract class AbstractHtml
         
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../circle.css" rel="stylesheet">
 </head>
         
 <body>

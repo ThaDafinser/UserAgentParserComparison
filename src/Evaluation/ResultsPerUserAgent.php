@@ -71,7 +71,8 @@ class ResultsPerUserAgent
         return $this->harmonizedValues;
     }
     
-    public function getUniqueHarmonizedValues(){
+    public function getUniqueHarmonizedValues()
+    {
         return array_unique($this->getHarmonizedValues());
     }
 

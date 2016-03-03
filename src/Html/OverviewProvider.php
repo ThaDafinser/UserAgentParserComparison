@@ -7,11 +7,7 @@ use UserAgentParserComparison\Entity\Provider;
 class OverviewProvider extends AbstractHtml
 {
 
-    private $em;
-
     private $provider;
-
-    private $userAgentCount;
 
     public function __construct(EntityManager $em, Provider $provider)
     {
@@ -21,38 +17,11 @@ class OverviewProvider extends AbstractHtml
 
     /**
      *
-     * @return EntityManager
-     */
-    private function getEntityManager()
-    {
-        return $this->em;
-    }
-
-    /**
-     *
      * @return Provider
      */
     private function getProvider()
     {
         return $this->provider;
-    }
-
-    private function getUserAgentCount()
-    {
-        if ($this->userAgentCount === null) {
-            $sql = "
-                SELECT
-                    COUNT(1) getThis
-                FROM userAgent
-            ";
-            
-            $conn = $this->getEntityManager()->getConnection();
-            $result = $conn->fetchAll($sql);
-            
-            $this->userAgentCount = $result[0]['getThis'];
-        }
-        
-        return $this->userAgentCount;
     }
 
     private function getResult()

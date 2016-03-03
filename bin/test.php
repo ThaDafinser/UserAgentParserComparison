@@ -1,5 +1,6 @@
 <?php
 use UserAgentParser\Exception\NoResultFoundException;
+
 include_once 'bootstrap.php';
 
 // $userAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A523 Safari/8536.25';
@@ -35,7 +36,6 @@ $userAgent = 'Kodi/14.0 (Macintosh; Intel Mac OS X 10_10_3) App_Bitness/64 Versi
 $chain = include 'bin/getChainProvider.php';
 
 foreach ($chain->getProviders() as $provider) {
-    
     echo '~~~' . $provider->getName() . '~~~' . PHP_EOL;
     
     try {

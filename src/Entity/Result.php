@@ -52,6 +52,11 @@ class Result
     protected $providerVersion;
 
     /**
+     * @Column(type="string", name="resFilename", nullable=true)
+     */
+    protected $filename;
+    
+    /**
      * @Column(type="decimal", name="resParseTime", precision=20, scale=5)
      */
     protected $parseTime;
@@ -183,6 +188,16 @@ class Result
     public function getProviderVersion()
     {
         return $this->providerVersion;
+    }
+    
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+    }
+    
+    public function getFilename()
+    {
+        return $this->filename;
     }
 
     public function setParseTime($parseTime)
