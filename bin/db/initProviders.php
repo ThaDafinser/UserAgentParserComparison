@@ -14,7 +14,8 @@ foreach ($chain->getProviders() as $provider) {
     $providerRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\Provider');
     
     $providerEntity = $providerRepo->findOneBy([
-        'name' => $provider->getName()
+        'name' => $provider->getName(),
+        'type' => 'real'
     ]);
     if ($providerEntity === null) {
         $providerEntity = new Provider();

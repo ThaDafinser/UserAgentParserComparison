@@ -11,9 +11,7 @@ $conn = $entityManager->getConnection();
 
 $providerRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\Provider');
 
-$providers = $providerRepo->findAll();
-
-foreach ($providers as $provider) {
+foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
     /* @var $provider \UserAgentParserComparison\Entity\Provider */
     
     echo $provider->name . PHP_EOL;

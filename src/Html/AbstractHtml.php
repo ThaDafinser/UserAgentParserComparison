@@ -90,9 +90,12 @@ abstract class AbstractHtml
     protected function getHtmlCombined($body, $script = '')
     {
         return '
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>' . $this->getTitle() . '</title>
+    <meta charset="utf-8" />
+            
+    <title>' . htmlspecialchars($this->getTitle()) . '</title>
         
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -133,7 +136,7 @@ abstract class AbstractHtml
 			    
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
         
     <script>
     ' . $script . '

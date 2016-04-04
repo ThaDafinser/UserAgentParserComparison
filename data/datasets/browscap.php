@@ -71,6 +71,7 @@ $files = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GE
 $userAgents = [];
 
 foreach ($files as $file) {
+    
     $file = $file[0];
     
     $result = include $file;
@@ -82,8 +83,8 @@ foreach ($files as $file) {
     foreach ($result as $row) {
         
         $data = [
-            'resFileName' => $file,
-            
+            'resFilename' => $file,
+
             'resBrowserName' => null,
             'resBrowserVersion' => null,
             
@@ -109,9 +110,7 @@ foreach ($files as $file) {
             
             $userAgents[bin2hex(sha1($row[0], true))] = [
                 'uaString' => $row[0],
-                'results' => [
-                    $result
-                ]
+                'result' => $result
             ];
         } catch (\Exception $ex) {
             // skip this UA

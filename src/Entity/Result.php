@@ -57,7 +57,7 @@ class Result
     protected $filename;
     
     /**
-     * @Column(type="decimal", name="resParseTime", precision=20, scale=5)
+     * @Column(type="decimal", name="resParseTime", precision=20, scale=5, nullable=true)
      */
     protected $parseTime;
 

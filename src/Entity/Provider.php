@@ -6,7 +6,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * @Entity
  * @Table(name="provider",
- * uniqueConstraints={@UniqueConstraint(name="unique_provider_name", columns={"proName"})}
+ * uniqueConstraints={@UniqueConstraint(name="unique_provider_name", columns={"proType","proName"})}
  * )
  */
 class Provider

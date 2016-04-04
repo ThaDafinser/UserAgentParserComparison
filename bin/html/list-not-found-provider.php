@@ -11,9 +11,7 @@ $conn = $entityManager->getConnection();
 
 $providerRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\Provider');
 
-$providers = $providerRepo->findAll();
-
-foreach ($providers as $provider) {
+foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
     /* @var $provider \UserAgentParserComparison\Entity\Provider */
     
     echo $provider->name . PHP_EOL;
@@ -49,7 +47,7 @@ foreach ($providers as $provider) {
     ";
     $result = $conn->fetchAll($sql);
     
-    $generate = new SimpleList();
+    $generate = new SimpleList($entityManager);
     $generate->setTitle('Not detected - ' . $provider->name . ' <small>' . $provider->version . '</small>');
     $generate->setElements($result);
     
@@ -104,7 +102,7 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No browser name found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
@@ -160,7 +158,7 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No rendering engine found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
@@ -216,7 +214,7 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No operating system found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
@@ -272,7 +270,7 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No device model found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
@@ -328,7 +326,7 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No device brands found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
@@ -384,7 +382,7 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No device type found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
@@ -414,15 +412,24 @@ foreach ($providers as $provider) {
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
-			    AND uaDeviceIsMobile IS NOT NULL
             WHERE
             	provider_id = '" . $provider->id . "'
                 AND resResultFound = 1
                 AND resDeviceIsMobile IS NULL
+        	    AND userAgent_id IN(
+            		SELECT
+            			userAgent_id
+            		FROM provider
+                    JOIN result 
+            			ON provider_id = proId
+            			AND resDeviceIsMobile = 1
+                    WHERE 
+            			proType = 'testSuite'
+                )
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Not detected as mobile - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
@@ -452,15 +459,24 @@ foreach ($providers as $provider) {
             FROM result
             JOIN userAgent
             	ON uaId = userAgent_id
-			    AND uaBotIsBot IS NOT NULL
             WHERE
             	provider_id = '" . $provider->id . "'
-                AND resResultFound = 1
+        	    AND resResultFound = 1
                 AND resBotIsBot IS NULL
+        	    AND userAgent_id IN(
+            		SELECT
+            			userAgent_id
+            		FROM provider
+                    JOIN result 
+            			ON provider_id = proId
+            			AND resBotIsBot = 1
+                    WHERE 
+            			proType = 'testSuite'
+                )
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Not detected as bot - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
@@ -510,13 +526,22 @@ foreach ($providers as $provider) {
             	ON uaId = userAgent_id
             WHERE
             	provider_id = '" . $provider->id . "'
-                AND resResultFound = 1
-                AND resBotIsBot IS NOT NULL
+        	    AND resResultFound = 1
                 AND resBotName IS NULL
+        	    AND userAgent_id IN(
+            		SELECT
+            			userAgent_id
+            		FROM provider
+                    JOIN result 
+            			ON provider_id = proId
+            			AND resBotName IS NOT NULL
+        	       WHERE 
+            			proType = 'testSuite'
+                )
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No bot name found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
@@ -566,13 +591,22 @@ foreach ($providers as $provider) {
             	ON uaId = userAgent_id
             WHERE
             	provider_id = '" . $provider->id . "'
-                AND resResultFound = 1
-                AND resBotIsBot IS NOT NULL
+        	    AND resResultFound = 1
                 AND resBotType IS NULL
+        	    AND userAgent_id IN(
+            		SELECT
+            			userAgent_id
+            		FROM provider
+                    JOIN result 
+            			ON provider_id = proId
+            			AND resBotType IS NOT NULL
+        	       WHERE 
+            			proType = 'testSuite'
+                )
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('No bot type found - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     

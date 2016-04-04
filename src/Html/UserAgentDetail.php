@@ -125,183 +125,153 @@ class UserAgentDetail extends AbstractHtml
         /*
          * Test suite
          */
-        $userAgent = $this->getUserAgent();
-        
         $html .= '<tr><th colspan="14" class="green lighten-3">';
-        $html .= 'Source result (test suite)';
+        $html .= 'Test suite';
         $html .= '</th></tr>';
         
-        $html .= '<tr>';
-        
-        $html .= '<td>';
-        $html .= '' . $userAgent->source . '<br /><small>' . $userAgent->fileName . '</small></td>';
-        
-        $html .= '<td>' . $userAgent->browserName . ' ' . $userAgent->browserVersion . '</td>';
-        $html .= '<td>' . $userAgent->engineName . ' ' . $userAgent->engineVersion . '</td>';
-        $html .= '<td>' . $userAgent->osName . ' ' . $userAgent->osVersion . '</td>';
-        
-        $html .= '<td style="border-left: 1px solid #555">' . $userAgent->deviceBrand . '</td>';
-        $html .= '<td>' . $userAgent->deviceModel . '</td>';
-        $html .= '<td>' . $userAgent->deviceType . '</td>';
-        if ($userAgent->deviceIsMobile === true) {
-            $html .= '<td>yes</td>';
-        } else {
-            $html .= '<td></td>';
+        foreach ($this->getResults() as $result) {
+            /* @var $result \UserAgentParserComparison\Entity\Result */
+            if ($result->getProvider()->type == 'testSuite') {
+                $html .= $this->getRow($result);
+            }
         }
-        if ($userAgent->deviceIsTouch === true) {
-            $html .= '<td>yes</td>';
-        } else {
-            $html .= '<td></td>';
-        }
-        
-        if ($userAgent->botIsBot === true) {
-            $html .= '<td style="border-left: 1px solid #555">yes</td>';
-        } else {
-            $html .= '<td style="border-left: 1px solid #555"></td>';
-        }
-        $html .= '<td>' . $userAgent->botName . '</td>';
-        $html .= '<td>' . $userAgent->botType . '</td>';
-        
-        $html .= '<td></td>';
-        $html .= '<td>
-                
-<!-- Modal Trigger -->
-<a class="modal-trigger btn waves-effect waves-light" href="#modal-test">Detail</a>
-
-<!-- Modal Structure -->
-<div id="modal-test" class="modal modal-fixed-footer">
-    <div class="modal-content">
-        <h4>Testsuite result detail</h4>
-        <p><pre><code class="php">' . print_r($userAgent->rawResult, true) . '</code></pre></p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">close</a>
-    </div>
-</div>
-                
-        </td>';
-        
-        $html .= '</tr>';
-        
-        $html .= '<tr><th colspan="14" class="green lighten-3">';
-        $html .= 'Providers';
-        $html .= '</th></tr>';
         
         /*
          * Providers
          */
+        $html .= '<tr><th colspan="14" class="green lighten-3">';
+        $html .= 'Providers';
+        $html .= '</th></tr>';
+        
         foreach ($this->getResults() as $result) {
-            $provider = $result->getProvider();
-            
-            $html .= '<tr>';
-            
-            $html .= '<td>' . $provider->name . '<br /><small>' . $result->getProviderVersion() . '</small></td>';
-            
-            if ($result->getResultFound() !== true) {
-                $html .= '
+            if ($result->getProvider()->type == 'real') {
+                $html .= $this->getRow($result);
+            }
+        }
+        
+        $html .= '</table>';
+        
+        return $html;
+    }
+
+    private function getRow(Result $result)
+    {
+        $provider = $result->getProvider();
+        
+        $html = '<tr>';
+        
+        $html .= '<td>' . $provider->name . '<br />';
+        $html .= '<small>' . $result->getProviderVersion() . '</small><br />';
+        if ($result->getFilename() != '') {
+            $html .= '<small>' . $result->getFilename() . '</small>';
+        }
+        $html .= '</td>';
+        
+        if ($result->getResultFound() !== true) {
+            $html .= '
                     <td colspan="12" class="center-align red lighten-1">
                         <strong>No result found</strong>
                     </td>
                 ';
-                
-                $html .= '</tr>';
-                
-                continue;
-            }
             
-            /*
-             * General
-             */
-            if ($provider->canDetectBrowserName === true) {
-                $html .= '<td>' . $result->getBrowserName() . ' ' . $result->getBrowserVersion() . '</td>';
+            $html .= '</tr>';
+            
+            return $html;
+        }
+        
+        /*
+         * General
+         */
+        if ($provider->canDetectBrowserName === true) {
+            $html .= '<td>' . $result->getBrowserName() . ' ' . $result->getBrowserVersion() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        if ($provider->canDetectEngineName === true) {
+            $html .= '<td>' . $result->getEngineName() . ' ' . $result->getEngineVersion() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        if ($provider->canDetectOsName === true) {
+            $html .= '<td>' . $result->getOsName() . ' ' . $result->getOsVersion() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        /*
+         * Device
+         */
+        if ($provider->canDetectDeviceBrand === true) {
+            $html .= '<td style="border-left: 1px solid #555">' . $result->getDeviceBrand() . '</td>';
+        } else {
+            $html .= '<td style="border-left: 1px solid #555"><i class="material-icons">close</i></td>';
+        }
+        
+        if ($provider->canDetectDeviceModel === true) {
+            $html .= '<td>' . $result->getDeviceModel() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        if ($provider->canDetectDeviceType === true) {
+            $html .= '<td>' . $result->getDeviceType() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        if ($provider->canDetectDeviceIsMobile === true) {
+            if ($result->getDeviceIsMobile() === true) {
+                $html .= '<td>yes</td>';
             } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
+                $html .= '<td></td>';
             }
-            
-            if ($provider->canDetectEngineName === true) {
-                $html .= '<td>' . $result->getEngineName() . ' ' . $result->getEngineVersion() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        if ($provider->canDetectDeviceIsTouch === true) {
+            if ($result->getDeviceIsTouch() === true) {
+                $html .= '<td>yes</td>';
             } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
+                $html .= '<td></td>';
             }
-            
-            if ($provider->canDetectOsName === true) {
-                $html .= '<td>' . $result->getOsName() . ' ' . $result->getOsVersion() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        /*
+         * Bot
+         */
+        if ($provider->canDetectBotIsBot === true) {
+            if ($result->getBotIsBot() === true) {
+                $html .= '<td style="border-left: 1px solid #555">yes</td>';
             } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
+                $html .= '<td style="border-left: 1px solid #555"></td>';
             }
-            
-            /*
-             * Device
-             */
-            if ($provider->canDetectDeviceBrand === true) {
-                $html .= '<td style="border-left: 1px solid #555">' . $result->getDeviceBrand() . '</td>';
-            } else {
-                $html .= '<td style="border-left: 1px solid #555"><i class="material-icons">close</i></td>';
-            }
-            
-            if ($provider->canDetectDeviceModel === true) {
-                $html .= '<td>' . $result->getDeviceModel() . '</td>';
-            } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
-            }
-            
-            if ($provider->canDetectDeviceType === true) {
-                $html .= '<td>' . $result->getDeviceType() . '</td>';
-            } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
-            }
-            
-            if ($provider->canDetectDeviceIsMobile === true) {
-                if ($result->getDeviceIsMobile() === true) {
-                    $html .= '<td>yes</td>';
-                } else {
-                    $html .= '<td></td>';
-                }
-            } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
-            }
-            
-            if ($provider->canDetectDeviceIsTouch === true) {
-                if ($result->getDeviceIsTouch() === true) {
-                    $html .= '<td>yes</td>';
-                } else {
-                    $html .= '<td></td>';
-                }
-            } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
-            }
-            
-            /*
-             * Bot
-             */
-            if ($provider->canDetectBotIsBot === true) {
-                if ($result->getBotIsBot() === true) {
-                    $html .= '<td style="border-left: 1px solid #555">yes</td>';
-                } else {
-                    $html .= '<td style="border-left: 1px solid #555"></td>';
-                }
-            } else {
-                $html .= '<td style="border-left: 1px solid #555"><i class="material-icons">close</i></td>';
-            }
-            
-            if ($provider->canDetectBotName === true) {
-                $html .= '<td>' . $result->getBotName() . '</td>';
-            } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
-            }
-            if ($provider->canDetectBotType === true) {
-                $html .= '<td>' . $result->getBotType() . '</td>';
-            } else {
-                $html .= '<td><i class="material-icons">close</i></td>';
-            }
-            
-            $html .= '<td>' . round($result->getParseTime(), 5) . '</td>';
-            
-            $html .= '<td>
-                
+        } else {
+            $html .= '<td style="border-left: 1px solid #555"><i class="material-icons">close</i></td>';
+        }
+        
+        if ($provider->canDetectBotName === true) {
+            $html .= '<td>' . $result->getBotName() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        if ($provider->canDetectBotType === true) {
+            $html .= '<td>' . $result->getBotType() . '</td>';
+        } else {
+            $html .= '<td><i class="material-icons">close</i></td>';
+        }
+        
+        $html .= '<td>' . round($result->getParseTime(), 5) . '</td>';
+        
+        $html .= '<td>
+        
 <!-- Modal Trigger -->
 <a class="modal-trigger btn waves-effect waves-light" href="#modal-' . $provider->id . '">Detail</a>
-
+        
 <!-- Modal Structure -->
 <div id="modal-' . $provider->id . '" class="modal modal-fixed-footer">
     <div class="modal-content">
@@ -312,13 +282,10 @@ class UserAgentDetail extends AbstractHtml
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">close</a>
     </div>
 </div>
-                
-                </td>';
-            
-            $html .= '</tr>';
-        }
         
-        $html .= '</table>';
+                </td>';
+        
+        $html .= '</tr>';
         
         return $html;
     }
@@ -330,7 +297,7 @@ class UserAgentDetail extends AbstractHtml
 	<h1 class="header center orange-text">User agent detail</h1>
 	<div class="row center">
         <h5 class="header light">
-            ' . $this->getUserAgent()->string . '
+            ' . htmlspecialchars($this->getUserAgent()->string) . '
         </h5>
 	</div>
 </div>   

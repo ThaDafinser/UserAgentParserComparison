@@ -36,7 +36,9 @@ class OverviewGeneral extends AbstractHtml
             
             	AVG(resParseTime) as avgParseTime
             FROM result
-            JOIN provider on proId = provider_id
+            JOIN provider 
+                ON proId = provider_id
+                AND proType = 'real'
             GROUP BY
             	proId
             ORDER BY 
@@ -52,11 +54,14 @@ class OverviewGeneral extends AbstractHtml
     {
         $sql = "
             SELECT 
-            	uaSource,
-            	COUNT(1) countNumber
-            FROM useragent
-            group by uaSource
-            order by uaSource
+            	proName,
+                COUNT(1) countNumber
+            FROM provider
+            JOIN result
+            	ON provider_id = proId
+            where proType = 'testSuite'
+            GROUP BY proId
+            ORDER BY proName
         ";
         
         $conn = $this->getEntityManager()->getConnection();
@@ -208,10 +213,20 @@ class OverviewGeneral extends AbstractHtml
                     <td></td>
                 ';
             }
+
+            $info = 'PHP v' . phpversion() . ' | Zend v' . zend_version() . ' | On ' . PHP_OS;
+            if (extension_loaded('xdebug')) {
+                $info .= ' | with xdebug';
+            }
+            if (extension_loaded('zend opcache')) {
+                $info .= ' | with opcache';
+            }
             
             $html .= '
                 <td>
-                    ' . round($row['avgParseTime'], 5) . '
+                    <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="' . htmlspecialchars($info) . '">
+                        ' . round($row['avgParseTime'], 5) . '
+                    </a>
 				</td>
             ';
             
@@ -240,7 +255,7 @@ class OverviewGeneral extends AbstractHtml
                 <th>
                     Provider
                 </th>
-                <th>
+                <th class="right-align">
                     Number of user agents
                 </th>
             </tr>
@@ -254,8 +269,8 @@ class OverviewGeneral extends AbstractHtml
         foreach ($this->getUserAgentPerProviderCount() as $row) {
             $html .= '<tr>';
             
-            $html .= '<td>' . $row['uaSource'] . '</td>';
-            $html .= '<td>' . $row['countNumber'] . '</td>';
+            $html .= '<td>' . $row['proName'] . '</td>';
+            $html .= '<td class="right-align">' . number_format($row['countNumber']) . '</td>';
             
             $html .= '</tr>';
         }
@@ -274,7 +289,7 @@ class OverviewGeneral extends AbstractHtml
 
     <div class="row center">
         <h5 class="header light">
-            We took <strong>' . $this->getUserAgentCount() . '</strong> different user agents and analyzed them with all providers below.<br />
+            We took <strong>' . number_format($this->getUserAgentCount()) . '</strong> different user agents and analyzed them with all providers below.<br />
             That way, it\'s possible to get a good overview of each provider
         </h5>
     </div>
@@ -335,9 +350,8 @@ class OverviewGeneral extends AbstractHtml
     </h3>
     <div class="row center">
         <h5 class="header light">
-            The user agents were extracted from the test suites of the following providers<br />
-            <strong>Note</strong> The actual number of tested user agents can be higher in the test suite itself.<br />
-            If a user agent is used in multiple test suites, the last one "wins" and overwrites the previous!
+            The user agents were extracted from different test suites when possible<br />
+            <strong>Note</strong> The actual number of tested user agents can be higher in the test suite itself.
         </h5>
     </div>
                 

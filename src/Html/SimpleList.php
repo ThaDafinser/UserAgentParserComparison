@@ -23,19 +23,19 @@ class SimpleList extends AbstractHtml
         foreach ($this->getElements() as $element) {
             $html .= '<li class="collection-item">';
             
-            $html .= '<h4 class="searchable">' . $element['name'];
+            $html .= '<h4 class="searchable"><span class="name">' . $element['name'] . '</span>';
             
             /*
              * Optional
              */
             if (isset($element['detectionCount'])) {
-                $html .= ' <small>' . $element['detectionCount'] . 'x detected</small>';
+                $html .= ' <small class="detectionCount">' . $element['detectionCount'] . 'x detected</small>';
             }
             if (isset($element['detectionCountUnique'])) {
-                $html .= ' <small>(' . $element['detectionCountUnique'] . 'x unique)</small>';
+                $html .= ' <small class="detectionCountUnique">(' . $element['detectionCountUnique'] . 'x unique)</small>';
             }
             if (isset($element['detectionValuesDistinct'])) {
-                $html .= '<br /><small>' . $element['detectionValuesDistinct'] . '</small>';
+                $html .= '<br /><small class="detectionValuesDistinct">' . $element['detectionValuesDistinct'] . '</small>';
             }
             
             $html .= '</h4>';
@@ -43,7 +43,7 @@ class SimpleList extends AbstractHtml
             $html .= '<strong>Example user agent</strong><br />';
             
             $html .= '<span class="userAgent">';
-            $html .= '<a href="' . $this->getUserAgentUrl($element['uaId']) . '">' . $element['uaString'] . '</a>';
+            $html .= '<a href="' . $this->getUserAgentUrl($element['uaId']) . '">' . htmlspecialchars($element['uaString']) . '</a>';
             $html .= '</span>';
             
             $html .= '</li>';
@@ -71,7 +71,11 @@ class SimpleList extends AbstractHtml
           <input class="search" type="search" placeholder="Search for a user agent">
           <i class="material-icons">close</i>
         </div>
-      </form>
+            
+        <a class="sort btn" data-sort="name">Sort by name</a>
+        <a class="sort btn" data-sort="detectionCount">Sort by detection count</a>
+            
+    </form>
             
     ' . $this->getList() . '
 </div>
@@ -79,8 +83,11 @@ class SimpleList extends AbstractHtml
         
         $script = '
 var options = {
-    page: 10000,
-    valueNames: [\'searchable\']
+    page: 50000,
+    valueNames: [
+        \'name\',
+        \'detectionCount\'
+    ]
 };
 
 var hackerList = new List(\'simple-list\', options);    

@@ -15,15 +15,17 @@ $userAgentRepo = $entityManager->getRepository('UserAgentParserComparison\Entity
 echo '~~~ Load all UAs ~~~' . PHP_EOL;
 
 $files = [
-    'browscap_all.php',
-    'piwik_all.php',
-    // 'uap-core_all.php',
-    // 'whichbrowser_all.php',
-    // 'woothee_all.php',
+    'browscap.php',
+    'donatj.php',
+    'jenssegers-agent.php',
+    'mobile-detect.php',
+    'piwik.php',
+    'sinergi.php',
+    'uap-core.php',
+    'whichbrowser.php',
+    'woothee.php',
+    'zsxsoft.php'
 ];
-
-
-$userAgents = [];
 
 foreach ($files as $file) {
     if (strpos($file, '.php') === false) {
@@ -37,10 +39,6 @@ foreach ($files as $file) {
     if (! isset($result['provider']) || ! isset($result['userAgents']) || ! is_array($result['userAgents'])) {
         throw new \Exception('Result is not valid! ' . $file);
     }
-    /*
-     * Add user agents
-     */
-    $userAgents = array_merge_recursive($userAgents, $result['userAgents']);
     
     /*
      * save provider
@@ -61,82 +59,105 @@ foreach ($files as $file) {
             proType = '" . $provider['proType'] . "'
             AND proName = '" . $provider['proName'] . "'
     ";
-    $result = $conn->fetchAll($sql);
+    $dbResult = $conn->fetchAll($sql);
     
-    if (count($result) === 1) {
+    if (count($dbResult) === 1) {
         // update!
+        $proId = $dbResult[0]['proId'];
+        
         $conn->update('provider', $provider, [
-            'proId' => $result[0]['proId']
+            'proId' => $dbResult[0]['proId']
         ]);
         
         echo 'U';
     } else {
-        $provider['proId'] = Uuid::uuid4()->toString();
+        $proId = Uuid::uuid4()->toString();
+        
+        $provider['proId'] = $proId;
         
         $conn->insert('provider', $provider);
         
         echo 'I';
     }
-}
-
-var_dump(count($userAgents));
-exit();
-
-echo 'UserAgent count: ' . count($userAgents) . PHP_EOL;
-
-/*
- * Insert them!
- */
-echo '~~~ Insert all UAs ~~~' . PHP_EOL;
-
-$conn->beginTransaction();
-$currenUserAgent = 1;
-
-foreach ($userAgents as $row) {
-    $row['uaFileName'] = str_replace('\\', '/', $row['uaFileName']);
     
-    $parts = explode($row['uaSource'], $row['uaFileName']);
-    if (count($parts) === 2) {
-        $row['uaFileName'] = $parts[1];
+    echo PHP_EOL;
+    echo 'UserAgent count: ' . count($result['userAgents']) . PHP_EOL;
+    
+    /*
+     * Useragents
+     */
+    foreach ($result['userAgents'] as $uaHash => $row) {
+        
+        /*
+         * insert UA itself
+         */
+        $sql = "
+            SELECT
+                *
+            FROM userAgent
+            WHERE
+                uaHash = '" . $uaHash . "'
+        ";
+        $result2 = $conn->fetchAll($sql);
+        
+        if (count($result2) === 1) {
+            // update!
+            $uaId = $result2[0]['uaId'];
+        } else {
+            $uaId = Uuid::uuid4()->toString();
+            
+            $row2 = [
+                'uaId' => $uaId,
+                'uaHash' => $uaHash,
+                'uaString' => $row['uaString']
+            ];
+            
+            $conn->insert('userAgent', $row2);
+        }
+        
+        /*
+         * Result
+         */
+        $res = $row['result'];
+        
+        $res['provider_id'] = $proId;
+        $res['userAgent_id'] = $uaId;
+        
+        $res['resProviderVersion'] = $version;
+        
+        $res['resResultFound'] = 1;
+        $res['resFilename'] = str_replace('\\', '/', $res['resFilename']);
+        
+        $date = new \DateTime(null, new \DateTimeZone('UTC'));
+        $res['resLastChangeDate'] = $date->format('Y-m-d H:i:s');
+        
+        $sql = "
+            SELECT
+                *
+            FROM result
+            WHERE
+                provider_id = '" . $proId . "'
+                AND userAgent_id = '" . $uaId . "'
+        ";
+        $result2 = $conn->fetchAll($sql);
+        
+        if (count($result2) === 1) {
+            // update!
+            $resId = $result2[0]['resId'];
+            
+            $conn->update('result', $res, [
+                'resId' => $resId
+            ]);
+            
+            echo 'U';
+        } else {
+            $res['resId'] = Uuid::uuid4()->toString();
+            
+            $conn->insert('result', $res);
+            
+            echo 'I';
+        }
     }
     
-    $row['uaHash'] = bin2hex(sha1($row['uaString'], true));
-    
-    $sql = "
-        SELECT
-            *
-        FROM userAgent
-        WHERE
-            uaHash = '" . $row['uaHash'] . "'
-    ";
-    $result = $conn->fetchAll($sql);
-    
-    if (count($result) === 1) {
-        // update!
-        $conn->update('userAgent', $row, [
-            'uaId' => $result[0]['uaId']
-        ]);
-        
-        echo 'U';
-        
-        continue;
-    }
-    
-    $row['uaId'] = Uuid::uuid4()->toString();
-    
-    $conn->insert('userAgent', $row);
-    
-    echo 'I';
-    
-    if ($currenUserAgent % 100 === 0) {
-        $conn->commit();
-        
-        $conn->beginTransaction();
-    }
-    
-    $currenUserAgent ++;
-}
-
-if ($conn->getTransactionNestingLevel() !== 0) {
-    $conn->commit();
+    echo PHP_EOL . PHP_EOL;
 }

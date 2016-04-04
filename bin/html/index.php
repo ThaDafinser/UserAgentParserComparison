@@ -6,7 +6,9 @@ use UserAgentParserComparison\Html\Index;
  */
 include_once 'bootstrap.php';
 
-$generate = new Index();
+/* @var $entityManager \Doctrine\ORM\EntityManager */
+
+$generate = new Index($entityManager);
 $generate->setTitle('UserAgentParser comparison');
 
 /*

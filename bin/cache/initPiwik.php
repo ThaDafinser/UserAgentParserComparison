@@ -16,14 +16,3 @@ $dd = new DeviceDetector();
 $dd->setCache($cache);
 $dd->setUserAgent('test');
 $dd->parse();
-
-// /*
-//  * Apc
-//  */
-// $cache = new Cache\ApcCache();
-// $cache->setNamespace('piwik_device');
-
-// $dd = new DeviceDetector();
-// $dd->setCache($cache);
-// $dd->setUserAgent('test');
-// $dd->parse();

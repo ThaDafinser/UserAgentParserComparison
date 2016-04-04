@@ -11,9 +11,7 @@ $conn = $entityManager->getConnection();
 
 $providerRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\Provider');
 
-$providers = $providerRepo->findAll();
-
-foreach ($providers as $provider) {
+foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
     /* @var $provider \UserAgentParserComparison\Entity\Provider */
     
     echo $provider->name . PHP_EOL;
@@ -43,12 +41,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected browser names - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/browser-names.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - renderingEngines
@@ -70,12 +69,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected rendering engines - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/rendering-engines.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - OSnames
@@ -97,12 +97,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected operating systems - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/operating-systems.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - deviceModel
@@ -124,12 +125,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected device models - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/device-models.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - deviceBrand
@@ -151,12 +153,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected device brands - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/device-brands.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - deviceTypes
@@ -178,12 +181,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected device types - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/device-types.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - bots
@@ -203,12 +207,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
     
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected as bot - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
     
         file_put_contents($folder . '/bot-is-bot.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - botNames
@@ -230,12 +235,13 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected bot names - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/bot-names.html', $generate->getHtml());
     }
+    echo '.';
     
     /*
      * detected - botTypes
@@ -257,10 +263,11 @@ foreach ($providers as $provider) {
         ";
         $result = $conn->fetchAll($sql);
         
-        $generate = new SimpleList();
+        $generate = new SimpleList($entityManager);
         $generate->setTitle('Detected bot types - ' . $provider->name . ' <small>' . $provider->version . '</small>');
         $generate->setElements($result);
         
         file_put_contents($folder . '/bot-types.html', $generate->getHtml());
     }
+    echo '.'.PHP_EOL;
 }

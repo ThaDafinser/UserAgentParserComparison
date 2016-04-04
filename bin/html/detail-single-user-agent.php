@@ -19,7 +19,7 @@ echo 'load agents...' . PHP_EOL;
  */
 echo 'done loading..' . PHP_EOL;
 
-foreach ($userAgentRepo->findAll() as $key => $userAgent) {
+foreach ($userAgentRepo->findAll()) as $key => $userAgent) {
     /* @var $userAgent \UserAgentParserComparison\Entity\UserAgent */
     
     $qb = $resultRepo->createQueryBuilder('result');
@@ -37,7 +37,7 @@ foreach ($userAgentRepo->findAll() as $key => $userAgent) {
         throw new \Exception('no results found...' . $qb->getQuery()->getSQL());
     }
     
-    $generate = new UserAgentDetail();
+    $generate = new UserAgentDetail($entityManager);
     $generate->setTitle('User agent detail - ' . $userAgent->string);
     $generate->setUserAgent($userAgent);
     $generate->setResults($results);

@@ -18,6 +18,20 @@ if (! file_exists($folder)) {
 }
 
 /*
+ * select all real providers
+ */
+$sql = "
+    SELECT
+        *
+    FROM provider
+    WHERE
+        proType = 'real'
+";
+$result = $conn->fetchAll($sql);
+
+$proIds = array_column($result, 'proId');
+
+/*
  * detected - browserNames
  */
 $sql = "
@@ -30,12 +44,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resBrowserName IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resBrowserName IS NOT NULL
     GROUP BY resBrowserName
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected browser names');
 $generate->setElements($result);
 
@@ -54,12 +69,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resEngineName IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resEngineName IS NOT NULL
     GROUP BY resEngineName
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected rendering engines');
 $generate->setElements($result);
 
@@ -78,12 +94,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resOsName IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resOsName IS NOT NULL
     GROUP BY resOsName
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected operating systems');
 $generate->setElements($result);
 
@@ -102,12 +119,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resDeviceModel IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resDeviceModel IS NOT NULL
     GROUP BY resDeviceModel
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected device models');
 $generate->setElements($result);
 
@@ -126,12 +144,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resDeviceBrand IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resDeviceBrand IS NOT NULL
     GROUP BY resDeviceBrand
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected device brands');
 $generate->setElements($result);
 
@@ -150,12 +169,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resDeviceType IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resDeviceType IS NOT NULL
     GROUP BY resDeviceType
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected device types');
 $generate->setElements($result);
 
@@ -174,12 +194,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resBotName IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resBotName IS NOT NULL
     GROUP BY resBotName
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected bot names');
 $generate->setElements($result);
 
@@ -198,12 +219,13 @@ $sql = "
     JOIN userAgent
         ON uaId = userAgent_id
     WHERE
-        resBotType IS NOT NULL
+        provider_id IN('" . implode('\', \'', $proIds) . "')
+        AND resBotType IS NOT NULL
     GROUP BY resBotType
 ";
 $result = $conn->fetchAll($sql);
 
-$generate = new SimpleList();
+$generate = new SimpleList($entityManager);
 $generate->setTitle('Detected bot types');
 $generate->setElements($result);
 
