@@ -12,7 +12,7 @@ use GuzzleHttp\Handler\CurlHandler;
  * Browscap
  */
 $cache = new File([
-    File::DIR => '.tmp/browscap'
+    File::DIR => '../myCache/.tmp/browscap/php'
 ]);
 
 // $cache = new \WurflCache\Adapter\Apc([
@@ -27,7 +27,7 @@ $browscapProvider = new Provider\BrowscapPhp($browscapParser);
 /*
  * Piwik
 */
-$cache = new Cache\PhpFileCache('.tmp/piwik');
+$cache = new Cache\PhpFileCache('../myCache/.tmp/piwik');
 
 // $cache = new Cache\ApcCache();
 // $cache->setNamespace('piwik_device');
@@ -40,14 +40,14 @@ $piwikProvider = new Provider\PiwikDeviceDetector($piwikParser);
 /*
  * Wurfl
 */
-$resourcesDir = '.tmp/wurfl';
+$resourcesDir = '../myCache/.tmp/wurfl';
 
 $persistenceDir = $resourcesDir . '/storage/persistence';
 $cacheDir       = $resourcesDir . '/storage/cache';
 
 // Create WURFL Configuration
 $wurflConfig = new \Wurfl\Configuration\InMemoryConfig();
-$wurflConfig->wurflFile('.tmp/wurfl.xml');
+$wurflConfig->wurflFile('data/wurfl.xml');
 $wurflConfig->matchMode(\Wurfl\Configuration\Config::MATCH_MODE_ACCURACY);
 
 $wurflConfig->persistence('file', [
