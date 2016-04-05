@@ -24,6 +24,31 @@ $browscapParser->setCache($cache);
 
 $browscapProvider = new Provider\BrowscapPhp($browscapParser);
 
+
+
+
+$cache = new File([
+    File::DIR => '../myCache/.tmp/browscap/lite'
+]);
+
+$browscapParser = new \BrowscapPHP\Browscap();
+$browscapParser->setCache($cache);
+
+$browscapProviderLite = new Provider\BrowscapLite($browscapParser);
+
+
+
+$cache = new File([
+    File::DIR => '../myCache/.tmp/browscap/full'
+]);
+
+$browscapParser = new \BrowscapPHP\Browscap();
+$browscapParser->setCache($cache);
+
+$browscapProviderFull = new Provider\BrowscapFull($browscapParser);
+
+
+
 /*
  * Piwik
 */
@@ -92,6 +117,8 @@ $userAgentString = new Http\UserAgentStringCom($client);
 
 $chain = new Provider\Chain([
     $browscapProvider,
+    $browscapProviderLite,
+    $browscapProviderFull,
     new Provider\DonatjUAParser(),
     $piwikProvider,
     new Provider\SinergiBrowserDetector(),
