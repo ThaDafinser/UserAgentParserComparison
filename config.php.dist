@@ -2,7 +2,7 @@
 /*
  * Version number for output folder!
  */
-define('COMPARISON_VERSION', 3);
+define('COMPARISON_VERSION', 5);
 
 $basePath = '../gh-pages/v' . COMPARISON_VERSION;
 
