@@ -24,9 +24,9 @@ $browscapParser->setCache($cache);
 
 $browscapProvider = new Provider\BrowscapPhp($browscapParser);
 
-
-
-
+/*
+ * BrowscapLite
+ */
 $cache = new File([
     File::DIR => '../myCache/.tmp/browscap/lite'
 ]);
@@ -36,8 +36,9 @@ $browscapParser->setCache($cache);
 
 $browscapProviderLite = new Provider\BrowscapLite($browscapParser);
 
-
-
+/*
+ * BrowscapFull
+ */
 $cache = new File([
     File::DIR => '../myCache/.tmp/browscap/full'
 ]);
@@ -46,8 +47,6 @@ $browscapParser = new \BrowscapPHP\Browscap();
 $browscapParser->setCache($cache);
 
 $browscapProviderFull = new Provider\BrowscapFull($browscapParser);
-
-
 
 /*
  * Piwik
