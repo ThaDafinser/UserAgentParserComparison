@@ -47,7 +47,7 @@ foreach ($userAgentRepo->findAll()) as $key => $userAgent) {
      */
     $folder = $basePath . '/user-agent-detail/' . substr($userAgent->id, 0, 2) . '/' . substr($userAgent->id, 2, 2);
     if (! file_exists($folder)) {
-        mkdir($folder, null, true);
+        mkdir($folder, 0777, true);
     }
     
     /*
