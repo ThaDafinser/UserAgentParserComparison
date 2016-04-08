@@ -5,6 +5,8 @@ php bin\cache\initWurfl.php
 php bin\db\initProviders.php
 php bin\db\initUserAgents.php
 php bin\db\initResults.php
+php bin\db\initUserAgentsEvaluation.php
+php bin\db\initResultsEvaluation.php
 php bin\html\index.php
 php bin\html\list-found-general.php
 php bin\html\list-found-provider.php
