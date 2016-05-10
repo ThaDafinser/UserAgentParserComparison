@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+            
+    <title>Detected bot types - UserAgentStringCom &lt;small&gt;&lt;/small&gt;</title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../circle.css" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">Detected bot types - UserAgentStringCom <small></small></h1>
+        
+    <div class="row center">
+        5 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+            
+        <a class="sort btn" data-sort="name">Sort by name</a>
+        <a class="sort btn" data-sort="detectionCount">Sort by detection count</a>
+            
+    </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable"><span class="name">Cloud Platform</span> <small class="detectionCount">5x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v5/user-agent-detail/2c/62/2c62d479-a20e-4b8d-9ca5-692f76517b2b.html">AppEngine-Google; ( http://code.google.com/appengine)</a></span></li><li class="collection-item"><h4 class="searchable"><span class="name">Crawler</span> <small class="detectionCount">531x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v5/user-agent-detail/9b/37/9b37ed6c-3112-4df8-af2e-27486999e2bf.html">Speedy Spider (Entireweb; Beta/1.3; http://www.entireweb.com/about/search_tech/speedyspider/)</a></span></li><li class="collection-item"><h4 class="searchable"><span class="name">Feed Reader</span> <small class="detectionCount">19x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v5/user-agent-detail/ae/0c/ae0c62d0-a89a-4c80-9057-19152bf6c24e.html">MagpieRSS/0.72 \(+http://magpierss.sf.net\)</a></span></li><li class="collection-item"><h4 class="searchable"><span class="name">LinkChecker</span> <small class="detectionCount">30x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v5/user-agent-detail/32/ea/32ea15da-1893-4bb7-af5e-ed348a76151f.html">Notifixious/LinkChecker (http://notifixio.us)</a></span></li><li class="collection-item"><h4 class="searchable"><span class="name">Validator</span> <small class="detectionCount">7x detected</small></h4><strong>Example user agent</strong><br /><span class="userAgent"><a href="/UserAgentParserComparison/v5/user-agent-detail/f2/68/f268e5af-751a-40c6-a643-2aacfce6a403.html">W3C_Validator/1.3 http://validator.w3.org/services</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2016-05-10 06:32:44</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 50000,
+    valueNames: [
+        'name',
+        'detectionCount'
+    ]
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>
