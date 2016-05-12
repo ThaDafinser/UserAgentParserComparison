@@ -14,7 +14,7 @@ $conn = $entityManager->getConnection();
  */
 $folder = $basePath . '/detected/general';
 if (! file_exists($folder)) {
-    mkdir($folder, null, true);
+    mkdir($folder, 0777, true);
 }
 
 /*

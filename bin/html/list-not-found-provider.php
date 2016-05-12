@@ -35,7 +35,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
     
     $folder = $basePath . '/not-detected/' . $provider->name . '';
     if (! file_exists($folder)) {
-        mkdir($folder, null, true);
+        mkdir($folder, 0777, true);
     }
     
     /*

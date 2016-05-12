@@ -15,8 +15,8 @@ class Index extends AbstractHtml
             }
             
             $html .= '
-                <a class="modal-trigger btn waves-effect waves-light" 
-                    href="/UserAgentParserComparison/v' . $i . '/index.html">
+                <a class="modal-trigger btn waves-effect waves-light"
+                    href="v' . $i . '/index.html">
                     ' . $txt . '
                 </a><br /><br />
             ';

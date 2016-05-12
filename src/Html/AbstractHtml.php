@@ -81,7 +81,7 @@ abstract class AbstractHtml
 
     protected function getUserAgentUrl($uaId)
     {
-        $url = '/UserAgentParserComparison/v' . COMPARISON_VERSION . '/user-agent-detail/' . substr($uaId, 0, 2) . '/' . substr($uaId, 2, 2);
+        $url = '../../user-agent-detail/' . substr($uaId, 0, 2) . '/' . substr($uaId, 2, 2);
         $url .= '/' . $uaId . '.html';
         
         return $url;

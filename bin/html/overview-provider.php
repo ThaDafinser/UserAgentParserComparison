@@ -22,5 +22,10 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
     /*
      * persist!
      */
-    file_put_contents($basePath . '/' . $provider->name . '.html', $generate->getHtml());
+    $folder = $basePath;
+    if (! file_exists($folder)) {
+        mkdir($folder, 0777, true);
+    }
+
+    file_put_contents($folder . '/' . $provider->name . '.html', $generate->getHtml());
 }
