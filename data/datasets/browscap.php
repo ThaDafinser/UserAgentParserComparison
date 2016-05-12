@@ -3,9 +3,9 @@ $path = 'vendor/browscap/browscap/tests/fixtures/issues';
 
 function hydrateBrowscap($data, array $row)
 {
-    $data['resRawResult'] = serialize($row[1]);
+    $data['resRawResult'] = serialize($row['properties']);
     
-    $row = $row[1];
+    $row = $row['properties'];
     
     if (isset($row['Browser']) && stripos($row['Browser'], 'Fake') !== false) {
         throw new \Exception('skip...');
@@ -108,8 +108,8 @@ foreach ($files as $file) {
         try {
             $result = hydrateBrowscap($data, $row);
             
-            $userAgents[bin2hex(sha1($row[0], true))] = [
-                'uaString' => $row[0],
+            $userAgents[bin2hex(sha1($row['ua'], true))] = [
+                'uaString' => $row['ua'],
                 'result' => $result
             ];
         } catch (\Exception $ex) {

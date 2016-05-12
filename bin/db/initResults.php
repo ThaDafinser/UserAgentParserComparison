@@ -44,10 +44,15 @@ $sql = "
     FROM userAgent
     LEFT JOIN result 
         ON userAgent_id = uaId
-        AND provider_id = '19c0fc1a-e212-47eb-99ff-bf517e37290b'
+        AND provider_id = '8c2a7a4e-3fbf-4df2-8d61-5e730422f67b'
     WHERE 
         resId IS NULL
     ORDER BY uaId
+";
+$sql = "
+    SELECT
+        *
+    FROM userAgent
 ";
 $statement = $conn->prepare($sql);
 $statement->execute();
@@ -89,13 +94,18 @@ while ($row = $statement->fetch()) {
             ];
         }
         
+        $additionalHeaders = null;
+        if ($row['uaAdditionalHeaders'] !== null) {
+            $additionalHeaders = unserialize($row['uaAdditionalHeaders']);
+        }
+        
         /*
          * Get the result with timing
          */
         $start = microtime(true);
         
         try {
-            $result = $provider->parse($row['uaString']);
+            $result = $provider->parse($row['uaString'], $additionalHeaders);
         } catch (NoResultFoundException $ex) {
             $result = null;
         } catch (\UserAgentParser\Exception\RequestException $ex) {

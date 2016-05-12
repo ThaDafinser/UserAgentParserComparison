@@ -292,12 +292,23 @@ class UserAgentDetail extends AbstractHtml
 
     public function getHtml()
     {
+        $additionalHeaders = $this->getUserAgent()->additionalHeaders;
+        
+        $addStr = '';
+        if ($this->getUserAgent()->additionalHeaders !== null && count($this->getUserAgent()->additionalHeaders) > 0) {
+            $addStr = '<strong>Additional headers</strong><br />';
+            foreach ($this->getUserAgent()->additionalHeaders as $key => $value) {
+                $addStr .= '<strong>' . htmlspecialchars($key) . '</strong> ' . htmlspecialchars($value) . '<br />';
+            }
+        }
+        
         $body = '
 <div class="section">
 	<h1 class="header center orange-text">User agent detail</h1>
 	<div class="row center">
         <h5 class="header light">
-            ' . htmlspecialchars($this->getUserAgent()->string) . '
+            ' . htmlspecialchars($this->getUserAgent()->string) . '<br />
+            ' . $addStr . '
         </h5>
 	</div>
 </div>   

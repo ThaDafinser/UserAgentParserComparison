@@ -42,8 +42,8 @@ class SimpleList extends AbstractHtml
             
             $html .= '<strong>Example user agent</strong><br />';
             
-            $html .= '<span class="userAgent">';
-            $html .= '<a href="' . $this->getUserAgentUrl($element['uaId']) . '">' . htmlspecialchars($element['uaString']) . '</a>';
+            $html .= '<span>';
+            $html .= '<a href="' . $this->getUserAgentUrl($element['uaId']) . '" class="userAgent">' . htmlspecialchars($element['uaString']) . '</a>';
             $html .= '</span>';
             
             $html .= '</li>';
@@ -86,7 +86,8 @@ var options = {
     page: 50000,
     valueNames: [
         \'name\',
-        \'detectionCount\'
+        \'detectionCount\',
+        \'userAgent\'
     ]
 };
 

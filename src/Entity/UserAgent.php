@@ -28,6 +28,11 @@ class UserAgent
      * @Column(type="text", name="uaString")
      */
     public $string;
+    
+    /**
+     * @Column(type="array", name="uaAdditionalHeaders", nullable=true)
+     */
+    public $additionalHeaders;
 
     public function __construct()
     {

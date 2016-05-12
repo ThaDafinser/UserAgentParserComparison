@@ -316,10 +316,21 @@ foreach ($files as $file) {
         try {
             $result = hydrateWhichbrowser($data, $row, $headers);
             
-            $userAgents[bin2hex(sha1($headers['User-Agent'], true))] = [
+            $key = bin2hex(sha1($headers['User-Agent'], true));
+            
+            $toInsert = [
                 'uaString' => $headers['User-Agent'],
                 'result' => $result
             ];
+            
+            if(count($headers) > 1){
+                unset($headers['User-Agent']);
+                
+                $toInsert['uaAdditionalHeaders'] = $headers;
+            }
+            
+            $userAgents[$key] = $toInsert;
+            
             echo '.';
         } catch (\Exception $ex) {
             // skip this UA

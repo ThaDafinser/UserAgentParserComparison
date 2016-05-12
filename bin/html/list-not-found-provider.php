@@ -9,6 +9,23 @@ include_once 'bootstrap.php';
 /* @var $entityManager \Doctrine\ORM\EntityManager */
 $conn = $entityManager->getConnection();
 
+/*
+ * select all real providers
+ */
+$sql = "
+    SELECT
+        *
+    FROM provider
+    WHERE
+        proType = 'real'
+";
+$result = $conn->fetchAll($sql);
+
+$proIds = array_column($result, 'proId');
+
+/*
+ * Start for each provider
+ */
 $providerRepo = $entityManager->getRepository('UserAgentParserComparison\Entity\Provider');
 
 foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
@@ -36,6 +53,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                 WHERE
         			res2.userAgent_id = uaId
                     AND res2.resResultFound = 1
+                    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
         			AND res2.provider_id != '" . $provider->id . "'
             ) as `detectionCount`
         FROM result
@@ -71,6 +89,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resBrowserName IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -80,6 +99,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resBrowserName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -89,6 +109,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resBrowserName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result
@@ -127,6 +148,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resEngineName IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -136,6 +158,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resEngineName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -145,6 +168,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resEngineName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result
@@ -183,6 +207,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resOsName IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -192,6 +217,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resOsName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -201,6 +227,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resOsName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result
@@ -239,6 +266,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resDeviceModel IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -248,6 +276,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resDeviceModel IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -257,6 +286,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resDeviceModel IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result
@@ -295,6 +325,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resDeviceBrand IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -304,6 +335,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resDeviceBrand IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -313,6 +345,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resDeviceBrand IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result
@@ -351,6 +384,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resDeviceType IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -360,6 +394,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resDeviceType IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -369,6 +404,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resDeviceType IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result
@@ -407,6 +443,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resDeviceIsMobile IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`
             FROM result
@@ -454,6 +491,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resBotIsBot IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`
             FROM result
@@ -501,6 +539,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resBotName IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -510,6 +549,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resBotName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -519,6 +559,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resBotName IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result
@@ -566,6 +607,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE
             			res2.userAgent_id = uaId
                         AND res2.resBotType IS NOT NULL
+                        AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCount`,
 			    (
@@ -575,6 +617,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resBotType IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionCountUnique`,
                 (
@@ -584,6 +627,7 @@ foreach ($providerRepo->findBy(['type' => 'real']) as $provider) {
                     WHERE 
             			res2.userAgent_id = uaId
                         AND res2.resBotType IS NOT NULL
+        			    AND res2.provider_id IN('" . implode('\', \'', $proIds) . "')
             			AND res2.provider_id != '" . $provider->id . "'
                 ) as `detectionValuesDistinct`
             FROM result

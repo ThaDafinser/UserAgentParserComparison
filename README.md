@@ -25,9 +25,9 @@ composer update -o --prefer-source
 
 #### Browscap
 
-Download the `full_php_browscap.ini` from [here](http://browscap.org/stream?q=Full_PHP_BrowscapINI)
+Download all (currently 3) `browscap.ini` files for PHP from [here](http://browscap.org/)
 
-And put it to `data/full_php_browscap.ini`
+And put it to `data/*.ini`
 
 #### Wurfl
 
@@ -61,7 +61,7 @@ php bin/db/initUserAgents.php
 php bin/db/initResults.php
 ```
 
-#### For v4 (not needed until yet)
+#### For vNEXT (not needed until yet)
 
 ```
 php bin/db/initResultsEvaluation.php
@@ -75,7 +75,8 @@ php bin/db/initUserAgentsEvaluation.php
 php bin/html/*.php # just all inside that folder
 ```
 
-## Run your own queries
+## Step 8) Run your own queries
 
-After executing Step 5) you have all data you need inside your `mysql` database!
+After executing Step 5) you have already all data you need inside your `mysql` database!
 
+So do whatever you want ;-)

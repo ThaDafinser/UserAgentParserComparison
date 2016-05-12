@@ -55,6 +55,7 @@ $generate->setTitle('Detected browser names');
 $generate->setElements($result);
 
 file_put_contents($folder . '/browser-names.html', $generate->getHtml());
+echo '.';
 
 /*
  * detected - renderingEngines
@@ -80,6 +81,7 @@ $generate->setTitle('Detected rendering engines');
 $generate->setElements($result);
 
 file_put_contents($folder . '/rendering-engines.html', $generate->getHtml());
+echo '.';
 
 /*
  * detected - OSnames
@@ -105,6 +107,7 @@ $generate->setTitle('Detected operating systems');
 $generate->setElements($result);
 
 file_put_contents($folder . '/operating-systems.html', $generate->getHtml());
+echo '.';
 
 /*
  * detected - deviceModel
@@ -130,6 +133,7 @@ $generate->setTitle('Detected device models');
 $generate->setElements($result);
 
 file_put_contents($folder . '/device-models.html', $generate->getHtml());
+echo '.';
 
 /*
  * detected - deviceBrand
@@ -155,6 +159,7 @@ $generate->setTitle('Detected device brands');
 $generate->setElements($result);
 
 file_put_contents($folder . '/device-brands.html', $generate->getHtml());
+echo '.';
 
 /*
  * detected - deviceTypes
@@ -180,6 +185,7 @@ $generate->setTitle('Detected device types');
 $generate->setElements($result);
 
 file_put_contents($folder . '/device-types.html', $generate->getHtml());
+echo '.';
 
 /*
  * detected - botNames
@@ -205,6 +211,7 @@ $generate->setTitle('Detected bot names');
 $generate->setElements($result);
 
 file_put_contents($folder . '/bot-names.html', $generate->getHtml());
+echo '.';
 
 /*
  * detected - botTypes

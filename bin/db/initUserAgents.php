@@ -4,6 +4,18 @@ use Ramsey\Uuid\Uuid;
 
 include_once 'bootstrap.php';
 
+$skipUserAgents = [
+    '',
+    ' ',
+    '-',
+    '(){ :; }; :(){ :|:& };:',
+    'this user agent should never exist hopefully as it is is only used in browscap tests',
+    'SomethingWeNeverKnewExisted',
+    'X-WebBrowser',
+    'Ploetz + Zeller (http://www.ploetz-zeller.de) Link Validator v1.0 (support@p-und-z.de) for ARIS Business Architect',
+    ''
+];
+
 /* @var $entityManager \Doctrine\ORM\EntityManager */
 $conn = $entityManager->getConnection();
 
@@ -22,7 +34,7 @@ $files = [
     'piwik.php',
     'sinergi.php',
     'uap-core.php',
-    'whichbrowser.php',
+    'whichbrowser.php'
     'woothee.php',
     'zsxsoft.php'
 ];
@@ -87,6 +99,10 @@ foreach ($files as $file) {
      * Useragents
      */
     foreach ($result['userAgents'] as $uaHash => $row) {
+        if (in_array($row['uaString'], $skipUserAgents)) {
+            echo 'S';
+            continue;
+        }
         
         /*
          * insert UA itself
@@ -103,13 +119,31 @@ foreach ($files as $file) {
         if (count($result2) === 1) {
             // update!
             $uaId = $result2[0]['uaId'];
+            
+            if (isset($row['uaAdditionalHeaders'])) {
+                $row2 = [
+                    'uaId' => $uaId,
+                    'uaHash' => $uaHash,
+                    'uaString' => $row['uaString'],
+                    'uaAdditionalHeaders' => serialize($row['uaAdditionalHeaders'])
+                ];
+                
+                $conn->update('userAgent', $row2, [
+                    'uaId' => $uaId
+                ]);
+            }
         } else {
             $uaId = Uuid::uuid4()->toString();
             
+            $additionalHeaders = null;
+            if (isset($row['uaAdditionalHeaders'])) {
+                $additionalHeaders = serialize($row['uaAdditionalHeaders']);
+            }
             $row2 = [
                 'uaId' => $uaId,
                 'uaHash' => $uaHash,
-                'uaString' => $row['uaString']
+                'uaString' => $row['uaString'],
+                'uaAdditionalHeaders' => $additionalHeaders
             ];
             
             $conn->insert('userAgent', $row2);
