@@ -45,15 +45,16 @@ $sql = "
     LEFT JOIN result 
         ON userAgent_id = uaId
         AND provider_id = '8c2a7a4e-3fbf-4df2-8d61-5e730422f67b'
-    WHERE 
-        resId IS NULL
+    #WHERE 
+        #resId IS NULL
+        #uaAdditionalHeaders IS NOT NULL
     ORDER BY uaId
 ";
-$sql = "
-    SELECT
-        *
-    FROM userAgent
-";
+// $sql = "
+//     SELECT
+//         *
+//     FROM userAgent
+// ";
 $statement = $conn->prepare($sql);
 $statement->execute();
 
@@ -83,7 +84,7 @@ while ($row = $statement->fetch()) {
             $row2 = $result[0];
             
             // skip
-            if ($row2['resProviderVersion'] == $provider->getVersion() || $provider->getVersion() === null) {
+            if ($row['uaAdditionalHeaders'] === null && ($row2['resProviderVersion'] == $provider->getVersion() || $provider->getVersion() === null)) {
                 echo 'S';
                 continue;
             }
@@ -94,7 +95,7 @@ while ($row = $statement->fetch()) {
             ];
         }
         
-        $additionalHeaders = null;
+        $additionalHeaders = [];
         if ($row['uaAdditionalHeaders'] !== null) {
             $additionalHeaders = unserialize($row['uaAdditionalHeaders']);
         }

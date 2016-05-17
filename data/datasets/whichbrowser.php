@@ -170,7 +170,7 @@ function hydrateWhichbrowser($data, array $row, array $headers)
             }
         }
         
-        $main->device->set($toUse);
+        $main->device->setIdentification($toUse);
     }
     
     if (isset($result['camouflage'])) {

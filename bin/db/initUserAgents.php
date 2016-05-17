@@ -13,7 +13,6 @@ $skipUserAgents = [
     'SomethingWeNeverKnewExisted',
     'X-WebBrowser',
     'Ploetz + Zeller (http://www.ploetz-zeller.de) Link Validator v1.0 (support@p-und-z.de) for ARIS Business Architect',
-    ''
 ];
 
 /* @var $entityManager \Doctrine\ORM\EntityManager */
@@ -34,7 +33,7 @@ $files = [
     'piwik.php',
     'sinergi.php',
     'uap-core.php',
-    'whichbrowser.php'
+    'whichbrowser.php',
     'woothee.php',
     'zsxsoft.php'
 ];

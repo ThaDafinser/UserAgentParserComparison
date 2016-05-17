@@ -19,7 +19,10 @@ echo 'load agents...' . PHP_EOL;
  */
 echo 'done loading..' . PHP_EOL;
 
-foreach ($userAgentRepo->findBy(['id' => '613125d1-b453-418c-aaf0-98dc6d9cc48d']) as $key => $userAgent) {
+$qb = $userAgentRepo->createQueryBuilder('userAgent');
+// $qb->where($qb->expr()->isNotNull('userAgent.additionalHeaders'));
+
+foreach ($qb->getQuery()->getResult() as $key => $userAgent) {
     /* @var $userAgent \UserAgentParserComparison\Entity\UserAgent */
     
     $qb = $resultRepo->createQueryBuilder('result');
