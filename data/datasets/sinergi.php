@@ -1,73 +1,73 @@
 <?php
-$file = 'vendor/sinergi/browser-detector/tests/BrowserDetector/Tests/_files/UserAgentStrings.xml';
-$content = file_get_contents($file);
-
-$xml = new SimpleXmlElement($content);
-
-$userAgents = [];
-
-foreach ($xml->strings->string as $string) {
-    
-    $data = [
-        'resFilename' => $file,
-        
-        'resBrowserName' => null,
-        'resBrowserVersion' => null,
-        
-        'resEngineName' => null,
-        'resEngineVersion' => null,
-        
-        'resOsName' => null,
-        'resOsVersion' => null,
-        
-        'resDeviceModel' => null,
-        'resDeviceBrand' => null,
-        'resDeviceType' => null,
-        'resDeviceIsMobile' => null,
-        'resDeviceIsTouch' => null,
-        
-        'resBotIsBot' => null,
-        'resBotName' => null,
-        'resBotType' => null
-    ];
-    
-    $string = $string->field;
-    
-    $browserName = (string) $string[0];
-    $browserVersion = (string) $string[1];
-    
-    $osName = (string) $string[2];
-    $osVersion = (string) $string[3];
-    
-    $deviceModel = (string) $string[4];
-    
-    $ua = (string) $string[6];
-    $ua = str_replace("\n", ' ', $ua);
-    $ua = preg_replace('!\s+!', ' ', $ua);
-    
-    if($browserName != ''){
-        $data['resBrowserName'] = $browserName;
-    }
-    if($browserVersion != ''){
-        $data['resBrowserVersion'] = $browserVersion;
-    }
-    
-    if($osName != ''){
-        $data['resOsName'] = $osName;
-    }
-    if($osVersion != ''){
-        $data['resOsVersion'] = $osVersion;
-    }
-    
-    if($deviceModel != ''){
-        $data['resDeviceModel'] = $deviceModel;
-    }
-    
-    $userAgents[bin2hex(sha1($ua, true))] = [
-        'uaString' => $ua,
-        'result' => $data
-    ];
-}
+//$file = 'vendor/sinergi/browser-detector/tests/BrowserDetector/Tests/_files/UserAgentStrings.xml';
+//$content = file_get_contents($file);
+//
+//$xml = new SimpleXmlElement($content);
+//
+//$userAgents = [];
+//
+//foreach ($xml->strings->string as $string) {
+//
+//    $data = [
+//        'resFilename' => $file,
+//
+//        'resBrowserName' => null,
+//        'resBrowserVersion' => null,
+//
+//        'resEngineName' => null,
+//        'resEngineVersion' => null,
+//
+//        'resOsName' => null,
+//        'resOsVersion' => null,
+//
+//        'resDeviceModel' => null,
+//        'resDeviceBrand' => null,
+//        'resDeviceType' => null,
+//        'resDeviceIsMobile' => null,
+//        'resDeviceIsTouch' => null,
+//
+//        'resBotIsBot' => null,
+//        'resBotName' => null,
+//        'resBotType' => null
+//    ];
+//
+//    $string = $string->field;
+//
+//    $browserName = (string) $string[0];
+//    $browserVersion = (string) $string[1];
+//
+//    $osName = (string) $string[2];
+//    $osVersion = (string) $string[3];
+//
+//    $deviceModel = (string) $string[4];
+//
+//    $ua = (string) $string[6];
+//    $ua = str_replace("\n", ' ', $ua);
+//    $ua = preg_replace('!\s+!', ' ', $ua);
+//
+//    if($browserName != ''){
+//        $data['resBrowserName'] = $browserName;
+//    }
+//    if($browserVersion != ''){
+//        $data['resBrowserVersion'] = $browserVersion;
+//    }
+//
+//    if($osName != ''){
+//        $data['resOsName'] = $osName;
+//    }
+//    if($osVersion != ''){
+//        $data['resOsVersion'] = $osVersion;
+//    }
+//
+//    if($deviceModel != ''){
+//        $data['resDeviceModel'] = $deviceModel;
+//    }
+//
+//    $userAgents[bin2hex(sha1($ua, true))] = [
+//        'uaString' => $ua,
+//        'result' => $data
+//    ];
+//}
 
 return [
     'provider' => [
@@ -96,5 +96,5 @@ return [
         'proCanDetectBotType' => 0
     ],
     
-    'userAgents' => $userAgents
+    'userAgents' => []
 ];

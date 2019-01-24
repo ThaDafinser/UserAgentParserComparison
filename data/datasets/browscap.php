@@ -1,5 +1,5 @@
 <?php
-$path = 'vendor/browscap/browscap/tests/fixtures/issues';
+$path = 'vendor/browscap/browscap/tests/issues';
 
 function hydrateBrowscap($data, array $row)
 {

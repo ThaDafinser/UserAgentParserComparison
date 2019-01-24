@@ -1,8 +1,4 @@
 <?php
-use BrowscapPHP\Browscap;
-use BrowscapPHP\Helper\IniLoader;
-use WurflCache\Adapter\File;
-
 /*
  * Browscap cache init
  */
@@ -13,12 +9,11 @@ include 'bootstrap.php';
  */
 echo '.';
 
-$cache = new File([
-    File::DIR => '../myCache/.tmp/browscap/full'
-]);
+$memoryCache = new \Doctrine\Common\Cache\FilesystemCache('../myCache/.tmp/browscap/full');
+$cache = new \Roave\DoctrineSimpleCache\SimpleCacheAdapter($memoryCache);
+$logger = new \Psr\Log\NullLogger();
 
-$bc = new Browscap();
-$bc->setCache($cache);
+$bc = new \BrowscapPHP\BrowscapUpdater($cache, $logger);
 $bc->convertFile('data/full_php_browscap.ini');
 
 
@@ -26,22 +21,24 @@ $bc->convertFile('data/full_php_browscap.ini');
  * Lite
  */
 echo '.';
-$cache = new File([
-    File::DIR => '../myCache/.tmp/browscap/lite'
-]);
 
-$bc = new Browscap();
-$bc->setCache($cache);
+$memoryCache = new \Doctrine\Common\Cache\FilesystemCache('../myCache/.tmp/browscap/lite');
+$cache = new \Roave\DoctrineSimpleCache\SimpleCacheAdapter($memoryCache);
+$logger = new \Psr\Log\NullLogger();
+
+$bc = new \BrowscapPHP\BrowscapUpdater($cache, $logger);
 $bc->convertFile('data/lite_php_browscap.ini');
 
 /*
  * PHP
  */
 echo '.';
-$cache = new File([
-    File::DIR => '../myCache/.tmp/browscap/php'
-]);
 
-$bc = new Browscap();
-$bc->setCache($cache);
+$memoryCache = new \Doctrine\Common\Cache\FilesystemCache('../myCache/.tmp/browscap/standard');
+$cache = new \Roave\DoctrineSimpleCache\SimpleCacheAdapter($memoryCache);
+$logger = new \Psr\Log\NullLogger();
+
+$bc = new \BrowscapPHP\BrowscapUpdater($cache, $logger);
 $bc->convertFile('data/php_browscap.ini');
+
+echo PHP_EOL;

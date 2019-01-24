@@ -16,3 +16,5 @@ $dd = new DeviceDetector();
 $dd->setCache($cache);
 $dd->setUserAgent('test');
 $dd->parse();
+
+echo PHP_EOL;
