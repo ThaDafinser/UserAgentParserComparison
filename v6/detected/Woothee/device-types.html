@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+            
+    <title>Detected device types - Woothee &lt;small&gt;v1.8.0&lt;/small&gt;</title>
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../circle.css" rel="stylesheet">
+</head>
+        
+<body>
+<div class="container">
+    
+<div class="section">
+    <h1 class="header center orange-text">Detected device types - Woothee <small>v1.8.0</small></h1>
+        
+    <div class="row center">
+        4 result(s) found
+    </div>
+</div>
+        
+<div class="section" id="simple-list">
+    <form>
+        <div class="input-field">
+          <input class="search" type="search" placeholder="Search for a user agent">
+          <i class="material-icons">close</i>
+        </div>
+            
+        <a class="sort btn" data-sort="name">Sort by name</a>
+        <a class="sort btn" data-sort="detectionCount">Sort by detection count</a>
+            
+    </form>
+            
+    <ul class="list collection"><li class="collection-item"><h4 class="searchable"><span class="name">appliance</span> <small class="detectionCount">153x detected</small></h4><strong>Example user agent</strong><br /><span><a href="../../user-agent-detail/00/2a/002ab362-4dde-4ccc-90d5-bbf17ed494f2.html" class="userAgent">Mozilla/5.0 (Nintendo WiiU) AppleWebKit/536.30 (KHTML, like Gecko) NX/3.0.4.2.13 NintendoBrowser/4.3.2.11274.EU</a></span></li><li class="collection-item"><h4 class="searchable"><span class="name">mobilephone</span> <small class="detectionCount">766x detected</small></h4><strong>Example user agent</strong><br /><span><a href="../../user-agent-detail/00/74/007458ae-9160-44d3-8f5b-f973dbdc6ec4.html" class="userAgent">SAMSUNG-SGH-Z400-Vodafone</a></span></li><li class="collection-item"><h4 class="searchable"><span class="name">pc</span> <small class="detectionCount">8010x detected</small></h4><strong>Example user agent</strong><br /><span><a href="../../user-agent-detail/00/11/001173ab-eb3b-48f4-a870-2bfad224cbda.html" class="userAgent">Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.1b1pre) Gecko/20080927033433 Minefield/3.1b1pre</a></span></li><li class="collection-item"><h4 class="searchable"><span class="name">smartphone</span> <small class="detectionCount">24333x detected</small></h4><strong>Example user agent</strong><br /><span><a href="../../user-agent-detail/00/02/000241bd-720c-4a94-a3b7-bc057803a787.html" class="userAgent">Mozilla/5.0 (Linux; Android 7.0; ONEPLUS A3000 Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.0.0 MQQBrowser/6.6 Mobile Safari/537.36</a></span></li></ul>
+</div>
+
+        
+    <div class="section">
+        <h1 class="header center orange-text">About this comparison</h1>
+    
+        <div class="row center">
+            <h5 class="header light">
+                The primary goal of this project is simple<br />
+        
+                I wanted to know which user agent parser is the most accurate in each part - device detection, bot detection and so on...<br />
+                <br />
+                The secondary goal is to provide a source for all user agent parsers to improve their detection based on this results.<br />
+                <br />
+                You can also improve this further, by suggesting ideas at <a href="https://github.com/ThaDafinser/UserAgentParserComparison">ThaDafinser/UserAgentParserComparison</a><br />
+                <br />
+                The comparison is based on the abstraction by <a href="https://github.com/ThaDafinser/UserAgentParser">ThaDafinser/UserAgentParser</a>
+            </h5>
+        </div>
+            
+    </div>
+        
+    <div class="card">
+		<div class="card-content">
+			Comparison created <i>2019-01-24 15:38:18</i> | by 
+            <a href="https://github.com/ThaDafinser">ThaDafinser</a>
+        </div>
+    </div>
+			    
+</div>
+			    
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+        
+    <script>
+    
+var options = {
+    page: 50000,
+    valueNames: [
+        'name',
+        'detectionCount',
+        'userAgent'
+    ]
+};
+
+var hackerList = new List('simple-list', options);    
+
+    </script>
+        
+</body>
+</html>
